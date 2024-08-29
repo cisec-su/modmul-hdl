@@ -1,0 +1,1573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Product Version: Vivado v2023.1 (64-bit)                              -->
+<!--                                                                         -->
+<!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.                   -->
+<!-- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.   -->
+
+<Project Product="Vivado" Version="7" Minor="63" Path="/home/toluntosun/Desktop/PhD/fpga_acceleration/modmul_git/modmul_lib/modmul_lib.xpr">
+  <DefaultLaunch Dir="$PRUNDIR"/>
+  <Configuration>
+    <Option Name="Id" Val="444d4a26f15f434f9b0f151ff2db94da"/>
+    <Option Name="Part" Val="xcu280-fsvh2892-2L-e"/>
+    <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
+    <Option Name="CompiledLibDirXSim" Val=""/>
+    <Option Name="CompiledLibDirModelSim" Val="$PCACHEDIR/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PCACHEDIR/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirXcelium" Val="$PCACHEDIR/compile_simlib/xcelium"/>
+    <Option Name="CompiledLibDirVCS" Val="$PCACHEDIR/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PCACHEDIR/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PCACHEDIR/compile_simlib/activehdl"/>
+    <Option Name="SimulatorInstallDirModelSim" Val=""/>
+    <Option Name="SimulatorInstallDirQuesta" Val=""/>
+    <Option Name="SimulatorInstallDirXcelium" Val=""/>
+    <Option Name="SimulatorInstallDirVCS" Val=""/>
+    <Option Name="SimulatorInstallDirRiviera" Val=""/>
+    <Option Name="SimulatorInstallDirActiveHdl" Val=""/>
+    <Option Name="SimulatorGccInstallDirModelSim" Val=""/>
+    <Option Name="SimulatorGccInstallDirQuesta" Val=""/>
+    <Option Name="SimulatorGccInstallDirXcelium" Val=""/>
+    <Option Name="SimulatorGccInstallDirVCS" Val=""/>
+    <Option Name="SimulatorGccInstallDirRiviera" Val=""/>
+    <Option Name="SimulatorGccInstallDirActiveHdl" Val=""/>
+    <Option Name="SimulatorVersionXsim" Val="2023.1"/>
+    <Option Name="SimulatorVersionModelSim" Val="2022.3"/>
+    <Option Name="SimulatorVersionQuesta" Val="2022.3"/>
+    <Option Name="SimulatorVersionXcelium" Val="22.09.001"/>
+    <Option Name="SimulatorVersionVCS" Val="T-2022.06-SP1"/>
+    <Option Name="SimulatorVersionRiviera" Val="2022.04"/>
+    <Option Name="SimulatorVersionActiveHdl" Val="13.1"/>
+    <Option Name="SimulatorGccVersionXsim" Val="9.3.0"/>
+    <Option Name="SimulatorGccVersionModelSim" Val="7.4.0"/>
+    <Option Name="SimulatorGccVersionQuesta" Val="7.4.0"/>
+    <Option Name="SimulatorGccVersionXcelium" Val="9.3.0"/>
+    <Option Name="SimulatorGccVersionVCS" Val="9.2.0"/>
+    <Option Name="SimulatorGccVersionRiviera" Val="9.3.0"/>
+    <Option Name="SimulatorGccVersionActiveHdl" Val="9.3.0"/>
+    <Option Name="BoardPart" Val="xilinx.com:au280:part0:1.2"/>
+    <Option Name="SourceMgmtMode" Val="DisplayOnly"/>
+    <Option Name="ActiveSimSet" Val="sim_wr_mixed"/>
+    <Option Name="DefaultLib" Val="xil_defaultlib"/>
+    <Option Name="ProjectType" Val="Default"/>
+    <Option Name="IPOutputRepo" Val="$PCACHEDIR/ip"/>
+    <Option Name="IPDefaultOutputPath" Val="$PGENDIR/sources_1"/>
+    <Option Name="IPCachePermission" Val="read"/>
+    <Option Name="IPCachePermission" Val="write"/>
+    <Option Name="EnableCoreContainer" Val="FALSE"/>
+    <Option Name="EnableResourceEstimation" Val="FALSE"/>
+    <Option Name="SimCompileState" Val="TRUE"/>
+    <Option Name="CreateRefXciForCoreContainers" Val="FALSE"/>
+    <Option Name="IPUserFilesDir" Val="$PIPUSERFILESDIR"/>
+    <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
+    <Option Name="EnableBDX" Val="FALSE"/>
+    <Option Name="DSABoardId" Val="au280"/>
+    <Option Name="WTXSimLaunchSim" Val="795"/>
+    <Option Name="WTModelSimLaunchSim" Val="0"/>
+    <Option Name="WTQuestaLaunchSim" Val="0"/>
+    <Option Name="WTIesLaunchSim" Val="0"/>
+    <Option Name="WTVcsLaunchSim" Val="0"/>
+    <Option Name="WTRivieraLaunchSim" Val="0"/>
+    <Option Name="WTActivehdlLaunchSim" Val="0"/>
+    <Option Name="WTXSimExportSim" Val="156"/>
+    <Option Name="WTModelSimExportSim" Val="156"/>
+    <Option Name="WTQuestaExportSim" Val="156"/>
+    <Option Name="WTIesExportSim" Val="0"/>
+    <Option Name="WTVcsExportSim" Val="156"/>
+    <Option Name="WTRivieraExportSim" Val="156"/>
+    <Option Name="WTActivehdlExportSim" Val="156"/>
+    <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
+    <Option Name="XSimRadix" Val="hex"/>
+    <Option Name="XSimTimeUnit" Val="ns"/>
+    <Option Name="XSimArrayDisplayLimit" Val="1024"/>
+    <Option Name="XSimTraceLimit" Val="65536"/>
+    <Option Name="SimTypes" Val="rtl"/>
+    <Option Name="SimTypes" Val="bfm"/>
+    <Option Name="SimTypes" Val="tlm"/>
+    <Option Name="SimTypes" Val="tlm_dpi"/>
+    <Option Name="MEMEnableMemoryMapGeneration" Val="TRUE"/>
+    <Option Name="DcpsUptoDate" Val="TRUE"/>
+    <Option Name="ClassicSocBoot" Val="FALSE"/>
+    <Option Name="LocalIPRepoLeafDirName" Val="ip_repo"/>
+  </Configuration>
+  <FileSets Version="1" Minor="31">
+    <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+      <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_3/dsp_macro_3.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_3/dsp_macro_3.xci"/>
+          <Attr Name="ImportTime" Val="1722983254"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_1_off/dsp_macro_mul_26x34_1_off.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_1_off/dsp_macro_mul_26x34_1_off.xci"/>
+          <Attr Name="ImportTime" Val="1722985753"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_1/dsp_macro_mul_26x34_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_1/dsp_macro_mul_26x34_1.xci"/>
+          <Attr Name="ImportTime" Val="1722985778"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_0/dsp_macro_mul_26x34_0.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_0/dsp_macro_mul_26x34_0.xci"/>
+          <Attr Name="ImportTime" Val="1722986002"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_1/dsp_macro_karatsuba_34x43_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_1/dsp_macro_karatsuba_34x43_1.xci"/>
+          <Attr Name="ImportTime" Val="1723023438"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_2/dsp_macro_karatsuba_34x43_2.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_2/dsp_macro_karatsuba_34x43_2.xci"/>
+          <Attr Name="ImportTime" Val="1723023541"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_0/dsp_macro_karatsuba_34x43_0.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_0/dsp_macro_karatsuba_34x43_0.xci"/>
+          <Attr Name="ImportTime" Val="1723024190"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_0_s1ff/dsp_macro_karatsuba_34x43_0_s1ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_0_s1ff/dsp_macro_karatsuba_34x43_0_s1ff.xci"/>
+          <Attr Name="ImportTime" Val="1723024775"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_1_iffs0ff/dsp_macro_karatsuba_34x43_1_iffs0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_1_iffs0ff/dsp_macro_karatsuba_34x43_1_iffs0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723901672"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_17x47_1_iff_1_1/dsp_macro_mul_17x47_1_iff_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_17x47_1_iff_1_1/dsp_macro_mul_17x47_1_iff_1.xci"/>
+          <Attr Name="ImportTime" Val="1723970545"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_26_v3_0_iff/dsp_macro_monty_26_v3_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_26_v3_0_iff/dsp_macro_monty_26_v3_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1724772201"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_38_1_ioff/dsp_macro_monty_38_1_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_38_1_ioff/dsp_macro_monty_38_1_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1724771064"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_38_2_ioff/dsp_macro_monty_38_2_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_38_2_ioff/dsp_macro_monty_38_2_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1724774959"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_38_0_iff/dsp_macro_monty_38_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_38_0_iff/dsp_macro_monty_38_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1724828521"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_38/dsp_macro_monty_38.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_38/dsp_macro_monty_38.xci"/>
+          <Attr Name="ImportTime" Val="1724830487"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/ip/word_red_r26_0/word_red_r26_0.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/word_red_r26_0/word_red_r26_0.xci"/>
+          <Attr Name="ImportTime" Val="1724947565"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/mod_red_mixed.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/csa/csa_2.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/mul_26x34_rtl.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_66x68.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_34x43_dsp.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_34x43_rtl.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_34x43.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/modmul/mod_mul_mixed.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/word_red_qh26.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/modmul/mod_mul.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/mul_26x34.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/def/dsp_def.vh">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="IsVisible" Val="1"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/mul_26x34_dsp.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_34x43_csa.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/word_red_38.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/csa/csa_tree.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/mod_red.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/word_red_r26.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/karatsuba/karatsuba_66x68_csa.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="mod_red"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
+      <Filter Type="Constrs"/>
+      <File Path="$PPRDIR/../../alveo-u280-xdc/alveo-u280-xdc.xdc">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/constrs_1/new/main.xdc">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/constrs_1/new/main.xdc"/>
+          <Attr Name="ImportTime" Val="1724752624"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="ConstrsType" Val="XDC"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="utils_1" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
+      <Filter Type="Utils"/>
+      <Config>
+        <Option Name="TopAutoSet" Val="TRUE"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_1" RelGenDir="$PGENDIR/dsp_macro_1">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_1/dsp_macro_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_1/dsp_macro_1.xci"/>
+          <Attr Name="ImportTime" Val="1722979981"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_2" RelGenDir="$PGENDIR/dsp_macro_2">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_2_1/dsp_macro_2.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_2_1/dsp_macro_2.xci"/>
+          <Attr Name="ImportTime" Val="1722981539"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_0" RelGenDir="$PGENDIR/dsp_macro_0">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_0/dsp_macro_0.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_0/dsp_macro_0.xci"/>
+          <Attr Name="ImportTime" Val="1722981913"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_mul_26x34_0_iff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_mul_26x34_0_iff" RelGenDir="$PGENDIR/dsp_macro_mul_26x34_0_iff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_0_iff/dsp_macro_mul_26x34_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_0_iff/dsp_macro_mul_26x34_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1723029099"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_mul_26x34_0_iff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_0_s0ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_0_s0ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_0_s0ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_0_s0ff/dsp_macro_karatsuba_34x43_0_s0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_0_s0ff/dsp_macro_karatsuba_34x43_0_s0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723018077"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_0_s0ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_1_s0ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_1_s0ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_1_s0ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_1_s0ff/dsp_macro_karatsuba_34x43_1_s0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_1_s0ff/dsp_macro_karatsuba_34x43_1_s0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723018208"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_1_s0ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_2_s0ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_2_s0ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_2_s0ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_2_s0ff/dsp_macro_karatsuba_34x43_2_s0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_2_s0ff/dsp_macro_karatsuba_34x43_2_s0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723018326"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_2_s0ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_mul_26x34_1_ioff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_mul_26x34_1_ioff" RelGenDir="$PGENDIR/dsp_macro_mul_26x34_1_ioff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_1_ioff/dsp_macro_mul_26x34_1_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_1_ioff/dsp_macro_mul_26x34_1_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1723028888"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_mul_26x34_1_ioff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_4" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_4" RelGenDir="$PGENDIR/sim_4">
+      <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../karatsuba_dsp/karatsuba_34x43_rtl_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="karatsuba_34x43_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_34x43_rtl_tb_behav.wcfg"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_5" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_5" RelGenDir="$PGENDIR/sim_5">
+      <Filter Type="Srcs"/>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="mul_26x34_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_6" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_6" RelGenDir="$PGENDIR/sim_6">
+      <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../karatsuba_dsp/karatsuba_66x68_rtl_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="karatsuba_66x68_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_66x68_rtl_tb_behav.wcfg"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_mul_26x34_1_iff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_mul_26x34_1_iff" RelGenDir="$PGENDIR/dsp_macro_mul_26x34_1_iff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_26x34_1_iff/dsp_macro_mul_26x34_1_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_26x34_1_iff/dsp_macro_mul_26x34_1_iff.xci"/>
+          <Attr Name="ImportTime" Val="1723135781"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_mul_26x34_1_iff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_0_s0s1ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_0_s0s1ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_0_s0s1ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_0_s0s1ff/dsp_macro_karatsuba_34x43_0_s0s1ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_0_s0s1ff/dsp_macro_karatsuba_34x43_0_s0s1ff.xci"/>
+          <Attr Name="ImportTime" Val="1723136920"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_0_s0s1ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_0_iffs0s1ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_0_iffs0s1ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_0_iffs0s1ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_0_iffs0s1ff/dsp_macro_karatsuba_34x43_0_iffs0s1ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_0_iffs0s1ff/dsp_macro_karatsuba_34x43_0_iffs0s1ff.xci"/>
+          <Attr Name="ImportTime" Val="1723821679"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_0_iffs0s1ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_34x43_2_iffs0ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_34x43_2_iffs0ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_34x43_2_iffs0ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_34x43_2_iffs0ff/dsp_macro_karatsuba_34x43_2_iffs0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_34x43_2_iffs0ff/dsp_macro_karatsuba_34x43_2_iffs0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723822017"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_34x43_2_iffs0ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_mul_17x47_0_iff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_mul_17x47_0_iff" RelGenDir="$PGENDIR/dsp_macro_mul_17x47_0_iff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mul_17x47_0_iff/dsp_macro_mul_17x47_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mul_17x47_0_iff/dsp_macro_mul_17x47_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1723912443"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_mul_17x47_0_iff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_mac_26x34_0_iff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_mac_26x34_0_iff" RelGenDir="$PGENDIR/dsp_macro_mac_26x34_0_iff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_mac_26x34_0_iff/dsp_macro_mac_26x34_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_mac_26x34_0_iff/dsp_macro_mac_26x34_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1723969182"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_mac_26x34_0_iff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_monty_26_1_ioff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_monty_26_1_ioff" RelGenDir="$PGENDIR/dsp_macro_monty_26_1_ioff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_26_1_ioff/dsp_macro_monty_26_1_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_26_1_ioff/dsp_macro_monty_26_1_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1724704716"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_monty_26_1_ioff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_karatsuba_mac_34x43_1_iffs0ff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_karatsuba_mac_34x43_1_iffs0ff" RelGenDir="$PGENDIR/dsp_macro_karatsuba_mac_34x43_1_iffs0ff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_karatsuba_mac_34x43_1_iffs0ff/dsp_macro_karatsuba_mac_34x43_1_iffs0ff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_karatsuba_mac_34x43_1_iffs0ff/dsp_macro_karatsuba_mac_34x43_1_iffs0ff.xci"/>
+          <Attr Name="ImportTime" Val="1723993582"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_karatsuba_mac_34x43_1_iffs0ff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_monty_26_0_iff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_monty_26_0_iff" RelGenDir="$PGENDIR/dsp_macro_monty_26_0_iff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_26_0_iff/dsp_macro_monty_26_0_iff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_26_0_iff/dsp_macro_monty_26_0_iff.xci"/>
+          <Attr Name="ImportTime" Val="1724703668"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_monty_26_0_iff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_wr_mixed" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_wr_mixed" RelGenDir="$PGENDIR/sim_wr_mixed">
+      <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../karatsuba_dsp/mod_red_mixed_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../karatsuba_dsp/mod_red_mixed_tb_behav1.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/mod_red_mixed.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/monty/tb/mod_red_mixed_tb.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="mod_red_mixed_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/mod_red_mixed_tb_behav.wcfg"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/mod_red_mixed_tb_behav1.wcfg"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_monty_26_v2_1_ioff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_monty_26_v2_1_ioff" RelGenDir="$PGENDIR/dsp_macro_monty_26_v2_1_ioff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_26_v2_1_ioff/dsp_macro_monty_26_v2_1_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_26_v2_1_ioff/dsp_macro_monty_26_v2_1_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1724708583"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_monty_26_v2_1_ioff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dsp_macro_monty_26_v3_1_ioff" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dsp_macro_monty_26_v3_1_ioff" RelGenDir="$PGENDIR/dsp_macro_monty_26_v3_1_ioff">
+      <File Path="$PSRCDIR/sources_1/ip/dsp_macro_monty_26_v3_1_ioff/dsp_macro_monty_26_v3_1_ioff.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/dsp_macro_monty_26_v3_1_ioff/dsp_macro_monty_26_v3_1_ioff.xci"/>
+          <Attr Name="ImportTime" Val="1724773327"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dsp_macro_monty_26_v3_1_ioff"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="word_red_qh26_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/word_red_qh26_0" RelGenDir="$PGENDIR/word_red_qh26_0">
+      <File Path="$PSRCDIR/sources_1/ip/word_red_qh26_0/word_red_qh26_0.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/word_red_qh26_0/word_red_qh26_0.xci"/>
+          <Attr Name="ImportTime" Val="1724872899"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="word_red_qh26_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="word_red_qh26_2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/word_red_qh26_2" RelGenDir="$PGENDIR/word_red_qh26_2">
+      <File Path="$PSRCDIR/sources_1/ip/word_red_qh26_2/word_red_qh26_2.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/word_red_qh26_2/word_red_qh26_2.xci"/>
+          <Attr Name="ImportTime" Val="1724873037"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="word_red_qh26_2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="word_red_qh26_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/word_red_qh26_1" RelGenDir="$PGENDIR/word_red_qh26_1">
+      <File Path="$PSRCDIR/sources_1/ip/word_red_qh26_1/word_red_qh26_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/word_red_qh26_1/word_red_qh26_1.xci"/>
+          <Attr Name="ImportTime" Val="1724873003"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="word_red_qh26_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_wordred_qh26" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_wordred_qh26" RelGenDir="$PGENDIR/sim_wordred_qh26">
+      <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../karatsuba_dsp/word_red_qh26_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="word_red_qh26_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/word_red_qh26_tb_behav.wcfg"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="sim_wordred_r26" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_wordred_r26" RelGenDir="$PGENDIR/sim_wordred_r26">
+      <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../karatsuba_dsp/word_red_r26_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="word_red_r26_tb"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="TransportPathDelay" Val="0"/>
+        <Option Name="TransportIntDelay" Val="0"/>
+        <Option Name="SelectedSimModel" Val="rtl"/>
+        <Option Name="PamDesignTestbench" Val=""/>
+        <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
+        <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
+        <Option Name="PamPseudoTop" Val="pseudo_tb"/>
+        <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../karatsuba_dsp/word_red_r26_tb_behav.wcfg"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="word_red_c26_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/word_red_c26_1" RelGenDir="$PGENDIR/word_red_c26_1">
+      <File Path="$PSRCDIR/sources_1/ip/word_red_c26_1/word_red_c26_1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../karatsuba_dsp/karatsuba_dsp.srcs/sources_1/ip/word_red_c26_1/word_red_c26_1.xci"/>
+          <Attr Name="ImportTime" Val="1724947416"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="word_red_c26_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+  </FileSets>
+  <Simulators>
+    <Simulator Name="XSim">
+      <Option Name="Description" Val="Vivado Simulator"/>
+      <Option Name="CompiledLib" Val="0"/>
+    </Simulator>
+    <Simulator Name="ModelSim">
+      <Option Name="Description" Val="ModelSim Simulator"/>
+    </Simulator>
+    <Simulator Name="Questa">
+      <Option Name="Description" Val="Questa Advanced Simulator"/>
+    </Simulator>
+    <Simulator Name="Xcelium">
+      <Option Name="Description" Val="Xcelium Parallel Simulator"/>
+    </Simulator>
+    <Simulator Name="VCS">
+      <Option Name="Description" Val="Verilog Compiler Simulator (VCS)"/>
+    </Simulator>
+    <Simulator Name="Riviera">
+      <Option Name="Description" Val="Riviera-PRO Simulator"/>
+    </Simulator>
+  </Simulators>
+  <Runs Version="1" Minor="20">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xcu280-fsvh2892-2L-e" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="true" WriteIncrSynthDcp="false" State="current" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_1_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_1" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_1_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_2_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_2" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_2" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_2_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_2_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_0_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_0" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_0_iff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_mul_26x34_0_iff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_0_iff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_0_iff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_0_iff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_s0ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_0_s0ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_s0ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_1_s0ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_1_s0ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_1_s0ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_1_s0ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_1_s0ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_2_s0ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_2_s0ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_2_s0ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_s0ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_s0ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_1_ioff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_mul_26x34_1_ioff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_1_ioff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_ioff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_ioff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_1_iff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_mul_26x34_1_iff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_1_iff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_iff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_iff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_s0s1ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_0_s0s1ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_s0s1ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0s1ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0s1ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_iffs0s1ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_0_iffs0s1ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_iffs0s1ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_iffs0s1ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_iffs0s1ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_2_iffs0ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_34x43_2_iffs0ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_2_iffs0ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_iffs0ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_iffs0ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_17x47_0_iff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_mul_17x47_0_iff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_17x47_0_iff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_17x47_0_iff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_17x47_0_iff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mac_26x34_0_iff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_mac_26x34_0_iff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mac_26x34_0_iff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mac_26x34_0_iff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mac_26x34_0_iff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_1_ioff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_monty_26_1_ioff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_1_ioff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_1_ioff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_1_ioff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_mac_34x43_1_iffs0ff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_karatsuba_mac_34x43_1_iffs0ff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_mac_34x43_1_iffs0ff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_mac_34x43_1_iffs0ff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_mac_34x43_1_iffs0ff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_0_iff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_monty_26_0_iff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_0_iff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_0_iff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_0_iff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_v2_1_ioff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_monty_26_v2_1_ioff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_v2_1_ioff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v2_1_ioff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v2_1_ioff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_v3_1_ioff_synth_1" Type="Ft3:Synth" SrcSet="dsp_macro_monty_26_v3_1_ioff" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_v3_1_ioff" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v3_1_ioff_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v3_1_ioff_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_0_synth_1" Type="Ft3:Synth" SrcSet="word_red_qh26_0" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_2_synth_1" Type="Ft3:Synth" SrcSet="word_red_qh26_2" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_2" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_2_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_2_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_1_synth_1" Type="Ft3:Synth" SrcSet="word_red_qh26_1" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_1_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_c26_1_synth_1" Type="Ft3:Synth" SrcSet="word_red_c26_1" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_c26_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_c26_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_c26_1_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" LaunchOptions="-jobs 8 " AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_1_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_1_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_2_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_2" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_2_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_2_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_2_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_0_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_0_iff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_0_iff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_mul_26x34_0_iff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_0_iff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_0_iff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_s0ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_s0ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_0_s0ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_1_s0ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_1_s0ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_1_s0ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_1_s0ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_1_s0ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_2_s0ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_2_s0ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_2_s0ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_s0ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_s0ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_1_ioff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_1_ioff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_mul_26x34_1_ioff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_ioff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_ioff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_26x34_1_iff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_26x34_1_iff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_mul_26x34_1_iff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_iff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_26x34_1_iff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_s0s1ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_s0s1ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_0_s0s1ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0s1ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_s0s1ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_0_iffs0s1ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_0_iffs0s1ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_0_iffs0s1ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_iffs0s1ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_0_iffs0s1ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_34x43_2_iffs0ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_34x43_2_iffs0ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_34x43_2_iffs0ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_iffs0ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_34x43_2_iffs0ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mul_17x47_0_iff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mul_17x47_0_iff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_mul_17x47_0_iff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_17x47_0_iff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mul_17x47_0_iff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_mac_26x34_0_iff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_mac_26x34_0_iff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_mac_26x34_0_iff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_mac_26x34_0_iff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_mac_26x34_0_iff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_1_ioff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_1_ioff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_monty_26_1_ioff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_1_ioff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_1_ioff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_karatsuba_mac_34x43_1_iffs0ff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_karatsuba_mac_34x43_1_iffs0ff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_karatsuba_mac_34x43_1_iffs0ff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_mac_34x43_1_iffs0ff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_karatsuba_mac_34x43_1_iffs0ff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_0_iff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_0_iff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_monty_26_0_iff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_0_iff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_0_iff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_v2_1_ioff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_v2_1_ioff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_monty_26_v2_1_ioff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v2_1_ioff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v2_1_ioff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dsp_macro_monty_26_v3_1_ioff_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="dsp_macro_monty_26_v3_1_ioff" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dsp_macro_monty_26_v3_1_ioff_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v3_1_ioff_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dsp_macro_monty_26_v3_1_ioff_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_0_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="word_red_qh26_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_2_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_2" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="word_red_qh26_2_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_2_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_2_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_qh26_1_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_qh26_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="word_red_qh26_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_qh26_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_qh26_1_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="word_red_c26_1_impl_1" Type="Ft2:EntireDesign" Part="xcu280-fsvh2892-2L-e" ConstrsSet="word_red_c26_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="word_red_c26_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/word_red_c26_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/word_red_c26_1_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+  </Runs>
+  <Board>
+    <Jumpers/>
+  </Board>
+  <DashboardSummary Version="1" Minor="0">
+    <Dashboards>
+      <Dashboard Name="default_dashboard">
+        <Gadgets>
+          <Gadget Name="drc_1" Type="drc" Version="1" Row="2" Column="0">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="impl_1#impl_1_route_report_drc_0 "/>
+          </Gadget>
+          <Gadget Name="methodology_1" Type="methodology" Version="1" Row="2" Column="1">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="impl_1#impl_1_route_report_methodology_0 "/>
+          </Gadget>
+          <Gadget Name="power_1" Type="power" Version="1" Row="1" Column="0">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="impl_1#impl_1_route_report_power_0 "/>
+          </Gadget>
+          <Gadget Name="timing_1" Type="timing" Version="1" Row="0" Column="1">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="impl_1#impl_1_route_report_timing_summary_0 "/>
+          </Gadget>
+          <Gadget Name="utilization_1" Type="utilization" Version="1" Row="0" Column="0">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="synth_1#synth_1_synth_report_utilization_0 "/>
+            <GadgetParam Name="RUN.STEP" Type="string" Value="synth_design"/>
+            <GadgetParam Name="RUN.TYPE" Type="string" Value="synthesis"/>
+          </Gadget>
+          <Gadget Name="utilization_2" Type="utilization" Version="1" Row="1" Column="1">
+            <GadgetParam Name="REPORTS" Type="string_list" Value="impl_1#impl_1_place_report_utilization_0 "/>
+          </Gadget>
+        </Gadgets>
+      </Dashboard>
+      <CurrentDashboard>default_dashboard</CurrentDashboard>
+    </Dashboards>
+  </DashboardSummary>
+</Project>

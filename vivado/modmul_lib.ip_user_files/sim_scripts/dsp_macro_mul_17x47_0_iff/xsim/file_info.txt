@@ -1,0 +1,1 @@
+dsp_macro_mul_17x47_0_iff.vhd,vhdl,xil_defaultlib,../../../../karatsuba_dsp.gen/sources_1/ip/dsp_macro_mul_17x47_0_iff/sim/dsp_macro_mul_17x47_0_iff.vhd,
