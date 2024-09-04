@@ -11,7 +11,7 @@ module word_red_r26
         parameter  TL_LEN = 26, // todo: don't return rest after returning with TL
         parameter  ASN_CL = 1, // todo: does not work for ASN_CL = 0
         parameter  FF_CL  = 1, // todo: does not work for FF_CL = 0
-        parameter  FF_OUT = 1
+        parameter  FF_OUT = 0
     )
     (
         input                       clk,
@@ -52,12 +52,15 @@ localparam TL_LST  = ((TLY_LEN % DSP_B_U) == 0) ? TL_DIV : (TL_DIV % DSP_B_U);
 
 localparam LAT     = 3 + QH_NUM - ASN_CL;
 
-
+localparam CYQ_I   = (ASN_CL) ? 1 : 2; 
 
 ///////////////////////////// signals ///////////////////////////////////
 
 wire [CH_LEN-1:0] CH;
 wire [CHY_LEN-1:0] CHY;
+
+reg   [CH_0+CH_1-1:0] CHY_DSP_q;
+wire  [CH_0+CH_1-1:0] CHY_DSP_mx;
 
 reg  [CHY_REM-1:0] CHY_q [0:LAT-1];
 reg  [Y-1:0] CY_q [0:LAT-1];
@@ -107,7 +110,9 @@ assign CL  = C[R-1:0];
 assign CL_N     = FF_CL ? -CL_q : -CL;
 assign carry    = FF_CL ? (CL_q[R-1] | CL_N[R-1]) : CL[R-1] | CL_N[R-1];
 
-assign CY_carry = CY_q[0] + carry_q;
+assign CY_carry = CY_q[CYQ_I-1] + carry_q;
+
+assign CHY_DSP_mx = (ASN_CL == 1) ? CHY[CH_1+CH_0-1:0] : CHY_DSP_q;
 
 generate
     for (genvar i = 0; i < QH_NUM - 1; i = i + 1) begin
@@ -141,7 +146,7 @@ assign T = (FF_OUT) ? T3_q : T3;
 
 /////////////////////////// multiplication and adds (DSPs) //////////////
 
-assign CH_IN[0] = CHY[CH_0 - 1 : 0];
+assign CH_IN[0] = CHY_DSP_mx[CH_0 - 1 : 0];
 assign QH_IN[0]  = (QH_NUM > 1) ? qH[QH_DIV-1 : 0] : qH[QH_LST-1 : 0];
 
 word_red_r26_0 dsp_inst_0 (
@@ -158,9 +163,10 @@ word_red_r26_0 dsp_inst_0 (
 
 generate
     if (QH_NUM > 1) begin
-        assign CH_IN[1] = (CH_1 == 0) ? 0 : CHY[CH_0 +: CH_1] << CH_1_S;
+        assign CH_IN[1] = (CH_1 == 0) ? 0 : CHY_DSP_mx[CH_0 +: CH_1] << CH_1_S;
         assign QH_IN[1] = (QH_NUM > 2)? qH[QH_DIV +: QH_DIV] : qH[QH_DIV +: QH_LST];
 
+        // todo: fix naming c26 => r26
         word_red_c26_1 dsp_inst_1 (
             .CLK(clk),
             .B(QH_IN[1]),
@@ -211,7 +217,7 @@ generate
 
     for(genvar i = 0; i < LAT; i = i + 1) begin
         always @(posedge clk) begin
-            CY_q[i] <= (i == 0) ? CH[0+:Y] : (i == 1) ? CY_carry[Y-1:0] : CY_q[i-1];
+            CY_q[i] <= (i == 0) ? CH[0+:Y] : (i == CYQ_I) ? CY_carry[Y-1:0] : CY_q[i-1];
         end
     end
 
@@ -229,6 +235,9 @@ endgenerate
 always @(posedge clk) begin
 
     carry_q <= carry;
+
+    if (ASN_CL == 0)
+        CHY_DSP_q <= CHY[CH_1 + CH_0 - 1 : 0];
 
     if (FF_CL)
         CL_q   <= CL;

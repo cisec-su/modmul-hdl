@@ -53,7 +53,7 @@
         "cinreg_1": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "cinreg_2": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "cinreg_3": [ { "value": "false", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "cinreg_4": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
+        "cinreg_4": [ { "value": "false", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "cinreg_5": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "mreg_5": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "preg_6": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
@@ -148,7 +148,7 @@
         "C_CONSTANT_1": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_LATENCY": [ { "value": "128", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_OPMODES": [ { "value": "000010011000010100000000", "resolve_type": "generated", "usage": "all" } ],
-        "C_REG_CONFIG": [ { "value": "00000000000011000001110011010100", "resolve_type": "generated", "usage": "all" } ],
+        "C_REG_CONFIG": [ { "value": "00000000000011000001100011010100", "resolve_type": "generated", "usage": "all" } ],
         "C_TEST_CORE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ]
       },
       "project_parameters": {

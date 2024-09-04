@@ -1,5 +1,5 @@
 vhdl xil_defaultlib  \
-"../../../../karatsuba_dsp.gen/sources_1/ip/word_red_r26_0/sim/word_red_r26_0.vhd" \
+"../../../../modmul_lib.gen/sources_1/ip/word_red_r26_0/sim/word_red_r26_0.vhd" \
 
 # Do not sort compile order
 nosort

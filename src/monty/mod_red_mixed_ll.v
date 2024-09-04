@@ -1,11 +1,13 @@
 
-module mod_red_mixed 
+module mod_red_mixed_ll 
    #(
        `include "dsp_def.vh"
        ,
         parameter K      = 120,
         parameter Q_LEN  = 60,  // 
-        parameter FF_OUT = 1
+        parameter FF_OUT = 1,
+        parameter FF_SUM = 0,
+        parameter FF_SUB = 0
     )
     (
         input                     clk,
@@ -20,63 +22,56 @@ localparam QH_LEN = 26;
 localparam R0     = Q_LEN - QH_LEN;
 localparam R1     = QH_LEN;
 
-localparam FF_CL = (R0 > (2*DSP_B_U)) ? 1 : 0;
-
-localparam QH26_LAT = 2 + ((R0 + DSP_B_U -1) / DSP_B_U); // ceil(R0 / DSP_B_U) + 2
+localparam R34_LAT = 3 + FF_SUM + FF_SUB*2; // ceil(R0 / DSP_B_U) + 2
 
 
 ///////////////////////////// signals ///////////////////////////////////
 
 wire [K-R0-1:0] C_i;
-reg [K-R0-R1-1:0] C_iq;
-reg [QH_LEN-1:0] qH_d [0:QH26_LAT-1];
+reg [QH_LEN-1:0] qH_d [0:R34_LAT-1];
 
 wire [R1-1:0] TL;
 
+reg [K-1:0] C_q;
+
 /////////////////////////////////////////////////////////////////////////
-
-always @(posedge clk) begin
-    C_iq <= C_i[K-R0-1:R1];
-end
-
 
 /////////////////////////// reduction iterations ////////////////////////
 
-word_red_qh26
+parametric_wordred
     #(
         .K(K),
-        .FF_OUT(0),
-        .TL_LEN(R1),
-        .FF_CL(1),
-        .Q_LEN(Q_LEN)
+        .Q_LEN(Q_LEN),
+        .R(R0),
+        .Y(0),
+        .FF_SUM(FF_SUM),
+        .FF_SUB(FF_SUB)
     )
-word_red_38_inst
+word_red_34_inst
     (
         .clk(clk          ),
         .rst(rst          ),
-        .qH (q[Q_LEN-1-:QH_LEN]),
-        .C  (C            ),
-        .T  (C_i          ),
-        .TL (TL           )
+        .qH (qH_d[FF_SUB]),
+        .C  (C_q          ),
+        .T  (C_i          )
     );
 
 
-word_red_r26
+parametric_wordred
     #(
         .K(K-R0),
         .Q_LEN(Q_LEN),
-        .Y(R0-R1),
-        .TL_LEN(R1),
-        .FF_CL(FF_CL),
-        .FF_OUT(FF_OUT),
-        .ASN_CL(1)
+        .R(R1),
+        .Y(8),
+        .FF_SUM(FF_SUM),
+        .FF_SUB(FF_SUB)
     )
 word_red_26_inst
     (
         .clk(clk          ),
         .rst(rst          ),
-        .qH (qH_d[QH26_LAT-1]),
-        .C ({C_i[K-R0-1:R1],TL}),
+        .qH (qH_d[R34_LAT-1]),
+        .C  (C_i),
         .T  (T            )
     );
 
@@ -85,11 +80,17 @@ word_red_26_inst
 
 generate
 
-for (genvar i = 0; i < QH26_LAT; i = i + 1) begin : gen_qh26
+for (genvar i = 0; i < R34_LAT; i = i + 1) begin : gen_qh26
     always @(posedge clk) begin
         qH_d[i] <= (i == 0) ? q[Q_LEN - 1 -: QH_LEN] : qH_d[i - 1];
     end
 end
 endgenerate
+
+
+always @(posedge clk) begin
+    C_q <= C;
+end
+
 
 endmodule
