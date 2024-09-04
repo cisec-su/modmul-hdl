@@ -2,11 +2,11 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
-// Date        : Thu Aug 29 19:04:16 2024
+// Date        : Wed Sep  4 14:39:40 2024
 // Host        : toluntosun-Ubuntu running 64-bit Ubuntu 23.10
-// Command     : write_verilog -force -mode synth_stub
-//               /home/toluntosun/Desktop/PhD/fpga_acceleration/karatsuba_dsp/karatsuba_dsp.gen/sources_1/ip/word_red_c26_1/word_red_c26_1_stub.v
-// Design      : word_red_c26_1
+// Command     : write_verilog -force -mode synth_stub -rename_top word_red_c26_1 -prefix
+//               word_red_c26_1_ word_red_c26_1_asyncl0_stub.v
+// Design      : word_red_c26_1_asyncl0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xcu280-fsvh2892-2L-e
 // --------------------------------------------------------------------------------

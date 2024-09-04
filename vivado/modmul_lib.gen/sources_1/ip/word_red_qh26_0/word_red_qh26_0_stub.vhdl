@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Wed Aug 28 22:22:14 2024
+-- Date        : Wed Sep  4 17:18:29 2024
 -- Host        : toluntosun-Ubuntu running 64-bit Ubuntu 23.10
 -- Command     : write_vhdl -force -mode synth_stub
---               /home/toluntosun/Desktop/PhD/fpga_acceleration/karatsuba_dsp/karatsuba_dsp.gen/sources_1/ip/word_red_qh26_0/word_red_qh26_0_stub.vhdl
+--               /home/toluntosun/Desktop/PhD/fpga_acceleration/modmul_git/vivado/modmul_lib.gen/sources_1/ip/word_red_qh26_0/word_red_qh26_0_stub.vhdl
 -- Design      : word_red_qh26_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xcu280-fsvh2892-2L-e

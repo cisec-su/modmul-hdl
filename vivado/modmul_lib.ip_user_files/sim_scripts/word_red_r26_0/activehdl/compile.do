@@ -24,6 +24,6 @@ vcom -work dsp_macro_v1_0_3 -93  \
 "../../../ipstatic/hdl/dsp_macro_v1_0_rfs.vhd" \
 
 vcom -work xil_defaultlib -93  \
-"../../../../karatsuba_dsp.gen/sources_1/ip/word_red_r26_0/sim/word_red_r26_0.vhd" \
+"../../../../modmul_lib.gen/sources_1/ip/word_red_r26_0/sim/word_red_r26_0.vhd" \
 
 
