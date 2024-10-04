@@ -1,16 +1,20 @@
+/*
+    Tolun Tosun
+    Sabanci University
+*/
+
 module parametric_wordred 
        #(
             `include "dsp_def.vh"
             ,
-            parameter  K      = 120,
-            parameter  Q_LEN  = 60,
-            parameter  R      = 34,
-            parameter  Y      = 0,
+            parameter  K      = 128,
+            parameter  Q_LEN  = 64,
+            parameter  R      = 17,
             parameter  FF_SUB = 0,
             parameter  FF_MUL = 1,
             parameter  FF_SUM = 0,
             parameter  FF_OUT = 1,
-            localparam QH_LEN = Q_LEN-R-Y,
+            localparam QH_LEN = Q_LEN-R,
             localparam O_SIZE = K-R
         )
         (
@@ -23,15 +27,12 @@ module parametric_wordred
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam MODE = (R      <= DSP_A_U && QH_LEN <= (DSP_B_U*2) && QH_LEN > DSP_B_U) ? 0 : 
-                  (QH_LEN <= DSP_A_U && R      <= (DSP_B_U*2) && R      > DSP_B_U) ? 1 : 
-                  (QH_LEN <= DSP_B_U && R      <= (DSP_A_U*2) && R      > DSP_A_U) ? 2 : 
-                  (QH_LEN <= DSP_B_U && R      <= DSP_B_U                        ) ? 3 : 
+localparam MODE = (R      <= DSP_B_U && QH_LEN <= (DSP_A_U*2) && QH_LEN > DSP_A_U) ? 4 : 
                   -1; // undefined behaviour
 
-localparam DO_P1 = (MODE == 0 || MODE == 1 || MODE == 2) ? 1 : 0;
 
-localparam P1_SHFT = (MODE == 0 || MODE == 1) ? DSP_B_U : (MODE == 2) ? DSP_A_U : 0;
+localparam P1_SHFT = DSP_A_U;
+
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -90,7 +91,7 @@ assign CH_mx[0]    = (FF_SUB) ? CH_q[0]    : CH;
 assign carry_mx[0] = (FF_SUB) ? carry_q[0] : carry;
 
 assign P0_mx[0]    = (FF_MUL) ? P0_q[0]    : P0;
-assign P1_mx       = (!DO_P1) ? 0 : (FF_MUL) ? P1_q       : P1;
+assign P1_mx       = (FF_MUL) ? P1_q       : P1;
 assign carry_mx[1] = (FF_MUL) ? carry_q[1] : carry_mx[0];
 assign CH_mx[1]    = (FF_MUL) ? CH_q[1]    : CH_mx[0];
 
@@ -116,15 +117,10 @@ assign carry = CL[R-1] | CL_N[R-1];
 
 /////////////////////////// multiplication  /////////////////////////////
 
-assign P0     = (MODE == 0) ? qH     [DSP_B_U-1:0] * CL_N_mx : 
-                (MODE == 1) ? CL_N_mx[DSP_B_U-1:0] * qH : 
-                (MODE == 2) ? CL_N_mx[DSP_A_U-1:0] * qH : 
-                (MODE == 3) ? CL_N_mx              * qH : 
+assign P0     = (MODE == 4) ? qH     [DSP_A_U-1:0]       * CL_N_mx : 
                 0;
 
-assign P1     = (MODE == 0) ? qH     [QH_LEN -1:DSP_B_U] * CL_N_mx : 
-                (MODE == 1) ? CL_N_mx[R      -1:DSP_B_U] * qH : 
-                (MODE == 2) ? CL_N_mx[R      -1:DSP_A_U] * qH :
+assign P1     = (MODE == 4) ? qH     [QH_LEN -1:DSP_A_U] * CL_N_mx : 
                 0;
 
 /////////////////////////////////////////////////////////////////////////
@@ -134,8 +130,8 @@ assign P1     = (MODE == 0) ? qH     [QH_LEN -1:DSP_B_U] * CL_N_mx :
 
 /////////////////////////// summation  //////////////////////////////////
 
-assign T0     = (P1_mx    << (Y + P1_SHFT)) + CH_mx[1] + carry_mx[1];
-assign T1     = (P0_mx[1] <<  Y) + T0_mx;
+assign T0     = (P1_mx    << (P1_SHFT)) + CH_mx[1] + carry_mx[1];
+assign T1     = (P0_mx[1]) + T0_mx;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -155,9 +151,7 @@ always @(posedge clk) begin
 
     if (FF_MUL) begin
         P0_q[0]    <= P0;
-        if (DO_P1) begin
-            P1_q       <= P1;
-        end
+        P1_q       <= P1;
         carry_q[1] <= carry_mx[0];
         CH_q[1]    <= CH_mx[0];
     end
