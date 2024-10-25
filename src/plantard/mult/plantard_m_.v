@@ -1,7 +1,7 @@
 // Plantard reduction prototype
 // 15/12/2023
 
-module PLANTARD #(
+module plantard_m #(
     parameter W = 32
 ) (
     input clk, input rst,

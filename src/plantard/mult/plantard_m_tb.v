@@ -1,4 +1,4 @@
-module PLANTARD_TB();
+module plantard_m_tb();
 
 parameter HP = 5;
 parameter FP = (2*HP);
