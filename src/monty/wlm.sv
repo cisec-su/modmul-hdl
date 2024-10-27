@@ -6,6 +6,7 @@ module wlm
    #(
         parameter  LOGQ    = 60 ,
         parameter  R       = 17 ,
+        parameter  CORRECT = 1  ,
         parameter  FF_IN   = 1  ,
         parameter  FF_SUM  = 0  ,
         parameter  FF_MUL  = 1  ,
@@ -25,10 +26,13 @@ module wlm
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam wlm_params_t params = {R, LOGQ, LOGQH, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
+localparam wlm_params_t params = {R, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam ITER = wlm_iter(params);
 localparam LAT =  wlm_lat(params);
-localparam LAT_1 = LAT - wlm_word_red_i_lat(wlm_iter(params) - 1, params) + FF_SUB;
+localparam LAT_1 = (CORRECT) ? LAT - wlm_correction_lat(params) : 
+                               LAT - wlm_word_red_i_lat(wlm_iter(params) - 1, params) + FF_SUB;
+localparam C_N = (CORRECT) ? ITER + 2 : ITER + 1;
+localparam Q_N = C_N - 1;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -37,10 +41,9 @@ localparam LAT_1 = LAT - wlm_word_red_i_lat(wlm_iter(params) - 1, params) + FF_S
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K-1:0] C_i [0:ITER];
+wire [K-1:0] C_i [0:C_N-1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
-wire [LOGQH-1:0] qH_d_mx [0:ITER-1];
-
+wire [LOGQH-1:0] qH_d_mx [0:Q_N-1];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -61,8 +64,8 @@ generate
         localparam Y_ = wlm_word_red_y(i, params);
 
         if (i == 0) begin
-            localparam qH_d_id = FF_SUB;
-            assign qH_d_mx[i] = qH_d[qH_d_id];        
+            localparam qH_d_id = FF_SUB + FF_IN - 1;
+            assign qH_d_mx[i] = (qH_d_id == (-1)) ? qH : qH_d[qH_d_id];        
         end
         else if (i == 1) begin
             localparam qH_d_id = wlm_word_red_i_lat(0, params) + FF_SUB - 1;
@@ -70,14 +73,14 @@ generate
         end
         else begin
             localparam qH_d_id = wlm_word_red_i_lat(0, params) + FF_SUB +
-                                 wlm_word_red_i_lat(1, params)*(i - 1) - 1;
+                                (wlm_word_red_i_lat(1, params) * (i - 1)) - 1;
             assign qH_d_mx[i] = qH_d[qH_d_id];
         end
 
 
         word_red
             #(
-                .K     (K-i*R  ),
+                .K     (K-i*(R-1)),
                 .LOGQH (LOGQH  ),
                 .R     (R_     ),
                 .Y     (Y_     ),
@@ -98,13 +101,51 @@ generate
 
     end
 
+endgenerate
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////// final correction  ///////////////////////////
+
+generate
+
+if (CORRECT) begin : correction_block
+
+    localparam qH_d_id = wlm_lat(params) - wlm_correction_lat(params) - 1;
+    assign qH_d_mx[ITER] = qH_d[qH_d_id];
+
+    correction_u
+        #(
+            .LOGQ  (LOGQ  ),
+            .LOGQH (LOGQH ),
+            .FF_IN (0     ),
+            .FF_SUB(0     ),
+            .FF_OUT(FF_OUT)
+        )
+    correction_u_inst
+        (
+            .clk(clk),
+            .rst(rst),
+            .qH (qH_d_mx[ITER]),
+            .C  (C_i    [ITER]),
+            .T  (T  )
+        );
+
+end
+else begin
+
+    assign T = C_i[ITER];
+
+end
 
 endgenerate
 
-assign T = C_i[ITER];
-
-
 /////////////////////////////////////////////////////////////////////////
+
+
 
 
 /////////////////////////// sequential logic  ///////////////////////////
