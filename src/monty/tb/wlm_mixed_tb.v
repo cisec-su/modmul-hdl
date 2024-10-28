@@ -25,8 +25,8 @@ module wlm_mixed_tb();
 reg clk;
 reg rst;
 
-// uncomment only one of them
 
+// uncomment only one of below
 `define TEST_WLM
 //`define TEST_WLM_MIXED
 
@@ -35,7 +35,7 @@ reg rst;
 localparam FF_IN  = 1;
 localparam FF_SUB = 1;
 localparam FF_MUL = 1;
-localparam FF_SUM = 0;
+localparam FF_SUM = 1;
 localparam QH_MODE= 1;
 localparam FF_OUT = 1;
 localparam CORRECT = 1;
@@ -80,6 +80,7 @@ reg  [K   -1:0] C;
 wlm_mixed
 #(
     .LOGQ  (LOGQ),
+    .CORRECT(CORRECT),
     .FF_IN (FF_IN),
     .FF_SUM(FF_SUM),
     .FF_SUB(FF_SUB),
@@ -141,7 +142,7 @@ initial begin
         C = 0;
         q = 0;
     end
-    $display("C = %x, T = %x", C, T);
+    $display("C = 0x%x, T = 0x%x", C, T);
     if (T == T_)
         $display("SUCCESS!\n");
     #FP;

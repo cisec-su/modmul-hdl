@@ -6,6 +6,7 @@ module wlm_mixed
    #(
         parameter  LOGQ    = 60 ,
         parameter  QH_MODE = 1  , // 0 -> LOGQH = 26, (else) -> LOGQH = 17
+        parameter  CORRECT = 1  ,
         parameter  FF_IN   = 1  ,
         parameter  FF_SUM  = 1  ,
         parameter  FF_MUL  = 1  ,
@@ -25,12 +26,16 @@ module wlm_mixed
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam wlm_mixed_params_t params = {LOGQ, LOGQH, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
+localparam wlm_mixed_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam R0     = wlm_mixed_R0(params);
 localparam R1     = wlm_mixed_R1(params);
-localparam Y      = R0 - R1;
-localparam LAT0   = wlm_mixed_word_red_0_lat(params);
-localparam LAT    = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params);
+localparam Y0     = wlm_mixed_Y0(params);
+localparam Y1     = wlm_mixed_Y1(params);
+localparam LAT    = wlm_mixed_lat(params);
+localparam LAT_1  =(CORRECT) ? wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) : 
+                               wlm_mixed_word_red_0_lat(params);
+localparam qH_d_id1 = wlm_mixed_word_red_0_lat(params) + FF_SUB - 1;
+localparam qH_d_idc = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) - 1;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -39,8 +44,8 @@ localparam LAT    = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K -R0-1:0] C_i;
-reg  [LOGQH-1:0] qH_d [0:LAT0-1];
+wire [K -R0-1:0] C_i  [0:      1];
+reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +59,7 @@ word_red
         .K     (K     ),
         .LOGQH (LOGQH ),
         .R     (R0    ),
-        .Y     (0     ),
+        .Y     (Y0    ),
         .FF_IN (FF_IN ),
         .FF_SUM(FF_SUM),
         .FF_SUB(FF_SUB),
@@ -67,16 +72,15 @@ word_red_inst_0
         .rst(rst         ),
         .qH (qH_d[FF_SUB]),
         .C  (C           ),
-        .T  (C_i         )
+        .T  (C_i[0]      )
     );
-
 
 word_red
     #(
         .K     (K - R0),
         .LOGQH (LOGQH ),
         .R     (R1    ),
-        .Y     (Y     ),
+        .Y     (Y1    ),
         .FF_IN (0     ),
         .FF_SUM(FF_SUM),
         .FF_MUL(FF_MUL),
@@ -85,12 +89,49 @@ word_red
     )
 word_red_inst_1
     (
-        .clk(clk         ),
-        .rst(rst         ),
-        .qH (qH_d[LAT0-1]),
-        .C  (C_i         ),
-        .T  (T           )
+        .clk(clk           ),
+        .rst(rst           ),
+        .qH (qH_d[qH_d_id1]),
+        .C  (C_i[0]        ),
+        .T  (C_i[1]        )
     );
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////// final correction  ///////////////////////////
+
+generate
+
+if (CORRECT) begin : correction_block
+
+    correction_u
+        #(
+            .LOGQ  (LOGQ  ),
+            .LOGQH (LOGQH ),
+            .FF_IN (0     ),
+            .FF_SUB(0     ),
+            .FF_OUT(FF_OUT)
+        )
+    correction_u_inst
+        (
+            .clk(clk           ),
+            .rst(rst           ),
+            .qH (qH_d[qH_d_idc]),
+            .C  (C_i[1]        ),
+            .T  (T             )
+        );
+
+end
+else begin
+
+    assign T = C_i[1];
+
+end
+
+endgenerate
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -101,7 +142,7 @@ word_red_inst_1
 
 generate
 
-for (genvar i = 0; i < LAT0; i = i + 1) begin
+for (genvar i = 0; i < LAT_1; i = i + 1) begin
     always @(posedge clk) begin
         qH_d[i] <= (i == 0) ? qH : qH_d[i - 1];
     end

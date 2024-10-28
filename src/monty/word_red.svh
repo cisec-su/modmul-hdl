@@ -8,7 +8,10 @@ typedef struct packed {
 } word_red_params_t;
 
 function int word_red_mode(input word_red_params_t params);
-    if (params.R           <= `DSP_A_U && params.LOGQH <= (`DSP_B_U*2) && params.LOGQH > `DSP_B_U) begin
+    if      (params.LOGQH  <= `DSP_B_U && params.R     <=  `DSP_A_U                              ) begin
+        word_red_mode = 3;
+    end
+    else if (params.R      <= `DSP_A_U && params.LOGQH <= (`DSP_B_U*2) && params.LOGQH > `DSP_B_U) begin
         word_red_mode = 0;
     end
     else if (params.LOGQH  <= `DSP_A_U && params.R     <= (`DSP_B_U*2) && params.R     > `DSP_B_U) begin
@@ -16,9 +19,6 @@ function int word_red_mode(input word_red_params_t params);
     end
     else if (params.LOGQH  <= `DSP_B_U && params.R     <= (`DSP_A_U*2) && params.R     > `DSP_A_U) begin
         word_red_mode = 2;
-    end
-    else if (params.LOGQH  <= `DSP_B_U && params.R     <=  `DSP_B_U                       ) begin
-        word_red_mode = 3;
     end
     else if (params.R      <= `DSP_B_U && params.LOGQH <= (`DSP_A_U*2) && params.LOGQH > `DSP_A_U) begin
         word_red_mode = 4;
