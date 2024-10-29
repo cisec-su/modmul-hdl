@@ -37,7 +37,7 @@ endfunction
 
 function int wlm_word_red_r(input int i, wlm_params_t params);
     if (i == (wlm_iter(params) - 1))
-        wlm_word_red_r = params.LOGQ - i*params.R;
+        wlm_word_red_r = params.LOGQ - i*(params.R - 1) + 1;
     else
         wlm_word_red_r = params.R;
 endfunction

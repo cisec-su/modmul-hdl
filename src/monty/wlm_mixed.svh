@@ -14,10 +14,10 @@ typedef struct packed {
 function int wlm_mixed_R1(input wlm_mixed_params_t params);
     int d;
     int r = params.LOGQ - params.LOGQH;
-    if (params.LOGQH == `DSP_A_U)
-        d = `DSP_B_U;
-    else
+    if (params.LOGQH <= `DSP_B_U)
         d = `DSP_A_U;
+    else
+        d = `DSP_B_U;
     if (r > d)
         wlm_mixed_R1 = d;
     else
@@ -26,7 +26,7 @@ endfunction
 
 
 function int wlm_mixed_R0(input wlm_mixed_params_t params);
-    wlm_mixed_R0 = params.LOGQ - wlm_mixed_R1(params);
+    wlm_mixed_R0 = params.LOGQ - wlm_mixed_R1(params) + 2;
 endfunction
 
 
