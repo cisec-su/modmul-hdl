@@ -4,6 +4,7 @@ module correction_u
        #(
             parameter  LOGQ   = 64,
             parameter  LOGQH  = 17,
+            parameter  LOGC   = LOGQ,
             parameter  FF_IN  = 1 ,
             parameter  FF_SUB = 1 ,
             parameter  FF_OUT = 1
@@ -12,7 +13,7 @@ module correction_u
             input              clk,
             input              rst,
             input  [LOGQH-1:0] qH ,
-            input  [LOGQ -1:0] C  ,
+            input  [LOGC -1:0] C  ,
             output [LOGQ -1:0] T
         );
 
