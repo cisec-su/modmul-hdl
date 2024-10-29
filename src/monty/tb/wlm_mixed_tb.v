@@ -27,8 +27,8 @@ reg rst;
 
 
 // uncomment only one of below
-`define TEST_WLM
-//`define TEST_WLM_MIXED
+//`define TEST_WLM
+`define TEST_WLM_MIXED
 
 
 

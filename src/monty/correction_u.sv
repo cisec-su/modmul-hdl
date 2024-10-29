@@ -12,7 +12,7 @@ module correction_u
             input              clk,
             input              rst,
             input  [LOGQH-1:0] qH ,
-            input  [LOGQ   :0] C  ,
+            input  [LOGQ -1:0] C  ,
             output [LOGQ -1:0] T
         );
 
@@ -29,15 +29,15 @@ localparam LAT = correction_u_lat(params);
 
 ///////////////////////////// signals ///////////////////////////////////
 
-reg  [LOGQ:0] C_q [0:1];
-wire [LOGQ:0] C_mx [0:1];
+reg  [LOGQ-1:0] C_q [0:1];
+wire [LOGQ-1:0] C_mx [0:1];
 
-wire [LOGQ:0] S;
-reg  [LOGQ:0] S_q;
-wire [LOGQ:0] S_mx;
+wire [LOGQ-1:0] S;
+reg  [LOGQ-1:0] S_q;
+wire [LOGQ-1:0] S_mx;
 
-wire [LOGQ:0] O;
-reg  [LOGQ:0] O_q;
+wire [LOGQ-1:0] O;
+reg  [LOGQ-1:0] O_q;
 
 wire [LOGQ-1:0] q;
 
@@ -64,7 +64,7 @@ assign T       = (FF_OUT) ? O_q    : O;
 
 assign q = (R != 0) ? {qH, {(R-1){1'b0}}, 1'b1} : qH;
 assign S = C_mx[0] - q;
-assign O = (S[LOGQ]) ? C_mx[1] : S_mx;
+assign O = (S[LOGQ-1]) ? C_mx[1] : S_mx;
 
 /////////////////////////////////////////////////////////////////////////
 

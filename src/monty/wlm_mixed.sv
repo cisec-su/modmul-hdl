@@ -44,7 +44,7 @@ localparam qH_d_idc = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_la
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K -R0-1:0] C_i  [0:      1];
+wire [K -R0  :0] C_i  [0:      1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 /////////////////////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ word_red_inst_0
 
 word_red
     #(
-        .K     (K - R0),
+        .K     (K-R0+1),
         .LOGQH (LOGQH ),
         .R     (R1    ),
         .Y     (Y1    ),
