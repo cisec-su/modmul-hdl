@@ -29,7 +29,7 @@ function int wlm_word_red_ff_out(input int i, wlm_params_t params);
         if (params.CORRECT == 0)
             wlm_word_red_ff_out = params.FF_OUT;
         else
-            wlm_word_red_ff_out = params.FF_OUT;
+            wlm_word_red_ff_out = 1;
     else
         wlm_word_red_ff_out = 1;
 endfunction

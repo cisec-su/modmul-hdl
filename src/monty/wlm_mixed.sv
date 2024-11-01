@@ -8,7 +8,7 @@ module wlm_mixed
         parameter  QH_MODE = 1  , // 0 -> LOGQH = 26, (else) -> LOGQH = 17
         parameter  CORRECT = 1  ,
         parameter  FF_IN   = 1  ,
-        parameter  FF_SUM  = 1  ,
+        parameter  FF_SUM  = 0  ,
         parameter  FF_MUL  = 1  ,
         parameter  FF_SUB  = 1  ,
         parameter  FF_OUT  = 1  ,
@@ -35,7 +35,8 @@ localparam LAT    = wlm_mixed_lat(params);
 localparam LAT_1  =(CORRECT) ? wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) : 
                                wlm_mixed_word_red_0_lat(params);
 localparam qH_d_id1 = wlm_mixed_word_red_0_lat(params) + FF_SUB - 1;
-localparam qH_d_idc = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) - 1;
+localparam qH_d_idc = LAT_1 - 1;
+localparam FF_OUT_1 = wlm_mixed_word_red_1_ff_out(params);
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +86,7 @@ word_red
         .FF_SUM(FF_SUM),
         .FF_MUL(FF_MUL),
         .FF_SUB(FF_SUB),
-        .FF_OUT(FF_OUT)
+        .FF_OUT(FF_OUT_1)
     )
 word_red_inst_1
     (
