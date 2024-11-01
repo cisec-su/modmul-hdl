@@ -46,8 +46,16 @@ function int wlm_mixed_word_red_0_lat(input wlm_mixed_params_t params);
 endfunction
 
 
+function int wlm_mixed_word_red_1_ff_out(wlm_mixed_params_t params);
+    if (params.CORRECT == 0)
+        wlm_mixed_word_red_1_ff_out = params.FF_OUT;
+    else
+        wlm_mixed_word_red_1_ff_out = 1;
+endfunction
+
+
 function int wlm_mixed_word_red_1_lat(input wlm_mixed_params_t params);
-    word_red_params_t params_ = {wlm_mixed_R1(params), params.LOGQH, 0, params.FF_SUB, params.FF_MUL, params.FF_SUM, params.FF_OUT};
+    word_red_params_t params_ = {wlm_mixed_R1(params), params.LOGQH, 0, params.FF_SUB, params.FF_MUL, params.FF_SUM, wlm_mixed_word_red_1_ff_out(params)};
     wlm_mixed_word_red_1_lat = word_red_lat(params_);
 endfunction
 
