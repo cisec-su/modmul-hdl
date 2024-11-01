@@ -1,16 +1,15 @@
-`timescale 1ns / 1ps
-
 `include "dsp_def_new.vh"
+`include "intmul_standard.svh"
 
 module intmul_standard
    #(  
-        parameter W_A     = 64,
-        parameter W_B     = 64,
+        parameter W_A     = 32,
+        parameter W_B     = 32,
         parameter FF_IN   = 1 ,
         parameter FF_MUL  = 1 ,
         parameter FF_OUT  = 1 ,
-        parameter USE_CSA = 1 ,
-        parameter FF_CSA  = 1
+        parameter USE_CSA = 0 ,
+        parameter FF_CSA  = 0
     )
     (
         input                      clk,
@@ -20,7 +19,8 @@ module intmul_standard
         output wire [W_A+W_B-1:0]  C
     );
 
-parameter LAT = FF_IN + FF_MUL + FF_OUT + (FF_CSA & USE_CSA);
+localparam intmul_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA};
+localparam LAT = intmul_lat(params);
 
 localparam N_A = ((W_A - 1) / `DSP_A_U) + 1;
 localparam N_B = ((W_B - 1) / `DSP_B_U) + 1;
@@ -40,7 +40,7 @@ reg  [`DSP_B_U-1:0] B_i_q [0:N_B-1];
 wire [`DSP_B_U-1:0] B_i_mx[0:N_B-1];
 
 
-wire [`DSP_M_U-1:0] P   [0:N_A-1][0:N_B-1];
+(* use_dsp = "yes" *) wire [`DSP_M_U-1:0] P [0:N_A-1][0:N_B-1];
 reg  [`DSP_M_U-1:0] P_q [0:N_A-1][0:N_B-1];
 wire [`DSP_M_U-1:0] P_mx[0:N_A-1][0:N_B-1];
 
