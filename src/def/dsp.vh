@@ -1,6 +1,5 @@
-`ifndef DSP_DEF
-
-`define DSP_DEF
+`ifndef DSP
+`define DSP
 
 `define DSP_A 27
 `define DSP_B 18

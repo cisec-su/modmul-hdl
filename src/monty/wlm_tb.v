@@ -1,35 +1,16 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 08/26/2024 01:53:31 PM
-// Design Name: 
-// Module Name: mod_red_mixed_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+
+`include "wlm_mixed.vh"
+
+module wlm_mixed_tb(
 
 
-module wlm_mixed_tb();
+
+
+    );
 
 reg clk;
 reg rst;
-
-
-// uncomment only one of below
-//`define TEST_WLM
-`define TEST_WLM_MIXED
-
 
 
 localparam FF_IN  = 1;

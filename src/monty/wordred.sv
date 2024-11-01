@@ -1,18 +1,18 @@
-`include "dsp_def_new.vh"
-`include "word_red.svh"
+`include "dsp.vh"
+`include "wordred.svh"
 
-module word_red 
+module wordred 
        #(
             parameter  K      = 120  ,
             parameter  LOGQH  = 26   ,
-            parameter  R      = 34   ,
+            parameter  W      = 34   ,
             parameter  Y      = 0    ,
             parameter  FF_IN  = 1    ,
             parameter  FF_SUB = 0    ,
             parameter  FF_MUL = 1    ,
             parameter  FF_SUM = 0    ,
             parameter  FF_OUT = 1    ,
-            parameter  O_SIZE = K - R + 1
+            parameter  O_SIZE = wordred_osize(K, LOGQH, W, Y)
         )
         (
             input                 clk,
@@ -24,13 +24,13 @@ module word_red
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam word_red_params_t params = {R, LOGQH, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-localparam FF_SUM_ = word_red_ff_sum(params);
-localparam MODE = word_red_mode(params);
+localparam wordred_params_t params = {W, LOGQH, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
+localparam FF_SUM_ = wordred_ff_sum(params);
+localparam MODE = wordred_mode(params);
 localparam P1_SHFT = (MODE == 0 || MODE == 1) ? `DSP_B_U : 
                      (MODE == 2 || MODE == 4) ? `DSP_A_U : 0;
-localparam DO_P1 = word_red_do_p1(params);
-localparam LAT = word_red_lat(params);
+localparam DO_P1 = wordred_do_p1(params);
+localparam LAT = wordred_lat(params);
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -43,15 +43,15 @@ localparam LAT = word_red_lat(params);
 reg  [K-1:0] C_q;
 wire [K-1:0] C_mx;
 
-wire [  R-1:0] CL;
-wire [K-R-1:0] CH;
+wire [  W-1:0] CL;
+wire [K-W-1:0] CH;
 
-wire [R-1:0] CL_N;
-reg  [R-1:0] CL_N_q;
-wire [R-1:0] CL_N_mx;
+wire [W-1:0] CL_N;
+reg  [W-1:0] CL_N_q;
+wire [W-1:0] CL_N_mx;
 
-reg  [K-R-1:0] CH_q  [0:1];
-wire [K-R-1:0] CH_mx [0:1];
+reg  [K-W-1:0] CH_q  [0:1];
+wire [K-W-1:0] CH_mx [0:1];
 
 wire carry;
 reg  carry_q  [0:1];
@@ -83,8 +83,8 @@ wire [O_SIZE-1:0] T1;
 
 /////////////////////////// partitioning  ///////////////////////////////
 
-assign CL = C_mx[R-1:0];
-assign CH = C_mx[K-1:R];
+assign CL = C_mx[W-1:0];
+assign CH = C_mx[K-1:W];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -117,7 +117,7 @@ assign T           = (FF_OUT) ? T1_q       : T1;
 /////////////////////////// negation and or  ////////////////////////////
 
 assign CL_N = -CL;
-assign carry = CL[R-1] | CL_N[R-1];
+assign carry = CL[W-1] | CL_N[W-1];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -134,8 +134,8 @@ assign P0     = (MODE == 0) ? qH     [`DSP_B_U-1:0] * CL_N_mx :
                 0;
 
 assign P1     = (MODE == 0) ? qH     [LOGQH -1:`DSP_B_U] * CL_N_mx :
-                (MODE == 1) ? CL_N_mx[R     -1:`DSP_B_U] * qH :
-                (MODE == 2) ? CL_N_mx[R     -1:`DSP_A_U] * qH :
+                (MODE == 1) ? CL_N_mx[W     -1:`DSP_B_U] * qH :
+                (MODE == 2) ? CL_N_mx[W     -1:`DSP_A_U] * qH :
                 (MODE == 4) ? qH     [LOGQH -1:`DSP_A_U] * CL_N_mx :
                 0;
 

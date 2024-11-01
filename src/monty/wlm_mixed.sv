@@ -1,19 +1,18 @@
 
-`include "dsp_def_new.vh"
+`include "dsp.vh"
 `include "wlm_mixed.svh"
 
 module wlm_mixed 
    #(
-        parameter  LOGQ    = 60 ,
-        parameter  QH_MODE = 1  , // 0 -> LOGQH = 26, (else) -> LOGQH = 17
-        parameter  CORRECT = 1  ,
-        parameter  FF_IN   = 1  ,
-        parameter  FF_SUM  = 0  ,
-        parameter  FF_MUL  = 1  ,
-        parameter  FF_SUB  = 1  ,
-        parameter  FF_OUT  = 1  ,
-        localparam K       = 2*LOGQ,
-        localparam LOGQH   = (QH_MODE == 0) ? 26 : 17
+        parameter         LOGQ    = 60      ,
+        parameter logqh_t LOGQH   = LOGQH_17,
+        parameter         CORRECT = 1       ,
+        parameter         FF_IN   = 1       ,
+        parameter         FF_SUM  = 0       ,
+        parameter         FF_MUL  = 1       ,
+        parameter         FF_SUB  = 1       ,
+        parameter         FF_OUT  = 1       ,
+        localparam        K       = 2*LOGQ
     )
     (
         input                    clk,
@@ -27,16 +26,16 @@ module wlm_mixed
 ///////////////////////////// parameters ////////////////////////////////
 
 localparam wlm_mixed_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-localparam R0     = wlm_mixed_R0(params);
-localparam R1     = wlm_mixed_R1(params);
-localparam Y0     = wlm_mixed_Y0(params);
-localparam Y1     = wlm_mixed_Y1(params);
+localparam W0     = wlm_mixed_w0(params);
+localparam W1     = wlm_mixed_w1(params);
+localparam Y0     = wlm_mixed_y0(params);
+localparam Y1     = wlm_mixed_y1(params);
 localparam LAT    = wlm_mixed_lat(params);
-localparam LAT_1  =(CORRECT) ? wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) : 
-                               wlm_mixed_word_red_0_lat(params);
-localparam qH_d_id1 = wlm_mixed_word_red_0_lat(params) + FF_SUB - 1;
+localparam LAT_1  =(CORRECT) ? wlm_mixed_wordred_0_lat(params) + wlm_mixed_wordred_1_lat(params) : 
+                               wlm_mixed_wordred_0_lat(params) + FF_SUB;
+localparam qH_d_id1 = wlm_mixed_wordred_0_lat(params) + FF_SUB - 1;
 localparam qH_d_idc = LAT_1 - 1;
-localparam FF_OUT_1 = wlm_mixed_word_red_1_ff_out(params);
+localparam FF_OUT_1 = wlm_mixed_wordred_1_ff_out(params);
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +44,7 @@ localparam FF_OUT_1 = wlm_mixed_word_red_1_ff_out(params);
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K -R0  :0] C_i  [0:      1];
+wire [K -W0  :0] C_i  [0:      1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 /////////////////////////////////////////////////////////////////////////
@@ -55,11 +54,11 @@ reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 /////////////////////////// reduction iterations ////////////////////////
 
-word_red
+wordred
     #(
         .K     (K     ),
         .LOGQH (LOGQH ),
-        .R     (R0    ),
+        .W     (W0    ),
         .Y     (Y0    ),
         .FF_IN (FF_IN ),
         .FF_SUM(FF_SUM),
@@ -67,7 +66,7 @@ word_red
         .FF_MUL(FF_MUL),
         .FF_OUT(1     )
     )
-word_red_inst_0
+wordred_inst_0
     (
         .clk(clk         ),
         .rst(rst         ),
@@ -76,11 +75,11 @@ word_red_inst_0
         .T  (C_i[0]      )
     );
 
-word_red
+wordred
     #(
-        .K     (K-R0+1),
+        .K     (K-W0+1),
         .LOGQH (LOGQH ),
-        .R     (R1    ),
+        .W     (W1    ),
         .Y     (Y1    ),
         .FF_IN (0     ),
         .FF_SUM(FF_SUM),
@@ -88,7 +87,7 @@ word_red
         .FF_SUB(FF_SUB),
         .FF_OUT(FF_OUT_1)
     )
-word_red_inst_1
+wordred_inst_1
     (
         .clk(clk           ),
         .rst(rst           ),

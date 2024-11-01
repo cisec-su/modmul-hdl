@@ -1,9 +1,15 @@
 `ifndef WLM_MIXED
 `define WLM_MIXED
 
-`include "dsp_def_new.vh"
-`include "word_red.svh"
+`include "dsp.vh"
+`include "wordred.svh"
 `include "correction_u.svh"
+
+
+typedef enum int {
+    LOGQH_26 = 26,
+    LOGQH_17 = 17
+} logqh_t;
 
 
 typedef struct packed {
@@ -11,7 +17,7 @@ typedef struct packed {
 } wlm_mixed_params_t;
 
 
-function int wlm_mixed_R1(input wlm_mixed_params_t params);
+function int wlm_mixed_w1(input wlm_mixed_params_t params);
     int d;
     int r = params.LOGQ - params.LOGQH;
     if (params.LOGQH <= `DSP_B_U)
@@ -19,44 +25,44 @@ function int wlm_mixed_R1(input wlm_mixed_params_t params);
     else
         d = `DSP_B_U;
     if (r > d)
-        wlm_mixed_R1 = d;
+        wlm_mixed_w1 = d;
     else
-        wlm_mixed_R1 = r;
+        wlm_mixed_w1 = r;
 endfunction
 
 
-function int wlm_mixed_R0(input wlm_mixed_params_t params);
-    wlm_mixed_R0 = params.LOGQ - wlm_mixed_R1(params) + 2;
+function int wlm_mixed_w0(input wlm_mixed_params_t params);
+    wlm_mixed_w0 = params.LOGQ - wlm_mixed_w1(params) + 2;
 endfunction
 
 
-function int wlm_mixed_Y0(input wlm_mixed_params_t params);
-    wlm_mixed_Y0 = params.LOGQ - params.LOGQH - wlm_mixed_R0(params);
+function int wlm_mixed_y0(input wlm_mixed_params_t params);
+    wlm_mixed_y0 = params.LOGQ - params.LOGQH - wlm_mixed_w0(params);
 endfunction
 
 
-function int wlm_mixed_Y1(input wlm_mixed_params_t params);
-    wlm_mixed_Y1 = params.LOGQ - params.LOGQH - wlm_mixed_R1(params);
+function int wlm_mixed_y1(input wlm_mixed_params_t params);
+    wlm_mixed_y1 = params.LOGQ - params.LOGQH - wlm_mixed_w1(params);
 endfunction
 
 
-function int wlm_mixed_word_red_0_lat(input wlm_mixed_params_t params);
-    word_red_params_t params_ = {wlm_mixed_R0(params), params.LOGQH, params.FF_IN, params.FF_SUB, params.FF_MUL, params.FF_SUM, 1};
-    wlm_mixed_word_red_0_lat = word_red_lat(params_);
+function int wlm_mixed_wordred_0_lat(input wlm_mixed_params_t params);
+    wordred_params_t params_ = {wlm_mixed_w0(params), params.LOGQH, params.FF_IN, params.FF_SUB, params.FF_MUL, params.FF_SUM, 1};
+    wlm_mixed_wordred_0_lat = wordred_lat(params_);
 endfunction
 
 
-function int wlm_mixed_word_red_1_ff_out(wlm_mixed_params_t params);
+function int wlm_mixed_wordred_1_ff_out(wlm_mixed_params_t params);
     if (params.CORRECT == 0)
-        wlm_mixed_word_red_1_ff_out = params.FF_OUT;
+        wlm_mixed_wordred_1_ff_out = params.FF_OUT;
     else
-        wlm_mixed_word_red_1_ff_out = 1;
+        wlm_mixed_wordred_1_ff_out = 1;
 endfunction
 
 
-function int wlm_mixed_word_red_1_lat(input wlm_mixed_params_t params);
-    word_red_params_t params_ = {wlm_mixed_R1(params), params.LOGQH, 0, params.FF_SUB, params.FF_MUL, params.FF_SUM, wlm_mixed_word_red_1_ff_out(params)};
-    wlm_mixed_word_red_1_lat = word_red_lat(params_);
+function int wlm_mixed_wordred_1_lat(input wlm_mixed_params_t params);
+    wordred_params_t params_ = {wlm_mixed_w1(params), params.LOGQH, 0, params.FF_SUB, params.FF_MUL, params.FF_SUM, wlm_mixed_wordred_1_ff_out(params)};
+    wlm_mixed_wordred_1_lat = wordred_lat(params_);
 endfunction
 
 
@@ -71,7 +77,7 @@ endfunction
 
 
 function int wlm_mixed_lat(input wlm_mixed_params_t params);
-    wlm_mixed_lat = wlm_mixed_word_red_0_lat(params) + wlm_mixed_word_red_1_lat(params) + wlm_mixed_correction_lat(params);
+    wlm_mixed_lat = wlm_mixed_wordred_0_lat(params) + wlm_mixed_wordred_1_lat(params) + wlm_mixed_correction_lat(params);
 endfunction
 
 `endif
