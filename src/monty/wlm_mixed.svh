@@ -6,12 +6,6 @@
 `include "correction_u.svh"
 
 
-typedef enum int {
-    LOGQH_26 = 26,
-    LOGQH_17 = 17
-} logqh_t;
-
-
 typedef struct packed {
     int LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT;
 } wlm_mixed_params_t;
