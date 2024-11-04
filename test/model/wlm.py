@@ -20,3 +20,50 @@ def wlm_iter(c, w, q, debug=False):
     if debug:
         print("T3: ", hex(T3))
     return T3
+
+
+def wlm(c, q, logq, logqh, correct=True, debug=False):
+    w = logq - logqh
+    iter = ((logq - 1) // (w - 1)) + 1
+    c0 = c
+    if debug:
+        print(iter)
+    w_sum = 0
+    for i in range(iter):
+        w_i = logq - i*(w - 1) + 1 if i == iter-1 else w
+        if debug:
+            print(i, w_i)
+        w_sum += w_i
+        c = wlm_iter(c, w_i, q)
+
+    if debug:
+        print(w_sum)
+
+    t = ((c0 * pow(2, -(w_sum), q) ) % q)
+    if correct:
+        return t
+    else:
+        assert (c == t) or ((c - q) == t)
+        return c
+
+
+def wlm_mixed(c, q, logq, logqh, dsp_a, dsp_b, correct=True):
+    w = logq - logqh
+    if (logqh <= dsp_b):
+        d = dsp_a
+    else:
+        d = dsp_a
+    if (w > d):
+        w1 = d
+    else:
+        w1 = w
+    w0 = logq - w1 + 1
+
+    t = ((c * pow(2, -(w0+w1), q) ) % q)
+    if correct:
+        return t
+    else:
+        c0 = wlm_iter(c, w0, q)
+        c1 = wlm_iter(c0, w1, q)
+        assert (c1 == t) or ((c1 - q) == t)
+        return c1
