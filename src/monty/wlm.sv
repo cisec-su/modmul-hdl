@@ -4,15 +4,14 @@
 module wlm 
    #(
         parameter  LOGQ    = 60 ,
-        parameter  W       = 17 ,
+        parameter  LOGQH   = 43 ,
         parameter  CORRECT = 1  ,
         parameter  FF_IN   = 1  ,
         parameter  FF_SUM  = 0  ,
         parameter  FF_MUL  = 1  ,
-        parameter  FF_SUB  = 1  ,
+        parameter  FF_SUB  = 0  ,
         parameter  FF_OUT  = 1  ,
-        localparam K       = 2*LOGQ,
-        localparam LOGQH   = LOGQ - W
+        localparam K       = 2*LOGQ
     )
     (
         input                   clk,
@@ -25,6 +24,7 @@ module wlm
 
 ///////////////////////////// parameters ////////////////////////////////
 
+localparam W = LOGQ - LOGQH;
 localparam wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam ITER = wlm_iter(params);
 localparam LAT =  wlm_lat(params);

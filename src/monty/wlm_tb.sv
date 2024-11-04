@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
-`include "wlm_mixed.svh"
+`include "wlm.svh"
 
 
-module wlm_mixed_tb
+module wlm_tb
    #(
         parameter           LOGQ    = 60      ,
-        parameter           LOGQH   = 17      ,
+        parameter           LOGQH   = 43      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
         parameter           FF_SUB  = 1       ,
@@ -14,6 +14,7 @@ module wlm_mixed_tb
         parameter           FF_SUM  = 1       ,
         parameter           FF_OUT  = 1       ,
         parameter           HP      = 5       ,
+        parameter string    MIXED   = 0       ,
         parameter string    FN_C    = "C.txt" ,
         parameter string    FN_qH   = "qH.txt",
         parameter string    FN_T    = "T.txt"
@@ -41,26 +42,50 @@ wire [LOGQ -1:0] T ;
 reg  [LOGQ -1:0] T_;
 reg  [K    -1:0] C ;
 
-wlm_mixed
-    #(
-        .LOGQ   (LOGQ   ),
-        .LOGQH  (LOGQH  ),
-        .CORRECT(CORRECT),
-        .FF_IN  (FF_IN  ),
-        .FF_SUM (FF_SUM ),
-        .FF_SUB (FF_SUB ),
-        .FF_MUL (FF_MUL ),
-        .FF_OUT (FF_OUT )
-    ) 
-wlm_mixed_inst 
-    (
-        .clk(clk),
-        .rst(rst),
-        .qH (qH ),
-        .C  (C  ),
-        .T  (T  )
-    );
 
+generate
+if (MIXED) begin : wlm_gen
+    wlm_mixed
+        #(
+            .LOGQ   (LOGQ   ),
+            .LOGQH  (LOGQH  ),
+            .CORRECT(CORRECT),
+            .FF_IN  (FF_IN  ),
+            .FF_SUM (FF_SUM ),
+            .FF_SUB (FF_SUB ),
+            .FF_MUL (FF_MUL ),
+            .FF_OUT (FF_OUT )
+        ) 
+    wlm_inst 
+        (
+            .clk(clk),
+            .rst(rst),
+            .qH (qH ),
+            .C  (C  ),
+            .T  (T  )
+        );
+end else begin : wlm_gen
+    wlm
+        #(
+            .LOGQ   (LOGQ   ),
+            .LOGQH  (LOGQH  ),
+            .CORRECT(CORRECT),
+            .FF_IN  (FF_IN  ),
+            .FF_SUM (FF_SUM ),
+            .FF_SUB (FF_SUB ),
+            .FF_MUL (FF_MUL ),
+            .FF_OUT (FF_OUT )
+        ) 
+    wlm_inst 
+        (
+            .clk(clk),
+            .rst(rst),
+            .qH (qH ),
+            .C  (C  ),
+            .T  (T  )
+        );
+end
+endgenerate
 
 function integer count_lines;
     input integer file;
@@ -149,7 +174,7 @@ initial begin
 
     $display("TOTAL TESTS: %d", n_C);
 
-    for (i = 0; i < n_C + wlm_mixed_inst.LAT; i = i + 1) begin
+    for (i = 0; i < n_C + wlm_gen.wlm_inst.LAT; i = i + 1) begin
         
         if (i < n_C) begin
             st_C  = $fscanf(file_C , "%h\n", C );
@@ -163,7 +188,7 @@ initial begin
             end
         end
         
-        if (i >= wlm_mixed_inst.LAT) begin
+        if (i >= wlm_gen.wlm_inst.LAT) begin
             st_T = $fscanf(file_T, "%h\n", T_);
             if (st_T != 1) begin
                 $display("Error while reading input %s for test %d", FN_T, i);
@@ -171,11 +196,11 @@ initial begin
             end
             
             if (T_ == T) begin
-                $display("Test [%d] Passed -> T = %x. Failing: %d", i - wlm_mixed_inst.LAT, T, fail);
+                $display("Test [%d] Passed -> T = %x. Failing: %d", i - wlm_gen.wlm_inst.LAT, T, fail);
             end else begin
                 fail = fail + 1;
                 $display("Test [%d] Failed -> T = 0x%x, Expected T = 0x%x. Failing: %d", 
-                          i - wlm_mixed_inst.LAT, T, T_, fail);
+                          i - wlm_gen.wlm_inst.LAT, T, T_, fail);
             end
         end
 
