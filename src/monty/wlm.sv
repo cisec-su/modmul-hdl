@@ -18,12 +18,13 @@ module wlm
         input                   rst,
         input  wire [LOGQH-1:0] qH ,
         input  wire [K    -1:0] C  ,
-        output wire [LOGQ -1:0] T
+        output wire [LOGT -1:0] T
     );
 
 
 ///////////////////////////// parameters ////////////////////////////////
 
+localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam W = LOGQ - LOGQH;
 localparam wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam ITER = wlm_iter(params);

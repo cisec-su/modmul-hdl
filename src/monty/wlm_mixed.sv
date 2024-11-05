@@ -19,12 +19,13 @@ module wlm_mixed
         input                    rst,
         input  wire [LOGQH -1:0] qH ,
         input  wire [K     -1:0] C  ,
-        output wire [LOGQ  -1:0] T
+        output wire [LOGT  -1:0] T
     );
 
 
 ///////////////////////////// parameters ////////////////////////////////
 
+localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam wlm_mixed_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam W0     = wlm_mixed_w0(params);
 localparam W1     = wlm_mixed_w1(params);

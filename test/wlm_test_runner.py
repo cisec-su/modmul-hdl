@@ -1,5 +1,4 @@
 import automation.test_runner
-import argparse
 import random
 
 from model.ntt_friendly_prime_gen import ntt_friendly_prime_gen
@@ -40,11 +39,11 @@ class WlmTestRunner(automation.test_runner.TestRunner):
         self.ft  = open(self.test_dir() + self.args.FN_T.replace('"',''), "w")
 
     def gen_test_vec_update(self, we):
-        c  = random.randint(0, 2**(2*self.args.LOGQ))
         qi = random.randint(0, len(self.primes)-1   )
+        q  = self.primes[qi]
+        qh = q >> (self.args.LOGQ - self.args.LOGQH)
+        c  = random.randint(0, q**2)
         if we:
-            q  = self.primes[qi]
-            qh = q >> (self.args.LOGQ - self.args.LOGQH)
             if self.args.MIXED:
                 t  = wlm_mixed(c, q, self.args.LOGQ, self.args.LOGQH, self.args.DSP_A, self.args.DSP_B, self.args.CORRECT)
             else:
