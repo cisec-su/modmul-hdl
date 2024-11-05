@@ -2,6 +2,7 @@ import abc
 from .tester import Tester
 import argparse
 import random
+import os
 
 
 class TestRunner(abc.ABC):
@@ -15,6 +16,7 @@ class TestRunner(abc.ABC):
         self.parser.add_argument("--seed", type=int, default=0, help="Set the random seed (default: 0)")        
         self.parser.add_argument("--vivado_path", type=str, default=None, help="Set the Vivado executable path (default: vivado)")
         self.parser.add_argument("--working_dir", type=str, default=None, help="Set the working directory for tester (default: .tester)")
+        self.parser.add_argument("--debug", action='store_true', help="Enable debugging for test vector generation")
 
         project = self.project()
         if project is None:
@@ -86,6 +88,10 @@ class TestRunner(abc.ABC):
         pass
 
     def generate_test_vectors(self):
+        test_dir = self.test_dir()
+        if not os.path.exists(test_dir):
+            os.makedirs(test_dir)
+
         random.seed(self.args.seed)
         self.gen_test_vec_init()
         for i in range(self.args.test_num):
@@ -99,7 +105,6 @@ class TestRunner(abc.ABC):
     def test_dir(self):
         project_dir = self.args.project.replace(".xpr", "")
         return f"{project_dir}.sim/{self.simulation_set()}/behav/xsim/"
-
 
     def run(self):
         self.generate_test_vectors()
