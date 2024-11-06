@@ -61,9 +61,9 @@ initial begin
     rst = 0;
     #(5*FP);
     if (C2 == 32'd1965696994) begin
-        $display("Nice :)");
+        $display("Correct :)");
     end else begin
-        $display("No :(");
+        $display("Incorrect :(");
     end
     //
     $display("Simulation finished."); 

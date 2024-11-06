@@ -1,4 +1,4 @@
-module k2red_ln_shift #(parameter W = 64) (
+module k2red_ln_shift #(parameter W = 32) (
   input                        clk,
   input                        rst,
   input      [      (2*W)-1:0] A  ,
@@ -6,7 +6,7 @@ module k2red_ln_shift #(parameter W = 64) (
   input      [$clog2(2*W)-1:0] l1 ,
   input      [$clog2(2*W)-1:0] l2 ,
   input      [$clog2(2*W)-1:0] l3 ,
-  input      [$clog2(2*W)-1:0] m  , // We can fix m to get better synthesis results :)
+  input      [$clog2(2*W)-1:0] m  , // m can be a design time parameter, would help performance
   output reg [          W-1:0] C2
 );
 
@@ -17,8 +17,8 @@ module k2red_ln_shift #(parameter W = 64) (
   wire        [(2*W)-1:0] AL   ;
   reg  signed [(2*W)-1:0] C2int;
 
-  barrelmask d00 (clk,rst,A,m,AH,AL);
-  barrelmask d01 (clk,rst,C1,m,C1H,C1L);
+  barrelmask #(.W(2*W)) d00(clk,rst,A,m,AH,AL);
+  barrelmask #(.W(2*W)) d01(clk,rst,C1,m,C1H,C1L);
 
   always @(posedge clk )
     begin
@@ -47,14 +47,6 @@ module k2red_ln_shift #(parameter W = 64) (
             end
         end
     end
-
-  `ifdef COCOTB_SIM
-    initial
-      begin
-        $dumpfile ("k2red.vcd");
-        $dumpvars (0, k2red_ln_shift);
-      end
-  `endif
 
 endmodule
 
