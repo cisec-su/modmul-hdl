@@ -11,7 +11,6 @@ module correction_u
         )
         (
             input              clk,
-            input              rst,
             input  [LOGQH-1:0] qH ,
             input  [LOGC -1:0] C  ,
             output [LOGQ -1:0] T

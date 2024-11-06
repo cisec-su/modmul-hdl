@@ -3,7 +3,7 @@
 
 module wordred 
        #(
-            parameter  K      = 120  ,
+            parameter  LOGC      = 120  ,
             parameter  LOGQH  = 26   ,
             parameter  W      = 34   ,
             parameter  Y      = 0    ,
@@ -12,14 +12,13 @@ module wordred
             parameter  FF_MUL = 1    ,
             parameter  FF_SUM = 0    ,
             parameter  FF_OUT = 1    ,
-            parameter  O_SIZE = wordred_osize(K, LOGQH, W, Y)
+            parameter  LOGT   = wordred_osize(LOGC, LOGQH, W, Y)
         )
         (
-            input                 clk,
-            input                 rst,
-            input  [LOGQH   -1:0]  qH,
-            input  [K       -1:0]   C,
-            output [O_SIZE  -1:0]   T
+            input               clk,
+            input  [LOGQH-1:0]  qH ,
+            input  [LOGC -1:0]   C ,
+            output [LOGT -1:0]   T
         );
 
 ///////////////////////////// parameters ////////////////////////////////
@@ -40,18 +39,18 @@ localparam LAT = wordred_lat(params);
 
 ///////////////////////////// signals ///////////////////////////////////
 
-reg  [K-1:0] C_q;
-wire [K-1:0] C_mx;
+reg  [LOGC-1:0] C_q;
+wire [LOGC-1:0] C_mx;
 
-wire [  W-1:0] CL;
-wire [K-W-1:0] CH;
+wire [     W-1:0] CL;
+wire [LOGC-W-1:0] CH;
 
 wire [W-1:0] CL_N;
 reg  [W-1:0] CL_N_q;
 wire [W-1:0] CL_N_mx;
 
-reg  [K-W-1:0] CH_q  [0:1];
-wire [K-W-1:0] CH_mx [0:1];
+reg  [LOGC-W-1:0] CH_q  [0:1];
+wire [LOGC-W-1:0] CH_mx [0:1];
 
 wire carry;
 reg  carry_q  [0:1];
@@ -68,13 +67,13 @@ reg  [`DSP_M_U-1:0] P1_q;
 wire [`DSP_M_U-1:0] P1_mx;
 
 
-wire [K-1:0] T0;
-reg  [K-1:0] T0_q;
-wire [K-1:0] T0_mx;
+wire [LOGC-1:0] T0;
+reg  [LOGC-1:0] T0_q;
+wire [LOGC-1:0] T0_mx;
 
 
-reg  [O_SIZE-1:0] T1_q;
-wire [O_SIZE-1:0] T1;
+reg  [LOGT-1:0] T1_q;
+wire [LOGT-1:0] T1;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -83,8 +82,8 @@ wire [O_SIZE-1:0] T1;
 
 /////////////////////////// partitioning  ///////////////////////////////
 
-assign CL = C_mx[W-1:0];
-assign CH = C_mx[K-1:W];
+assign CL = C_mx[W   -1:0];
+assign CH = C_mx[LOGC-1:W];
 
 /////////////////////////////////////////////////////////////////////////
 

@@ -12,14 +12,13 @@ module wlm_mixed
         parameter         FF_MUL  = 1       ,
         parameter         FF_SUB  = 0       ,
         parameter         FF_OUT  = 1       ,
-        localparam        K       = 2*LOGQ
+        localparam        LOGC    = 2*LOGQ
     )
     (
-        input                    clk,
-        input                    rst,
-        input  wire [LOGQH -1:0] qH ,
-        input  wire [K     -1:0] C  ,
-        output wire [LOGT  -1:0] T
+        input                clk,
+        input   [LOGQH -1:0] qH ,
+        input   [LOGC  -1:0] C  ,
+        output  [LOGT  -1:0] T
     );
 
 
@@ -45,7 +44,7 @@ localparam FF_OUT_1 = wlm_mixed_wordred_1_ff_out(params);
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K -W0  :0] C_i  [0:      1];
+wire [LOGC-W0:0] C_i  [0:      1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 /////////////////////////////////////////////////////////////////////////
@@ -57,7 +56,7 @@ reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 wordred
     #(
-        .K     (K     ),
+        .LOGC  (LOGC  ),
         .LOGQH (LOGQH ),
         .W     (W0    ),
         .Y     (Y0    ),
@@ -70,7 +69,6 @@ wordred
 wordred_inst_0
     (
         .clk(clk         ),
-        .rst(rst         ),
         .qH (qH_d[FF_SUB]),
         .C  (C           ),
         .T  (C_i[0]      )
@@ -78,7 +76,7 @@ wordred_inst_0
 
 wordred
     #(
-        .K     (K-W0+1),
+        .LOGC  (LOGC-W0+1),
         .LOGQH (LOGQH ),
         .W     (W1    ),
         .Y     (Y1    ),
@@ -91,7 +89,6 @@ wordred
 wordred_inst_1
     (
         .clk(clk           ),
-        .rst(rst           ),
         .qH (qH_d[qH_d_id1]),
         .C  (C_i[0]        ),
         .T  (C_i[1]        )
@@ -119,7 +116,6 @@ if (CORRECT) begin : correction_block
     correction_u_inst
         (
             .clk(clk           ),
-            .rst(rst           ),
             .qH (qH_d[qH_d_idc]),
             .C  (C_i[1]        ),
             .T  (T             )

@@ -3,36 +3,35 @@
 
 module wlm 
    #(
-        parameter  LOGQ    = 60 ,
-        parameter  LOGQH   = 43 ,
-        parameter  CORRECT = 1  ,
-        parameter  FF_IN   = 1  ,
-        parameter  FF_SUM  = 0  ,
-        parameter  FF_MUL  = 1  ,
-        parameter  FF_SUB  = 0  ,
-        parameter  FF_OUT  = 1  ,
-        localparam K       = 2*LOGQ
+        parameter  LOGQ    = 60,
+        parameter  LOGQH   = 43,
+        parameter  CORRECT = 1 ,
+        parameter  FF_IN   = 1 ,
+        parameter  FF_SUM  = 0 ,
+        parameter  FF_MUL  = 1 ,
+        parameter  FF_SUB  = 0 ,
+        parameter  FF_OUT  = 1
     )
     (
-        input                   clk,
-        input                   rst,
-        input  wire [LOGQH-1:0] qH ,
-        input  wire [K    -1:0] C  ,
-        output wire [LOGT -1:0] T
+        input               clk,
+        input   [LOGQH-1:0] qH ,
+        input   [LOGC -1:0] C  ,
+        output  [LOGT -1:0] T
     );
 
 
 ///////////////////////////// parameters ////////////////////////////////
 
+localparam LOGC = 2*LOGQ;
 localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
-localparam W = LOGQ - LOGQH;
+localparam W    = LOGQ - LOGQH;
 localparam wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-localparam ITER = wlm_iter(params);
-localparam LAT =  wlm_lat(params);
+localparam ITER  = wlm_iter(params);
+localparam LAT   =  wlm_lat(params);
 localparam LAT_1 = (CORRECT) ? LAT - wlm_correction_lat(params) : 
                                LAT - wlm_wordred_i_lat(wlm_iter(params) - 1, params) + FF_SUB;
-localparam C_N = (CORRECT) ? ITER + 2 : ITER + 1;
-localparam Q_N = C_N - 1;
+localparam C_N   = (CORRECT) ? ITER + 2 : ITER + 1;
+localparam Q_N   = C_N - 1;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -41,7 +40,7 @@ localparam Q_N = C_N - 1;
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [K-1:0] C_i [0:C_N-1];
+wire [LOGC-1:0] C_i [0:C_N-1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 wire [LOGQH-1:0] qH_d_mx [0:Q_N-1];
 
@@ -80,7 +79,7 @@ generate
 
         wordred
             #(
-                .K     (K-i*(W-1)),
+                .LOGC  (LOGC-i*(W-1)),
                 .LOGQH (LOGQH  ),
                 .W     (W_     ),
                 .Y     (Y_     ),
@@ -93,7 +92,6 @@ generate
         wordred_inst
             (
                 .clk(clk       ),
-                .rst(rst       ),
                 .qH (qH_d_mx[i]),
                 .C  (C_i[i]    ),
                 .T  (C_i[i + 1])
@@ -128,7 +126,6 @@ if (CORRECT) begin : correction_block
     correction_u_inst
         (
             .clk(clk),
-            .rst(rst),
             .qH (qH_d_mx[ITER]),
             .C  (C_i    [ITER]),
             .T  (T  )

@@ -31,8 +31,8 @@ function int wordred_mode(input wordred_params_t params);
 endfunction
 
 
-function int wordred_osize(input int K, input int LOGQH, input int W, input int Y);
-    int t0 = K - W + 1;
+function int wordred_osize(input int LOGC, input int LOGQH, input int W, input int Y);
+    int t0 = LOGC - W + 1;
     int t1 = LOGQH + W + Y + 1;
     if (t0 > t1)
         wordred_osize = t0;

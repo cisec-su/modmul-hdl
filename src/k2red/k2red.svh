@@ -20,11 +20,11 @@ endfunction
 
 
 function mac_std_params_t k2red_mac_0_params(input k2red_params_t params);
-    k2red_mac_0_params = '{LOGA: params.LOGQH, LOGB: k2red_logm(params), MODE_E: 2,
-                           LOGE: k2red_logc(params) - k2red_logm(params) + 1,
-                           FF_IN_A: 0, FF_IN_B: params.FF_IN, FF_IN_E: params.FF_IN ,
-                           FF_MUL: params.FF_MUL, FF_OUT: 1,
-                           USE_CSA: params.USE_CSA, FF_CSA: params.FF_CSA};
+    k2red_mac_0_params = '{LOGA   : params.LOGQH,   LOGB   : k2red_logm(params), MODE_E : 2,
+                           LOGE   : k2red_logc(params) - k2red_logm(params) + 1,
+                           FF_IN_A: 0,              FF_IN_B: params.FF_IN,       FF_IN_E: params.FF_IN ,
+                           FF_MUL : params.FF_MUL,  FF_OUT : 1,
+                           USE_CSA: params.USE_CSA, FF_CSA : params.FF_CSA};
 endfunction
 
 
@@ -48,11 +48,11 @@ endfunction
 
 
 function mac_std_params_t k2red_mac_1_params(input k2red_params_t params);
-    k2red_mac_1_params = '{LOGA: params.LOGQH, LOGB: k2red_logm(params), MODE_E: 2,
-                           LOGE: k2red_logt0(params) - k2red_logm(params),
-                           FF_IN_A: 0, FF_IN_B: 0, FF_IN_E: 0,
-                           FF_MUL: params.FF_MUL, FF_OUT: k2red_ff_out_1(params),
-                           USE_CSA: params.USE_CSA, FF_CSA: params.FF_CSA};
+    k2red_mac_1_params = '{LOGA   : params.LOGQH,   LOGB   : k2red_logm(params), MODE_E : 2,
+                           LOGE   : k2red_logt0(params) - k2red_logm(params),
+                           FF_IN_A: 0,              FF_IN_B: 0,                  FF_IN_E: 0,
+                           FF_MUL : params.FF_MUL,  FF_OUT : k2red_ff_out_1(params),
+                           USE_CSA: params.USE_CSA, FF_CSA : params.FF_CSA};
 endfunction
 
 
