@@ -19,7 +19,7 @@ module correction_u
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam R = LOGQ - LOGQH;
+localparam W = LOGQ - LOGQH;
 localparam correction_u_params_t params = {FF_IN, FF_SUB, FF_OUT};
 localparam LAT = correction_u_lat(params);
 
@@ -63,7 +63,7 @@ assign T       = (FF_OUT) ? O_q    : O;
 
 /////////////////////////// subtraction  and assignment /////////////////
 
-assign q = (R != 0) ? {qH, {(R-1){1'b0}}, 1'b1} : qH;
+assign q = (W != 0) ? {qH, {(W - 1){1'b0}}, 1'b1} : qH;
 assign S = C_mx[0] - q;
 assign O = (S[LOGC]) ? C_mx[1] : S_mx;
 
