@@ -1,7 +1,16 @@
 module k2red_ln_shift_tb();
 
-// Parameters
-localparam  W = 32;
+`define USE_32_BITS
+
+`ifdef USE_32_BITS
+localparam W = 32;
+localparam M = 17;
+localparam LOG_L = 4;
+`else
+localparam W = 64;
+localparam M = 46;
+localparam LOG_L = 4;
+`endif
 
 parameter HP = 5;
 parameter FP = (2*HP);
@@ -9,26 +18,25 @@ parameter FP = (2*HP);
 reg clk;
 reg rst;
 
-reg [63:0] A;
-reg [31:0] Q;
-reg [5:0] l1;
-reg [5:0] l2;
-reg [5:0] l3;
-reg [5:0] m;
-wire [31:0] C2;
+reg [(2*W)-1:0] A;
+reg [W-1:0] Q;
+reg [LOG_L-1:0] l1;
+reg [LOG_L-1:0] l2;
+reg [LOG_L-1:0] l3;
+wire [W-1:0] C2;
 
 k2red_ln_shift # (
-    .W(W)
+    .W(W),
+    .M(M),
+    .LOG_L(LOG_L)
   )
   dut (
     .clk(clk),
-    .rst(rst),
     .A(A),
     .Q(Q),
     .l1(l1),
     .l2(l2),
     .l3(l3),
-    .m(m),
     .C2(C2)
   );
 
@@ -41,30 +49,42 @@ initial begin
 
     $display("Simulation started.");
     //
-    clk = 0;
-    rst = 1;
+    clk = 1;
     A = 0;
     Q = 0;
     l1 = 0;
     l2 = 0;
     l3 = 0;
-    m = 0;
     #FP;
-    rst = 0;
+    `ifdef USE_32_BITS
     A = 63'd2500883870215315764; // k^2*C mod q =  1965696994
     Q = 32'd2148794369;
     l1 = 2;
     l2 = 1;
     l3 = 3;
-    m = 17;
     #FP;
     rst = 0;
-    #(5*FP);
+    #(4*FP);
     if (C2 == 32'd1965696994) begin
         $display("Correct :)");
     end else begin
         $display("Incorrect :(");
     end
+    `else
+    A = 128'd21267647932558653966460912964485513217; // k^2*C mod q =  6509854724
+    Q = 64'd10376575016438333441;
+    l1 = 2;
+    l2 = 1;
+    l3 = 13;
+    #FP;
+    rst = 0;
+    #(4*FP);
+    if (C2 == 64'd6509854724) begin
+        $display("Correct :)");
+    end else begin
+        $display("Incorrect :(");
+    end
+    `endif
     //
     $display("Simulation finished."); 
     $finish(); // Finish simulation.
