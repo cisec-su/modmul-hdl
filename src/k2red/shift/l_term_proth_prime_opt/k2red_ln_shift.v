@@ -1,7 +1,7 @@
 // #(parameter LOG_Q = 32, M = 17, LOG_L = 4)
 // #(parameter LOG_Q = 64, M = 46, LOG_L = 4)
 
-module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
+module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
   input                      clk,
   input      [(2*LOG_Q)-1:0] A  ,
   input      [    LOG_Q-1:0] Q  ,
@@ -27,8 +27,8 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
   wire [    L_MAX+M-1:0] ALl1_mx,ALl2_mx,ALl3_mx;
 
   reg  signed [  LOG_C1-1:0] C1    ;
-  reg         [       M-1:0] C1L, C1L_q;
-  wire        [       M-1:0] C1L_mx;
+  reg  signed [       M-1:0] C1L, C1L_q;
+  wire signed [       M-1:0] C1L_mx;
   reg  signed [LOG_C1-M-1:0] C1H,C1H_q;
   wire signed [LOG_C1-M-1:0] C1H_mx;
 

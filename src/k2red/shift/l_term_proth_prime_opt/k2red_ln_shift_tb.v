@@ -12,6 +12,8 @@ localparam M = 46;
 localparam LOG_L = 4;
 `endif
 
+localparam USE_L3 = 1;
+localparam SPEED_OPT = 1;
 parameter HP = 5;
 parameter FP = (2*HP);
 
@@ -28,7 +30,9 @@ wire [W-1:0] C2;
 k2red_ln_shift # (
     .W(W),
     .M(M),
-    .LOG_L(LOG_L)
+    .LOG_L(LOG_L),
+    .USE_L3(USE_L3),
+    .SPEED_OPT(SPEED_OPT)
   )
   dut (
     .clk(clk),
@@ -64,7 +68,7 @@ initial begin
     l3 = 3;
     #FP;
     rst = 0;
-    #(4*FP);
+    #((4+(SPEED_OPT*2))*FP);
     if (C2 == 32'd1965696994) begin
         $display("Correct :)");
     end else begin
@@ -78,7 +82,7 @@ initial begin
     l3 = 13;
     #FP;
     rst = 0;
-    #(4*FP);
+    #((4+(SPEED_OPT*2))*FP);
     if (C2 == 64'd6509854724) begin
         $display("Correct :)");
     end else begin
