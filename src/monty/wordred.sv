@@ -12,7 +12,7 @@ module wordred
             parameter  FF_MUL = 1    ,
             parameter  FF_SUM = 0    ,
             parameter  FF_OUT = 1    ,
-            parameter  LOGT   = wordred_osize(LOGC, LOGQH, W, Y)
+            parameter  LOGT   = wordred_logt(LOGC, LOGQH, W, Y)
         )
         (
             input               clk,

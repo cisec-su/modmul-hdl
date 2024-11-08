@@ -12,7 +12,7 @@ typedef struct packed {
 
 
 function int wlm_iter(input wlm_params_t params);
-    wlm_iter = (params.LOGQ - 1) / (params.W - 1) + 1;
+    wlm_iter = (params.LOGQ - 1) / params.W + 1;
 endfunction
 
 
@@ -37,7 +37,7 @@ endfunction
 
 function int wlm_wordred_w(input int i, wlm_params_t params);
     if (i == (wlm_iter(params) - 1))
-        wlm_wordred_w = params.LOGQ - i*(params.W - 1);
+        wlm_wordred_w = params.LOGQ - i*params.W;
     else
         wlm_wordred_w = params.W;
 endfunction

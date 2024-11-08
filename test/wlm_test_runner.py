@@ -33,7 +33,7 @@ class WlmTestRunner(automation.test_runner.TestRunner):
         return "sim_wlm"
 
     def gen_test_vec_init(self):
-        self.primes = ntt_friendly_prime_gen(self.args.LOGQ, self.args.LOGQH, self.args.test_num, random=random)
+        self.primes = ntt_friendly_prime_gen(self.args.LOGQ, self.args.LOGQH, num_primes=min(1000, self.args.test_num), random=random)
         self.fc  = open(self.test_dir() + self.args.FN_C.replace('"',''), "w")
         self.fqh = open(self.test_dir() + self.args.FN_qH.replace('"',''), "w")
         self.ft  = open(self.test_dir() + self.args.FN_T.replace('"',''), "w")

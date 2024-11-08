@@ -26,7 +26,7 @@ endfunction
 
 
 function int wlm_mixed_w0(input wlm_mixed_params_t params);
-    wlm_mixed_w0 = params.LOGQ - wlm_mixed_w1(params) + 1;
+    wlm_mixed_w0 = params.LOGQ - wlm_mixed_w1(params);
 endfunction
 
 

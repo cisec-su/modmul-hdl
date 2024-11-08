@@ -12,17 +12,17 @@
 
 module mac_std
    #(  
-        parameter LOGA    = 32,
-        parameter LOGB    = 32,
-        parameter MODE_E  = 0 ,
-        parameter LOGE    = 32,
-        parameter FF_IN_A = 1 ,
-        parameter FF_IN_B = 1 ,
-        parameter FF_IN_E = 1 ,
-        parameter FF_MUL  = 1 ,
-        parameter FF_OUT  = 1 ,
-        parameter USE_CSA = 0 ,
-        parameter FF_CSA  = 0
+        parameter          LOGA    = 60    ,
+        parameter          LOGB    = 60    ,
+        parameter mode_e_t MODE_E  = DIS_E ,
+        parameter          LOGE    = 32    ,
+        parameter          FF_IN_A = 1     ,
+        parameter          FF_IN_B = 1     ,
+        parameter          FF_IN_E = 0     ,
+        parameter          FF_MUL  = 1     ,
+        parameter          FF_OUT  = 1     ,
+        parameter          USE_CSA = 0     ,
+        parameter          FF_CSA  = 0
     )
     (
         input                clk,

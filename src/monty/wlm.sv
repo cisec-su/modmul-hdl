@@ -27,7 +27,7 @@ localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam W    = LOGQ - LOGQH;
 localparam wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam ITER  = wlm_iter(params);
-localparam LAT   =  wlm_lat(params);
+localparam LAT   = wlm_lat(params);
 localparam LAT_1 = (CORRECT) ? LAT - wlm_correction_lat(params) : 
                                LAT - wlm_wordred_i_lat(wlm_iter(params) - 1, params) + FF_SUB;
 localparam C_N   = (CORRECT) ? ITER + 2 : ITER + 1;

@@ -5,8 +5,8 @@
 
 module wlm_tb
    #(
-        parameter           LOGQ    = 60      ,
-        parameter           LOGQH   = 43      ,
+        parameter           LOGQ    = 64      ,
+        parameter           LOGQH   = 32      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
         parameter           FF_SUB  = 1       ,

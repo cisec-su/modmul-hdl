@@ -24,13 +24,13 @@ def wlm_iter(c, w, q, debug=False):
 
 def wlm(c, q, logq, logqh, correct=True, debug=False):
     w = logq - logqh
-    iter = ((logq - 1) // (w - 1)) + 1
+    iter = ((logq - 1) // (w)) + 1
     c0 = c
     if debug:
         print(iter)
     w_sum = 0
     for i in range(iter):
-        w_i = logq - i*(w - 1) if i == iter-1 else w
+        w_i = logq - i*(w) if i == iter-1 else w
         if debug:
             print(i, w_i)
         w_sum += w_i
@@ -48,7 +48,7 @@ def wlm(c, q, logq, logqh, correct=True, debug=False):
         return c
 
 
-def wlm_mixed(c, q, logq, logqh, dsp_a, dsp_b, correct=True):
+def wlm_mixed(c, q, logq, logqh, dsp_a, dsp_b, correct=True, debug=False):
     w = logq - logqh
     if (logqh <= dsp_b):
         d = dsp_a
@@ -58,7 +58,11 @@ def wlm_mixed(c, q, logq, logqh, dsp_a, dsp_b, correct=True):
         w1 = d
     else:
         w1 = w
-    w0 = logq - w1 + 1
+    w0 = logq - w1
+
+    if debug:
+        print(w0, w1)
+
 
     c0 = wlm_iter(c, w0, q)
     c1 = wlm_iter(c0, w1, q)

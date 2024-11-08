@@ -6,6 +6,13 @@ typedef struct packed {
 } mac_std_params_t;
 
 
+typedef enum int {
+    DIS_E = 0,
+    ADD_E = 1,
+    SUB_E = 2
+} mode_e_t;
+
+
 function int mac_std_lat(input mac_std_params_t params);
     mac_std_lat = (params.FF_IN_A || params.FF_IN_B || (params.FF_IN_E & (params.MODE_E != 0))) + params.FF_MUL + params.FF_OUT + (params.FF_CSA & params.USE_CSA);
 endfunction
