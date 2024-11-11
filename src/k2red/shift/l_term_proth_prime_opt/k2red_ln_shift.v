@@ -13,7 +13,7 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
   output                     valid_out
 );
 
-  localparam L_MAX = (1 << LOG_L) - 1 ; // Maximum shift amount for Ls
+  localparam L_MAX = (1 << LOG_L); // Maximum shift amount for Ls
   localparam LOG_C = (2*LOG_Q) - M + 1; // Bit-width for C1 and C2 (+1 for sign bit)
   localparam DELAY = 5 + (2*SPEED_OPT); // Latency of the module
 
@@ -26,12 +26,12 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
 
   reg  [(2*LOG_Q)-M-1:0] AH,AH_q;
   wire [(2*LOG_Q)-M-1:0] AH_mx  ; // Pipeline mux output
-  reg  [          M-1:0] AL,AL_q; // Pipeline reg output
-  wire [          M-1:0] AL_mx  ; // Pipeline mux output
-  wire [    L_MAX+M-1:0] ALw1m  ;
-  wire [    L_MAX+M-1:0] ALl1,ALl2,ALl3;
-  reg  [    L_MAX+M-1:0] ALl1_q,ALl2_q,ALl3_q; // Pipeline reg output
-  wire [    L_MAX+M-1:0] ALl1_mx,ALl2_mx,ALl3_mx; // Pipeline mux output
+  reg  [          M:0] AL,AL_q; // Pipeline reg output
+  wire [          M:0] AL_mx  ; // Pipeline mux output
+  wire [    L_MAX+M:0] ALw1m  ;
+  wire [    L_MAX+M:0] ALl1,ALl2,ALl3;
+  reg  [    L_MAX+M:0] ALl1_q,ALl2_q,ALl3_q; // Pipeline reg output
+  wire [    L_MAX+M:0] ALl1_mx,ALl2_mx,ALl3_mx; // Pipeline mux output
 
   reg  signed [  LOG_C-1:0] C1    ;
   reg  signed [        M:0] C1L, C1L_q;
@@ -39,9 +39,9 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
   reg  signed [LOG_C-M-1:0] C1H,C1H_q;
   wire signed [LOG_C-M-1:0] C1H_mx;
 
-  wire signed [L_MAX+M-1:0] C1w1m,C1l1,C1l2,C1l3; // Added 1 bit for sign
-  reg  signed [L_MAX+M-1:0] C1l1_q,C1l2_q,C1l3_q; // Added 1 bit for sign
-  wire signed [L_MAX+M-1:0] C1l1_mx,C1l2_mx,C1l3_mx; // Added 1 bit for sign
+  wire signed [L_MAX+M:0] C1w1m,C1l1,C1l2,C1l3; // Added 1 bit for sign
+  reg  signed [L_MAX+M:0] C1l1_q,C1l2_q,C1l3_q; // Added 1 bit for sign
+  wire signed [L_MAX+M:0] C1l1_mx,C1l2_mx,C1l3_mx; // Added 1 bit for sign
 
 
   reg signed [LOG_C-1:0] C2int;
