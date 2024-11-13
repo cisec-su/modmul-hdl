@@ -128,8 +128,9 @@ assign carry = CL[W-1] | CL_N[W-1];
 assign P0     = (MODE == 0) ? qH     [`DSP_B_U-1:0] * CL_N_mx :
                 (MODE == 1) ? CL_N_mx[`DSP_B_U-1:0] * qH :
                 (MODE == 2) ? CL_N_mx[`DSP_A_U-1:0] * qH :
-                (MODE == 3) ? CL_N_mx              * qH :
+                (MODE == 3) ? CL_N_mx               * qH :
                 (MODE == 4) ? qH     [`DSP_A_U-1:0] * CL_N_mx :
+                (MODE == 5) ? qH                    * CL_N_mx :
                 0;
 
 assign P1     = (MODE == 0) ? qH     [LOGQH -1:`DSP_B_U] * CL_N_mx :

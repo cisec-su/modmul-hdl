@@ -2,13 +2,13 @@
 
 module k2red
    #(
-        parameter  LOGQ     = 60,
-        parameter  LOGQH    = 26,
+        parameter  LOGQ     = 32,
+        parameter  LOGQH    = 15,
         parameter  CORRECT  = 1 ,
         parameter  FF_IN    = 1 ,
         parameter  FF_MUL   = 1 ,
-        parameter  USE_CSA  = 0 ,
-        parameter  FF_CSA   = 0 ,
+        parameter  USE_CSA  = 1 ,
+        parameter  FF_CSA   = 1 ,
         parameter  FF_CORR  = 0 ,
         parameter  FF_OUT   = 1
     )

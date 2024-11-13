@@ -22,7 +22,7 @@ def prothl_prime_gen(logq, logqh, debug=False, use_l3=True):
         n_ = to_q_inv(l1, l2, l3, logq, logqh, use_l3)
         if n == n_:
             return True
-        return True
+        return False
 
     primes = {}
 
@@ -34,7 +34,7 @@ def prothl_prime_gen(logq, logqh, debug=False, use_l3=True):
                     mu = pow(q, -1, 1 << logq)
                     mu_ = -mu & ((1 << logq) - 1)
                     assert (mu_ * q) & ((1 << logq) - 1) == ((1 << logq) - 1)
-                    if (q not in primes) and check_mu(mu_, l1, l2, l3) and q < (1 << logq) and (q & ((1 << m) - 1) == 1):
+                    if (q not in primes) and check_mu(mu_, l1 - m, l2 - m, l3 - m) and q < (1 << logq) and (q & ((1 << m) - 1) == 1):
                         if debug:
                             print(l1, l2, l3, hex(q), hex(mu_))
                         primes[q] = [l1 - m, l2 - m, l3 - m] if use_l3 else [l1 - m, l2 - m]

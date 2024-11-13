@@ -13,6 +13,9 @@ function int wordred_mode(input wordred_params_t params);
     if      (params.LOGQH  <= `DSP_B_U && params.W     <=  `DSP_A_U                              ) begin
         wordred_mode = 3;
     end
+    else if (params.LOGQH  <= `DSP_A_U && params.W     <=  `DSP_B_U                              ) begin
+        wordred_mode = 5;
+    end
     else if (params.W      <= `DSP_A_U && params.LOGQH <= (`DSP_B_U*2) && params.LOGQH > `DSP_B_U) begin
         wordred_mode = 0;
     end
