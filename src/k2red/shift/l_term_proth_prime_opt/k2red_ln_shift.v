@@ -1,16 +1,14 @@
 // #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1)
 // #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1)
 
-module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
+module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
   input                      clk      ,
   input      [(2*LOG_Q)-1:0] A        ,
   input      [    LOG_Q-1:0] Q        ,
   input      [    LOG_L-1:0] l1       ,
   input      [    LOG_L-1:0] l2       ,
   input      [    LOG_L-1:0] l3       ,
-  input                      valid_in ,
-  output reg [    LOG_Q-1:0] C2       ,
-  output                     valid_out
+  output reg [    LOG_Q-1:0] C2
 );
 
   localparam L_MAX = (1 << LOG_L); // Maximum shift amount for Ls
@@ -22,7 +20,6 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
   reg [LOG_L-1:0] l1_pipeline   [DELAY-1:0];
   reg [LOG_L-1:0] l2_pipeline   [DELAY-1:0];
   reg [LOG_L-1:0] l3_pipeline   [DELAY-1:0];
-  reg             valid_pipeline[  DELAY:0];
 
   reg  [(2*LOG_Q)-M-1:0] AH,AH_q;
   wire [(2*LOG_Q)-M-1:0] AH_mx  ; // Pipeline mux output
@@ -45,6 +42,15 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
 
 
   reg signed [LOG_C-1:0] C2int;
+
+  // Test values
+  wire signed [LOG_C-1:0] A_int_H = ((ALl2_mx) + {AH_mx})                   ;
+  wire signed [  LOG_C:0] A_int_L = {1'b0,((ALw1m) + (ALl1_mx) + (ALl3_mx))};
+
+  wire signed [LOG_C-1:0] C1_act = (A_int_L) - (A_int_H);
+
+  wire signed [LOG_C-1:0] C2int_L = ((C1w1m) + (C1l1_mx) + (C1l3_mx));
+  wire signed [LOG_C-1:0] C2int_H = ((C1l2_mx) + ({C1H_mx}))         ;
 
 
   // Barrel Shifters
@@ -73,8 +79,6 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
   assign C1l1_mx = (SPEED_OPT) ? C1l1_q  : C1l1;
   assign C1l2_mx = (SPEED_OPT) ? C1l2_q  : C1l2;
   assign C1l3_mx = (SPEED_OPT) ? C1l3_q  : C1l3;
-
-  assign valid_out = valid_pipeline[DELAY-1];
 
   generate
     if (SPEED_OPT) begin
@@ -120,16 +124,6 @@ module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPE
             l1_pipeline[dly_l] <= (dly_l == 0) ? l1 : l1_pipeline[dly_l - 1];
             l2_pipeline[dly_l] <= (dly_l == 0) ? l2 : l2_pipeline[dly_l - 1];
             l3_pipeline[dly_l] <= (dly_l == 0) ? l3 : l3_pipeline[dly_l - 1];
-          end
-        end
-    endgenerate
-
-    generate
-      for(genvar dly_v=0; dly_v < DELAY; dly_v=dly_v+1)
-        begin
-          always @(posedge clk)
-          begin
-            valid_pipeline[dly_v] <= (dly_v == 0) ? valid_in : valid_pipeline[dly_v - 1];
           end
         end
     endgenerate
