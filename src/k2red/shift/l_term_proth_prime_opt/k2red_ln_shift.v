@@ -1,7 +1,7 @@
 // #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1)
 // #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1)
 
-module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
+module k2red_ln_shift #(parameter LOG_Q = 32, M = 17, LOG_L = 4, USE_L3 = 1, SPEED_OPT = 1) (
   input                      clk      ,
   input      [(2*LOG_Q)-1:0] A        ,
   input      [    LOG_Q-1:0] Q        ,
@@ -13,10 +13,10 @@ module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPE
 
   localparam L_MAX = (1 << LOG_L); // Maximum shift amount for Ls
   localparam LOG_C = (2*LOG_Q) - M + 1; // Bit-width for C1 and C2 (+1 for sign bit)
-  localparam DELAY = 5 + (2*SPEED_OPT); // Latency of the module
+  localparam DELAY = 4 + (2*SPEED_OPT); // Latency of the module
 
   // Pipeline registers for stream processing
-  reg [LOG_Q-1:0] q_pipeline    [DELAY-1:0];
+  reg [LOG_Q-M-1:0] q_pipeline    [DELAY-1:0];
   reg [LOG_L-1:0] l1_pipeline   [DELAY-1:0];
   reg [LOG_L-1:0] l2_pipeline   [DELAY-1:0];
   reg [LOG_L-1:0] l3_pipeline   [DELAY-1:0];
@@ -31,27 +31,25 @@ module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPE
   wire [    L_MAX+M:0] ALl1_mx,ALl2_mx,ALl3_mx; // Pipeline mux output
 
   reg  signed [  LOG_C-1:0] C1    ;
-  reg  signed [        M:0] C1L, C1L_q;
+  reg  signed [        M:0] C1L_q;
+  wire signed [        M:0] C1L;
   wire signed [        M:0] C1L_mx;
-  reg  signed [LOG_C-M-1:0] C1H,C1H_q;
+  wire signed [LOG_C-M-1:0] C1H;
+  reg  signed [LOG_C-M-1:0] C1H_q;
   wire signed [LOG_C-M-1:0] C1H_mx;
 
   wire signed [L_MAX+M:0] C1w1m,C1l1,C1l2,C1l3; // Added 1 bit for sign
   reg  signed [L_MAX+M:0] C1l1_q,C1l2_q,C1l3_q; // Added 1 bit for sign
   wire signed [L_MAX+M:0] C1l1_mx,C1l2_mx,C1l3_mx; // Added 1 bit for sign
 
+  localparam LOG_C2 = ((L_MAX + M) > (LOG_C-M)) ? ((L_MAX + M) + 2) : ((LOG_C-M) + 2);
 
-  reg signed [LOG_C-1:0] C2int;
+  reg signed [LOG_C2-1:0] C2int;
+  wire signed [LOG_Q+1:0] C2int_sub;
 
-  // Test values
-  wire signed [LOG_C-1:0] A_int_H = ((ALl2_mx) + {AH_mx})                   ;
-  wire signed [  LOG_C:0] A_int_L = {1'b0,((ALw1m) + (ALl1_mx) + (ALl3_mx))};
+  wire [LOG_Q-M-1:0] QH;
 
-  wire signed [LOG_C-1:0] C1_act = (A_int_L) - (A_int_H);
-
-  wire signed [LOG_C-1:0] C2int_L = ((C1w1m) + (C1l1_mx) + (C1l3_mx));
-  wire signed [LOG_C-1:0] C2int_H = ((C1l2_mx) + ({C1H_mx}))         ;
-
+  assign QH = Q[LOG_Q-1:M];
 
   // Barrel Shifters
   // A Shift Pipeline Steps
@@ -79,6 +77,11 @@ module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPE
   assign C1l1_mx = (SPEED_OPT) ? C1l1_q  : C1l1;
   assign C1l2_mx = (SPEED_OPT) ? C1l2_q  : C1l2;
   assign C1l3_mx = (SPEED_OPT) ? C1l3_q  : C1l3;
+
+  assign C1H = C1[LOG_C-1:M];
+  assign C1L = {1'b0,C1[M-1:0]};
+
+  assign C2int_sub = C2int - {q_pipeline[DELAY-1],{(M-1){1'b0}},1'b1};
 
   generate
     if (SPEED_OPT) begin
@@ -111,7 +114,7 @@ module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPE
         begin
           always @(posedge clk)
           begin
-            q_pipeline[dly] <= (dly == 0) ? Q : q_pipeline[dly - 1];
+            q_pipeline[dly] <= (dly == 0) ? QH : q_pipeline[dly - 1];
           end
         end
     endgenerate
@@ -140,24 +143,20 @@ module k2red_ln_shift #(parameter LOG_Q = 64, M = 47, LOG_L = 4, USE_L3 = 1, SPE
         C1 <= ((ALw1m) + (ALl1_mx)) - ((ALl2_mx) + {AH_mx}); // First k*A_L - A_H
       end
       // 3rd stage
-      C1H <= C1[LOG_C-1:M];
-      C1L <= {1'b0,C1[M-1:0]};
-      // 4th stage
       if (USE_L3) begin
         C2int <= ((C1w1m) + (C1l1_mx) + (C1l3_mx)) - ((C1l2_mx) + (C1H_mx)); // Second k*C_L - C_H --> 1cc/2cc (SPEED_OPT)
       end else begin
         C2int <= ((C1w1m) + (C1l1_mx)) - ((C1l2_mx) + (C1H_mx)); // Second k*C_L - C_H
       end
-
-      // 5th stage
-      if ((C2int > q_pipeline[DELAY-1]) || (C2int == q_pipeline[DELAY-1])) // Correction to fully reduce
+      // 4th stage
+      if ((C2int_sub[LOG_Q] == 0)|| (C2int_sub == 0)) // Correction to fully reduce
         begin
-          C2 <= C2int - q_pipeline[DELAY-1];
+          C2 <= C2int_sub;
         end
       else
         begin
           if (C2int < 0) begin
-            C2 <= C2int + q_pipeline[DELAY-1];
+            C2 <= C2int + {q_pipeline[DELAY-1],{(M-1){1'b0}},1'b1};
           end else begin
             C2 <= C2int;
           end
