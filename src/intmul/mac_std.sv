@@ -81,7 +81,7 @@ for (genvar i = 0; i < N_D; i = i + 1) begin
     initial D[i] = 0;
 end
 
-reg  [LOGC-1:0] S;
+(* use_dsp = "no" *) reg  [LOGC-1:0] S;
 reg  [LOGC-1:0] S_q;
 
 generate
