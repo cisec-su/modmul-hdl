@@ -1,15 +1,6 @@
 `include "dsp.vh"
 `include "mac_std.svh"
 
-/*
-    if MODE_E == 0, computes C = A*B
-    if MODE_E == 1, computes C = A*B + E
-    if MODE_E == 2, computes C = A*B - E
-
-    MODE_E expects E to be a signed number (2's complement)
-
-*/
-
 module mac_std
    #(  
         parameter          LOGA    = 60    ,
@@ -37,8 +28,11 @@ localparam LOGD = mac_std_logd(params);
 localparam LOGC = mac_std_logc(params);
 localparam LAT  = mac_std_lat(params);
 
-localparam N_A = ((LOGA - 1) / `DSP_A_U) + 1;
-localparam N_B = ((LOGB - 1) / `DSP_B_U) + 1;
+localparam DSP_A_U = (LOGA >= LOGB) ? `DSP_A_U : `DSP_B_U;
+localparam DSP_B_U = (LOGA >= LOGB) ? `DSP_B_U : `DSP_A_U;
+
+localparam N_A = ((LOGA - 1) / DSP_A_U) + 1;
+localparam N_B = ((LOGB - 1) / DSP_B_U) + 1;
 localparam N_D = N_A + N_B - 1;
 
 localparam CSA_DEPTH  = (MODE_E == 0) ? N_D  : N_D + 1;
@@ -50,13 +44,13 @@ integer i;
 
 ///////////////////////////// signals ///////////////////////////////////
 
-wire [`DSP_A_U-1:0] A_i   [0:N_A-1];
-reg  [`DSP_A_U-1:0] A_i_q [0:N_A-1];
-wire [`DSP_A_U-1:0] A_i_mx[0:N_A-1];
+wire [DSP_A_U-1:0] A_i   [0:N_A-1];
+reg  [DSP_A_U-1:0] A_i_q [0:N_A-1];
+wire [DSP_A_U-1:0] A_i_mx[0:N_A-1];
 
-wire [`DSP_B_U-1:0] B_i   [0:N_B-1];
-reg  [`DSP_B_U-1:0] B_i_q [0:N_B-1];
-wire [`DSP_B_U-1:0] B_i_mx[0:N_B-1];
+wire [DSP_B_U-1:0] B_i   [0:N_B-1];
+reg  [DSP_B_U-1:0] B_i_q [0:N_B-1];
+wire [DSP_B_U-1:0] B_i_mx[0:N_B-1];
 
 
 generate
@@ -105,19 +99,19 @@ endgenerate
 
 for (genvar i = 0; i < N_A; i = i + 1) begin
     if (i == (N_A - 1)) begin
-        assign A_i[i] = A[LOGA - 1 : `DSP_A_U*i];
+        assign A_i[i] = A[LOGA - 1 : DSP_A_U*i];
     end
     else begin
-        assign A_i[i] = A[`DSP_A_U*i +: `DSP_A_U];
+        assign A_i[i] = A[DSP_A_U*i +: DSP_A_U];
     end
 end
 
 for (genvar i = 0; i < N_B; i = i + 1) begin
     if (i == (N_B - 1)) begin
-        assign B_i[i] = B[LOGB - 1 : `DSP_B_U*i];
+        assign B_i[i] = B[LOGB - 1 : DSP_B_U*i];
     end
     else begin
-        assign B_i[i] = B[`DSP_B_U*i +: `DSP_B_U];
+        assign B_i[i] = B[DSP_B_U*i +: DSP_B_U];
     end
 end
 
@@ -197,11 +191,11 @@ end
 for (genvar i = 0; i < N_A; i = i + 1) begin
     for (genvar j = 0; j < N_B; j = j + 1) begin
         always @(*) begin
-            if (((i*`DSP_A_U) + (j*`DSP_B_U) + `DSP_M_U) <= (LOGA+LOGB)) begin
-                D[(i-j+N_D) % N_D][(i*`DSP_A_U) + (j*`DSP_B_U) +: `DSP_M_U] = P_mx[i][j];
+            if (((i*DSP_A_U) + (j*DSP_B_U) + `DSP_M_U) <= (LOGA+LOGB)) begin
+                D[(i-j+N_D) % N_D][(i*DSP_A_U) + (j*DSP_B_U) +: `DSP_M_U] = P_mx[i][j];
             end
             else begin
-                D[(i-j+N_D) % N_D][LOGA + LOGB - 1 : (i*`DSP_A_U) + (j*`DSP_B_U)] = P_mx[i][j];
+                D[(i-j+N_D) % N_D][LOGA + LOGB - 1 : (i*DSP_A_U) + (j*DSP_B_U)] = P_mx[i][j];
             end
         end
 

@@ -27,7 +27,7 @@ localparam mac_std_params_t mac_1_params = k2red_mac_1_params(params);
 
 localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 2;
 localparam LOGC = k2red_logc(params);
-localparam M    = k2red_logm(params);
+localparam W    = k2red_w(params);
 localparam LAT  = k2red_lat(params);
 localparam LOGT0 = k2red_logt0(params);
 localparam LOGT1 = k2red_logt1(params);
@@ -52,12 +52,12 @@ generate
     end
 endgenerate
 
-wire [LOGC-M-1:0] CH;
-wire [     M-1:0] CL;
+wire [LOGC-W-1:0] CH;
+wire [     W-1:0] CL;
 
 wire [LOGT0  -1:0] T0; // in 2's complement form
-wire [LOGT0-M-1:0] T0H;
-wire [      M-1:0] T0L;
+wire [LOGT0-W-1:0] T0H;
+wire [      W-1:0] T0L;
 
 wire [LOGT1-1:0] T1;
 reg  [LOGT1-1:0] T1_q;
@@ -81,11 +81,11 @@ reg  [LOGQ-1:0] T4_q;
 
 /////////////////////////// partitioning  ///////////////////////////////
 
-assign CL = C[M   -1:0];
-assign CH = C[LOGC-1:M];
+assign CL = C[W   -1:0];
+assign CH = C[LOGC-1:W];
 
-assign T0L = T0[M-1    :0];
-assign T0H = T0[LOGT0-1:M];
+assign T0L = T0[W-1    :0];
+assign T0H = T0[LOGT0-1:W];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -174,7 +174,7 @@ mac_std_inst_1
 
 if (CORRECT) begin
     assign qH_mx[2] = (qH_d_idc > 0) ? qH_d[qH_d_idc] : qH;
-    assign corr.q = {qH_mx[2], {(M - 1){1'b0}}, 1'b1};
+    assign corr.q = {qH_mx[2], {(W - 1){1'b0}}, 1'b1};
     assign T2 = T1 + corr.q;
     assign T3 = T1 - corr.q;
 
