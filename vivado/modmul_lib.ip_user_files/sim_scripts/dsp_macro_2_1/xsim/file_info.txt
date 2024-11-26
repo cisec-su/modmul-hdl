@@ -1,1 +1,0 @@
-dsp_macro_2.vhd,vhdl,xil_defaultlib,../../../../karatsuba_dsp.gen/sources_1/ip/dsp_macro_2_1/sim/dsp_macro_2.vhd,

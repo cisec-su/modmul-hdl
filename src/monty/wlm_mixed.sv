@@ -4,8 +4,8 @@
 
 module wlm_mixed 
    #(
-        parameter         LOGQ    = 60      ,
-        parameter         LOGQH   = 17      ,
+        parameter         LOGQ    = 32      ,
+        parameter         LOGQH   = 15      ,
         parameter         CORRECT = 1       ,
         parameter         FF_IN   = 1       ,
         parameter         FF_SUM  = 0       ,

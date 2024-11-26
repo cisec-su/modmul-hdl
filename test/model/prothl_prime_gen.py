@@ -48,4 +48,4 @@ def prothl_prime_gen(logq, logqh, debug=False, use_l3=True):
 
 
 if __name__ == "__main__":
-    prothl_prime_gen(64, 32, debug=True, use_l3=True)
+    prothl_prime_gen(64, 16, debug=True, use_l3=True)

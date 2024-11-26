@@ -34,4 +34,4 @@ def ntt_friendly_prime_gen(logq, logqh, num_primes=None, debug=False, random=Non
 
 
 if __name__ == "__main__":
-    ntt_friendly_prime_gen(60, 28, None, True)
+    ntt_friendly_prime_gen(32, 15, None, True)

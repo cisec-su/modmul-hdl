@@ -3,8 +3,8 @@
 
 module wlm 
    #(
-        parameter  LOGQ    = 60,
-        parameter  LOGQH   = 43,
+        parameter  LOGQ    = 32,
+        parameter  LOGQH   = 19,
         parameter  CORRECT = 1 ,
         parameter  FF_IN   = 1 ,
         parameter  FF_SUM  = 0 ,

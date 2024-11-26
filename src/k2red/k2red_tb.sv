@@ -4,8 +4,8 @@
 
 module k2red_tb
     #(
-        parameter           LOGQ    = 32      ,
-        parameter           LOGQH   = 15      ,
+        parameter           LOGQ    = 64      ,
+        parameter           LOGQH   = 26      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
         parameter           FF_MUL  = 1       ,

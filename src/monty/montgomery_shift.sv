@@ -9,15 +9,15 @@
 
 module montgomery_shift
    #(
-        parameter  LOGQ    = 64,
-        parameter  LOGQH   = 32,
-        parameter  LOGL1   = 5 ,
-        parameter  LOGL2   = 5 ,
-        parameter  USE_L3  = 1 ,
-        parameter  LOGL3   = 5 ,
+        parameter  LOGQ    = 32,
+        parameter  LOGQH   = 15,
+        parameter  LOGL1   = 4 ,
+        parameter  LOGL2   = 4 ,
+        parameter  USE_L3  = 0 ,
+        parameter  LOGL3   = 4 ,
         parameter  CORRECT = 1 ,
         parameter  FF_IN   = 1 ,
-        parameter  FF_SHF  = 1 ,
+        parameter  FF_SHF  = 0 ,
         parameter  FF_SUB  = 1 ,
         parameter  FF_SUM  = 1 ,
         parameter  FF_OUT  = 1

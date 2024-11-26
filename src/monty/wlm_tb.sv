@@ -5,13 +5,13 @@
 
 module wlm_tb
    #(
-        parameter           LOGQ    = 64      ,
-        parameter           LOGQH   = 32      ,
+        parameter           LOGQ    = 60      ,
+        parameter           LOGQH   = 17      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
-        parameter           FF_SUB  = 1       ,
+        parameter           FF_SUB  = 0       ,
         parameter           FF_MUL  = 1       ,
-        parameter           FF_SUM  = 1       ,
+        parameter           FF_SUM  = 0       ,
         parameter           FF_OUT  = 1       ,
         parameter           HP      = 5       ,
         parameter string    MIXED   = 0       ,
