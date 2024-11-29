@@ -3,15 +3,16 @@
 
 
 `include "word_red.svh"
+`include "correction_u.svh"
 
 
 typedef struct packed {
-    int R, LOGQ, LOGQH, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT;
+    int R, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT;
 } wlm_params_t;
 
 
 function int wlm_iter(input wlm_params_t params);
-    wlm_iter = (params.LOGQ - 1) / params.R + 1;
+    wlm_iter = (params.LOGQ - 1) / (params.R - 1) + 1;
 endfunction
 
 
@@ -25,7 +26,10 @@ endfunction
 
 function int wlm_word_red_ff_out(input int i, wlm_params_t params);
     if (i == (wlm_iter(params) - 1))
-        wlm_word_red_ff_out = params.FF_OUT;
+        if (params.CORRECT == 0)
+            wlm_word_red_ff_out = params.FF_OUT;
+        else
+            wlm_word_red_ff_out = params.FF_OUT;
     else
         wlm_word_red_ff_out = 1;
 endfunction
@@ -50,12 +54,23 @@ function int wlm_word_red_i_lat(int i, input wlm_params_t params);
 endfunction
 
 
+function int wlm_correction_lat(input wlm_params_t params);
+    if (params.CORRECT == 0)
+        wlm_correction_lat = 0;
+    else begin
+        correction_u_params_t params_ = {0, 0, params.FF_OUT};
+        wlm_correction_lat = correction_u_lat(params_);
+    end
+endfunction
+
+
 function int wlm_lat(input wlm_params_t params);
     int sum = 0;
     for (int i = 0; i < wlm_iter(params); i++) begin
         sum += wlm_word_red_i_lat(i, params);
     end
-    wlm_lat = sum;
+    wlm_lat = sum + wlm_correction_lat(params);
 endfunction
+
 
 `endif

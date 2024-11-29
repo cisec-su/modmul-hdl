@@ -30,7 +30,7 @@ localparam TEST_MOD_RED_MIXED    = 1;
 
 localparam TEST_IP = TEST_MOD_RED_MIXED_LL;
 
-// brlow only active for TEST_MOD_RED_MIXED_LL
+// below only active for TEST_MOD_RED_MIXED_LL
 localparam FF_SUB = 0;
 localparam FF_MUL = 1;
 localparam FF_SUM = 0;
@@ -72,7 +72,7 @@ reg  [K    -1:0] C;
 
 generate
     if (TEST_IP == TEST_MOD_RED_MIXED_LL) begin
-       mod_red_mixed_ll
+       wlm_mixed
        #(
             .K     (K),
             .Q_LEN (Q_LEN),  // don't change
@@ -84,7 +84,7 @@ generate
         ) mod_red_inst (
             .clk(clk),
             .rst(rst),
-            .q  (q  ),
+            .qH (q[Q_LEN - 1 -: 17]  ),
             .C  (C ),
             .T  (T  )
         );
