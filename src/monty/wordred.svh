@@ -13,9 +13,6 @@ function int wordred_mode(input wordred_params_t params);
     if      (params.LOGQH  <= `DSP_B_U && params.W     <=  `DSP_A_U                              ) begin
         wordred_mode = 3;
     end
-    else if (params.LOGQH  <= `DSP_A_U && params.W     <=  `DSP_B_U                              ) begin
-        wordred_mode = 5;
-    end
     else if (params.W      <= `DSP_A_U && params.LOGQH <= (`DSP_B_U*2) && params.LOGQH > `DSP_B_U) begin
         wordred_mode = 0;
     end
@@ -34,13 +31,13 @@ function int wordred_mode(input wordred_params_t params);
 endfunction
 
 
-function int wordred_logt(input int LOGC, input int LOGQH, input int W, input int Y);
-    int t0 = LOGC - W + 1;
+function int wordred_osize(input int K, input int LOGQH, input int W, input int Y);
+    int t0 = K - W + 1;
     int t1 = LOGQH + W + Y + 1;
     if (t0 > t1)
-        wordred_logt = t0;
+        wordred_osize = t0;
     else
-        wordred_logt = t1;
+        wordred_osize = t1;
 endfunction
 
 function int wordred_do_p1(input wordred_params_t params);
