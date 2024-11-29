@@ -1,9 +1,10 @@
 `include "dsp.vh"
+`include "intmul_nonstd_60x60.svh"
 
-module intmul_nonstd
+module intmul_nonstd_60x60
    #(
-        parameter W_A     = 60,       
-        parameter W_B     = 60,
+        parameter LOGA     = 60,       
+        parameter LOGB     = 60,
         parameter FF_IN   = 1,
         parameter FF_MUL  = 1,
         parameter FF_OUT  = 1,
@@ -14,11 +15,13 @@ module intmul_nonstd
     (
         input                      clk,
         input                      rst, 
-        input wire  [W_A    -1:0]  A,
-        input wire  [W_B    -1:0]  B,
-        output wire [W_A+W_B-1:0]  C
+        input wire  [LOGA    -1:0]  A,
+        input wire  [LOGB    -1:0]  B,
+        output wire [LOGA+LOGB-1:0]  C
     );
 
+localparam intmul_nonstd_60x60_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, USE_DSP};
+localparam LAT = intmul_nonstd_60x60_lat(params);
 
 integer i;
 
@@ -34,28 +37,28 @@ wire [`DSP_A_U-1:0] A_0_mx, A_1_mx, A_4_mx, A_5_mx, B_2_mx, B_3_mx, B_6_mx, B_7_
 wire [`DSP_B_U-1:0] A_2_mx, A_3_mx, A_6_mx, A_7_mx, B_0_mx, B_1_mx, B_4_mx, B_5_mx;
 wire [2*`DSP_B_U-1:`DSP_A_U] A_p_mx, B_p_mx;
 
-(* use_dsp = "yes" *) wire [`DSP_M_U-1:0] M [0:7]; 
-reg  [`DSP_M_U-1:0] M_q [0:7];
-wire [`DSP_M_U-1:0] M_mx[0:7];
+(* use_dsp = "yes" *) wire [`DSP_M_U-1:0] P [0:7]; 
+reg  [`DSP_M_U-1:0] P_q [0:7];
+wire [`DSP_M_U-1:0] P_mx[0:7];
 
-(* use_dsp = "yes" *) wire [`DSP_M_U - 1:0] P_dsp; 
-wire [`DSP_M_U - 1:0] P_no_dsp; 
-reg [`DSP_M_U - 1:0] P_dsp_q; 
-reg [`DSP_M_U - 1:0] P_no_dsp_q; 
-wire [`DSP_M_U - 1:0] P_dsp_mx; 
-wire [`DSP_M_U - 1:0] P_no_dsp_mx; 
+(* use_dsp = "yes" *) wire [`DSP_M_U - 1:0] M_dsp; 
+wire [`DSP_M_U - 1:0] M_no_dsp; 
+reg [`DSP_M_U - 1:0] M_dsp_q; 
+reg [`DSP_M_U - 1:0] M_no_dsp_q; 
+wire [`DSP_M_U - 1:0] M_dsp_mx; 
+wire [`DSP_M_U - 1:0] M_no_dsp_mx; 
 
-reg  [W_A+W_B-1:0] S;
-reg  [W_A+W_B-1:0] S_q;
+reg  [LOGA+LOGB-1:0] S;
+reg  [LOGA+LOGB-1:0] S_q;
 
-reg [W_A+W_B-1:0] D[0:8]; 
+reg [LOGA+LOGB-1:0] D[0:8]; 
 for (genvar i = 0; i < 9; i = i + 1) begin
     initial D[i] = 0;
 end
 
-wire [W_A+W_B+3:0] CSA_OUT    [0:1];
-reg  [W_A+W_B+3:0] CSA_OUT_q  [0:1];
-wire [W_A+W_B+3:0] CSA_OUT_mx [0:1];
+wire [LOGA+LOGB+3:0] CSA_OUT    [0:1];
+reg  [LOGA+LOGB+3:0] CSA_OUT_q  [0:1];
+wire [LOGA+LOGB+3:0] CSA_OUT_mx [0:1];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -65,17 +68,17 @@ assign A_0 = A[`DSP_A_U-1:0];
 assign A_1 = A[`DSP_A_U-1:0];
 assign A_2 = A[`DSP_B_U-1:0];
 assign A_3 = A[2*`DSP_B_U-1:`DSP_B_U];
-assign A_4 = A[W_A-1:2*`DSP_B_U];
-assign A_5 = A[W_A-1:2*`DSP_B_U];
-assign A_6 = A[W_A-1:`DSP_M_U];
+assign A_4 = A[LOGA-1:2*`DSP_B_U];
+assign A_5 = A[LOGA-1:2*`DSP_B_U];
+assign A_6 = A[LOGA-1:`DSP_M_U];
 assign A_7 = A[`DSP_M_U-1:`DSP_A_U];
 assign A_p = A[2*`DSP_B_U-1:`DSP_A_U];
 
 assign B_0 = B[`DSP_B_U-1:0];
 assign B_1 = B[2*`DSP_B_U-1:`DSP_B_U];
-assign B_2 = B[W_A-1:2*`DSP_B_U];
-assign B_3 = B[W_A-1:2*`DSP_B_U];
-assign B_4 = B[W_A-1:`DSP_M_U];
+assign B_2 = B[LOGA-1:2*`DSP_B_U];
+assign B_3 = B[LOGA-1:2*`DSP_B_U];
+assign B_4 = B[LOGA-1:`DSP_M_U];
 assign B_5 = B[`DSP_M_U-1:`DSP_A_U];
 assign B_6 = B[`DSP_A_U-1:0];
 assign B_7 = B[`DSP_A_U-1:0];
@@ -107,13 +110,13 @@ assign A_p_mx = (FF_IN) ? A_p_q : A_p;
 assign B_p_mx = (FF_IN) ? B_p_q : B_p;
 
 for (genvar i = 0; i < 8; i = i + 1) begin
-    assign M_mx[i] = (FF_MUL) ? M_q[i] : M[i];
+    assign P_mx[i] = (FF_MUL) ? P_q[i] : P[i];
 end
 
 if (USE_DSP) begin
-    assign P_dsp_mx = (FF_MUL) ? P_dsp_q : P_dsp;
+    assign M_dsp_mx = (FF_MUL) ? M_dsp_q : M_dsp;
 end else begin
-    assign P_no_dsp_mx = (FF_MUL) ? P_no_dsp_q : P_no_dsp;
+    assign M_no_dsp_mx = (FF_MUL) ? M_no_dsp_q : M_no_dsp;
 end
 
 for (genvar i = 0; i < 2; i = i + 1) begin
@@ -126,19 +129,19 @@ assign C = (FF_OUT) ? S_q : S;
 
 ///////////////////////////// Multiplication ////////////////////////////
 
-assign M[0] = A_0_mx * B_0_mx;
-assign M[1] = A_1_mx * B_1_mx;
-assign M[2] = A_2_mx * B_2_mx;
-assign M[3] = A_3_mx * B_3_mx;
-assign M[4] = A_4_mx * B_4_mx;
-assign M[5] = A_5_mx * B_5_mx;
-assign M[6] = A_6_mx * B_6_mx;
-assign M[7] = A_7_mx * B_7_mx;
+assign P[0] = A_0_mx * B_0_mx;
+assign P[1] = A_1_mx * B_1_mx;
+assign P[2] = A_2_mx * B_2_mx;
+assign P[3] = A_3_mx * B_3_mx;
+assign P[4] = A_4_mx * B_4_mx;
+assign P[5] = A_5_mx * B_5_mx;
+assign P[6] = A_6_mx * B_6_mx;
+assign P[7] = A_7_mx * B_7_mx;
 
 if (USE_DSP) begin
-    assign P_dsp = A_p_mx * B_p_mx;
+    assign M_dsp = A_p_mx * B_p_mx;
 end else begin
-    assign P_no_dsp = A_p_mx * B_p_mx;
+    assign M_no_dsp = A_p_mx * B_p_mx;
 end
 
 /////////////////////////////////////////////////////////////////////////
@@ -146,18 +149,18 @@ end
 ///////////////////////////// Assignment ////////////////////////////
 
 always @(*) begin
-        D[0] = { {(W_A+W_B-`DSP_M_U){1'b0}}, M_mx[0] };
-        D[1] = { {(W_A+W_B-`DSP_M_U-`DSP_B_U){1'b0}}, M_mx[1], {`DSP_B_U{1'b0}} };
-        D[2] = { {(W_A+W_B-`DSP_M_U-2*`DSP_B_U){1'b0}}, M_mx[2], {2*`DSP_B_U{1'b0}} };
-        D[3] = { {`DSP_A_U{1'b0}}, M_mx[3], {(W_A+W_B-`DSP_M_U-`DSP_A_U){1'b0}} };
-        D[4] = { {(W_A+W_B-`DSP_M_U-`DSP_A_U){1'b0}}, M_mx[7], {`DSP_A_U{1'b0}} };
-        D[5] = { {2*`DSP_B_U{1'b0}}, M_mx[6], {(W_A+W_B-`DSP_M_U-2*`DSP_B_U){1'b0}} };
-        D[6] = { {`DSP_B_U{1'b0}}, M_mx[5], {(W_A+W_B-`DSP_M_U-`DSP_B_U){1'b0}} };
-        D[7] = { M_mx[4], {(W_A+W_B-`DSP_M_U){1'b0}} };
+        D[0] = { {(LOGA+LOGB-`DSP_M_U){1'b0}}, P_mx[0] };
+        D[1] = { {(LOGA+LOGB-`DSP_M_U-`DSP_B_U){1'b0}}, P_mx[1], {`DSP_B_U{1'b0}} };
+        D[2] = { {(LOGA+LOGB-`DSP_M_U-2*`DSP_B_U){1'b0}}, P_mx[2], {2*`DSP_B_U{1'b0}} };
+        D[3] = { {`DSP_A_U{1'b0}}, P_mx[3], {(LOGA+LOGB-`DSP_M_U-`DSP_A_U){1'b0}} };
+        D[4] = { {(LOGA+LOGB-`DSP_M_U-`DSP_A_U){1'b0}}, P_mx[7], {`DSP_A_U{1'b0}} };
+        D[5] = { {2*`DSP_B_U{1'b0}}, P_mx[6], {(LOGA+LOGB-`DSP_M_U-2*`DSP_B_U){1'b0}} };
+        D[6] = { {`DSP_B_U{1'b0}}, P_mx[5], {(LOGA+LOGB-`DSP_M_U-`DSP_B_U){1'b0}} };
+        D[7] = { P_mx[4], {(LOGA+LOGB-`DSP_M_U){1'b0}} };
     if (USE_DSP) begin
-        D[8] = { {(W_A+W_B-`DSP_M_U-`DSP_A_U+1){1'b0}}, P_dsp_mx, {(W_A+W_B-`DSP_M_U-`DSP_A_U+1){1'b0}} };
+        D[8] = { {(LOGA+LOGB-`DSP_M_U-`DSP_A_U+1){1'b0}}, M_dsp_mx, {(LOGA+LOGB-`DSP_M_U-`DSP_A_U+1){1'b0}} };
     end else begin
-        D[8] = { {(W_A+W_B-`DSP_M_U-`DSP_A_U+1){1'b0}}, P_no_dsp_mx, {(W_A+W_B-`DSP_M_U-`DSP_A_U+1){1'b0}} };
+        D[8] = { {(LOGA+LOGB-`DSP_M_U-`DSP_A_U+1){1'b0}}, M_no_dsp_mx, {(LOGA+LOGB-`DSP_M_U-`DSP_A_U+1){1'b0}} };
     end
 end
 
@@ -168,7 +171,7 @@ end
 if (USE_CSA) begin
 
     csa_tree #(
-        W_A + W_B,
+        LOGA + LOGB,
         9
     ) CSA_TREE (
         D,
@@ -221,14 +224,14 @@ end
 if (FF_MUL) begin
     for (genvar i = 0; i < 8; i = i + 1) begin
         always @(posedge clk) begin
-            M_q[i] <= M[i];
+            P_q[i] <= P[i];
         end
     end
     always @(posedge clk) begin
         if (USE_DSP) begin
-            P_dsp_q <= P_dsp;
+            M_dsp_q <= M_dsp;
         end else begin
-            P_no_dsp_q <= P_no_dsp;
+            M_no_dsp_q <= M_no_dsp;
         end
     end
 end
