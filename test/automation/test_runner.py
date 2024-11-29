@@ -13,7 +13,6 @@ class TestRunner(abc.ABC):
         self.parser.add_argument("--test_num", type=int, default=1000, help="Specify the test number (default: 1000)")
         self.parser.add_argument("--test_sel", type=int, default=-1, help="Specify a specific test number (default: -1, select all)")
         self.parser.add_argument("--seed", type=int, default=0, help="Set the random seed (default: 0)")        
-        self.parser.add_argument("--test_dir", type=str, default="vivado/modmul_lib.sim/sim_wr_mixed/behav/xsim/", help="Set the test directory (default: test)")
         self.parser.add_argument("--vivado_path", type=str, default=None, help="Set the Vivado executable path (default: vivado)")
         self.parser.add_argument("--working_dir", type=str, default=None, help="Set the working directory for tester (default: .tester)")
 
@@ -96,6 +95,11 @@ class TestRunner(abc.ABC):
     def parser_add_tb_param(self, name, **kwargs):
         self.parser.add_argument(f"--{name}", **kwargs)
         self.param_keys.append(name)
+
+    def test_dir(self):
+        project_dir = self.args.project.replace(".xpr", "")
+        return f"{project_dir}.sim/{self.simulation_set()}/behav/xsim/"
+
 
     def run(self):
         self.generate_test_vectors()

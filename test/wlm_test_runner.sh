@@ -1,10 +1,5 @@
 vivado=/home/toluntosun/Xilinx/Vivado/2023.1/bin/vivado
-project=$(pwd)/vivado/modmul_lib.xpr
-
-python test/wlm_test_runner.py --MIXED 1 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 60 --LOGQH 17 --FF_SUB 0 --FF_SUM 0
-python test/wlm_test_runner.py --MIXED 0 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 32 --LOGQH 18 --FF_SUB 0 --FF_SUM 0
-python test/wlm_test_runner.py --MIXED 0 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 32 --LOGQH 19 --FF_SUB 0 --FF_SUM 0
-
+project=/home/toluntosun/Desktop/PhD/fpga_acceleration/modmul_git/vivado/modmul_lib.xpr
 python test/wlm_test_runner.py --MIXED 1 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 32 --LOGQH 15
 python test/wlm_test_runner.py --MIXED 1 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 64 --LOGQH 17
 python test/wlm_test_runner.py --MIXED 1 --test_num 1000 --vivado $vivado --project $project --test_num 1000 --LOGQ 32 --LOGQH 15 --FF_SUB 0

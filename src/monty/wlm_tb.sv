@@ -6,12 +6,12 @@
 module wlm_tb
    #(
         parameter           LOGQ    = 60      ,
-        parameter           LOGQH   = 17      ,
+        parameter           LOGQH   = 43      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
-        parameter           FF_SUB  = 0       ,
+        parameter           FF_SUB  = 1       ,
         parameter           FF_MUL  = 1       ,
-        parameter           FF_SUM  = 0       ,
+        parameter           FF_SUM  = 1       ,
         parameter           FF_OUT  = 1       ,
         parameter           HP      = 5       ,
         parameter string    MIXED   = 0       ,
@@ -20,10 +20,11 @@ module wlm_tb
         parameter string    FN_T    = "T.txt"
     );
 
-localparam LOGC = LOGQ*2;
+localparam K = LOGQ*2;
 
 
 reg clk;
+reg rst;
 
 localparam FP = (2*HP);
 
@@ -39,7 +40,7 @@ integer fail = 0;
 reg  [LOGQH-1:0] qH;
 wire [LOGQ -1:0] T ;
 reg  [LOGQ -1:0] T_;
-reg  [LOGC -1:0] C ;
+reg  [K    -1:0] C ;
 
 
 generate
@@ -58,6 +59,7 @@ if (MIXED) begin : wlm_gen
     wlm_inst 
         (
             .clk(clk),
+            .rst(rst),
             .qH (qH ),
             .C  (C  ),
             .T  (T  )
@@ -77,13 +79,13 @@ end else begin : wlm_gen
     wlm_inst 
         (
             .clk(clk),
+            .rst(rst),
             .qH (qH ),
             .C  (C  ),
             .T  (T  )
         );
 end
 endgenerate
-
 
 function integer count_lines;
     input integer file;
@@ -158,8 +160,11 @@ initial begin
     $display("Simulation started.");
 
     clk = 1'b0;
+    rst = 1'b0;
     #FP;
+    rst = 1'b1;
     #FP;
+    rst = 1'b0;
     #(HP);
     #(1);
     // Initialize inputs

@@ -10,7 +10,7 @@ module wlm_mixed
         parameter         FF_IN   = 1       ,
         parameter         FF_SUM  = 0       ,
         parameter         FF_MUL  = 1       ,
-        parameter         FF_SUB  = 1       ,
+        parameter         FF_SUB  = 0       ,
         parameter         FF_OUT  = 1       ,
         localparam        K       = 2*LOGQ
     )
