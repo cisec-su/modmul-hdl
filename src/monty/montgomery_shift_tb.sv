@@ -12,8 +12,10 @@ module montgomery_shift_tb
         parameter           USE_L3  = 1       ,
         parameter           LOGL3   = 5       ,
         parameter           FF_IN   = 1       ,
-        parameter           FF_SHF  = 1       ,
-        parameter           FF_SUB  = 1       ,
+        parameter           FF_SHF0 = 1       ,
+        parameter           FF_SUB0 = 1       ,
+        parameter           FF_SHF1 = 1       ,
+        parameter           FF_SUB1 = 1       ,
         parameter           FF_SUM  = 1       ,
         parameter           FF_OUT  = 1       ,
         parameter           HP      = 5       ,
@@ -22,10 +24,11 @@ module montgomery_shift_tb
         parameter string    FN_T    = "T.txt"
     );
 
-localparam LOGC = LOGQ*2;
+localparam K = LOGQ*2;
 localparam LOGT = montgomery_shift_inst.LOGT;
 
 reg clk;
+reg rst;
 
 localparam FP = (2*HP);
 
@@ -43,7 +46,7 @@ reg  [LOGQH-1:0] qH;
 reg  [LOGQH-1:0] Q;
 wire [LOGT -1:0] T;
 reg  [LOGT -1:0] T_;
-reg  [LOGC -1:0] C;
+reg  [K    -1:0] C;
 reg  [LOGL1-1:0] L1;
 reg  [LOGL2-1:0] L2;
 reg  [LOGL3-1:0] L3;
@@ -55,8 +58,10 @@ montgomery_shift
         .LOGQH  (LOGQH  ),
         .CORRECT(CORRECT),
         .FF_IN  (FF_IN  ),
-        .FF_SUB (FF_SUB ),
-        .FF_SHF (FF_SHF ),
+        .FF_SUB0(FF_SUB0),
+        .FF_SHF0(FF_SHF0),
+        .FF_SUB1(FF_SUB1),
+        .FF_SHF1(FF_SHF1),
         .FF_SUM (FF_SUM ),
         .FF_OUT (FF_OUT ),
         .USE_L3 (USE_L3 ),
@@ -67,6 +72,7 @@ montgomery_shift
 montgomery_shift_inst 
     (
         .clk(clk),
+        .rst(rst),
         .qH (qH),
         .C  (C ),
         .L1 (L1),
@@ -151,8 +157,11 @@ initial begin
     $display("Simulation started.");
 
     clk = 1'b0;
+    rst = 1'b0;
     #FP;
+    rst = 1'b1;
     #FP;
+    rst = 1'b0;
     #(HP);
     #(1);
     // Initialize inputs
