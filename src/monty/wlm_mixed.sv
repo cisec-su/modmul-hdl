@@ -5,7 +5,7 @@
 module wlm_mixed 
    #(
         parameter         LOGQ    = 60      ,
-        parameter logqh_t LOGQH   = LOGQH_17,
+        parameter         LOGQH   = 17      ,
         parameter         CORRECT = 1       ,
         parameter         FF_IN   = 1       ,
         parameter         FF_SUM  = 0       ,

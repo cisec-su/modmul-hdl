@@ -2,10 +2,11 @@
 
 `include "wlm_mixed.svh"
 
+
 module wlm_mixed_tb
    #(
         parameter           LOGQ    = 60      ,
-        parameter logqh_t   LOGQH   = LOGQH_17,
+        parameter           LOGQH   = 17      ,
         parameter           CORRECT = 1       ,
         parameter           FF_IN   = 1       ,
         parameter           FF_SUB  = 1       ,
@@ -30,7 +31,7 @@ localparam FP = (2*HP);
 always #HP clk = ~clk;
 
 
-integer file_C, file_qH, file_T, n_C, n_qH, n_T, r_C, r_qH, r_T, st_C, st_qH, st_T;
+integer file_C, file_qH, file_T, n_C, n_qH, n_T, st_C, st_qH, st_T;
 integer i;
 integer fail = 0;
 
@@ -65,6 +66,7 @@ function integer count_lines;
     input integer file;
     integer char;
     integer lines;
+    integer r;
     begin
         lines = 0;
         while (!$feof(file)) begin
@@ -75,6 +77,11 @@ function integer count_lines;
         end
         count_lines = lines;
     end
+    r = $fseek(file, 0, 0);
+    if (r != 0) begin
+        $display("Could not rewind file %d.", file);
+        close_files_finish();
+    end
 endfunction
 
 
@@ -84,6 +91,7 @@ function void close_files_finish();
     $fclose(file_T);
     $finish;
 endfunction
+
 
 initial begin
 
@@ -120,24 +128,6 @@ initial begin
     end
     else if (n_C == 0) begin
         $display("Files %s, %s and %s are empty", FN_C, FN_qH, FN_T);
-        close_files_finish();
-    end
-
-    r_C = $fseek(file_C, 0, 0);
-    if (r_C != 0) begin
-        $display("Could not rewind file %s.", FN_C);
-        close_files_finish();
-    end
-    
-    n_qH = $fseek(file_qH, 0, 0);
-    if (n_qH != 0) begin
-        $display("Could not rewind file %s.", FN_qH);
-        close_files_finish();
-    end
-
-    n_T = $fseek(file_T, 0, 0);
-    if (n_T != 0) begin
-        $display("Could not rewind file %s.", FN_T);
         close_files_finish();
     end
 
@@ -207,7 +197,7 @@ initial begin
         $display("%d tests failed.", fail);
     end
 
-    $finish;
+    close_files_finish();
 end
 
 endmodule
