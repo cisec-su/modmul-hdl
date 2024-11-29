@@ -1,0 +1,1 @@
+dsp_macro_karatsuba_mac_34x43_1_iffs0ff.vhd,vhdl,xil_defaultlib,../../../../karatsuba_dsp.gen/sources_1/ip/dsp_macro_karatsuba_mac_34x43_1_iffs0ff/sim/dsp_macro_karatsuba_mac_34x43_1_iffs0ff.vhd,

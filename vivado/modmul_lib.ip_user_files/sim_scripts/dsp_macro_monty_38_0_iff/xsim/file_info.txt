@@ -1,0 +1,1 @@
+dsp_macro_monty_38_0_iff.vhd,vhdl,xil_defaultlib,../../../../karatsuba_dsp.gen/sources_1/ip/dsp_macro_monty_38_0_iff/sim/dsp_macro_monty_38_0_iff.vhd,
