@@ -9,25 +9,22 @@
 
 module montgomery_shift
    #(
-        parameter  LOGQ    = 64,
-        parameter  LOGQH   = 32,
-        parameter  LOGL1   = 5 ,
-        parameter  LOGL2   = 5 ,
-        parameter  USE_L3  = 1 ,
-        parameter  LOGL3   = 5 ,
+        parameter  LOGQ    = 32,
+        parameter  LOGQH   = 15,
+        parameter  LOGL1   = 4 ,
+        parameter  LOGL2   = 4 ,
+        parameter  USE_L3  = 0 ,
+        parameter  LOGL3   = 4 ,
         parameter  CORRECT = 1 ,
         parameter  FF_IN   = 1 ,
-        parameter  FF_SHF0 = 1 ,
-        parameter  FF_SUB0 = 1 ,
-        parameter  FF_SHF1 = 1 ,
-        parameter  FF_SUB1 = 1 ,
+        parameter  FF_SHF  = 0 ,
+        parameter  FF_SUB  = 1 ,
         parameter  FF_SUM  = 1 ,
         parameter  FF_OUT  = 1
     )
     (
         input               clk,
-        input               rst,
-        input  [LOGQ*2-1:0] C  ,
+        input  [LOGC  -1:0] C  ,
         output [LOGT  -1:0] T  ,
         input  [LOGQH -1:0] qH ,
         input  [LOGL1 -1:0] L1 ,
@@ -37,11 +34,12 @@ module montgomery_shift
 
 ///////////////////////////// parameters ////////////////////////////////
 
+localparam LOGC = LOGQ * 2;
 localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
-localparam montgomery_shift_params_t params = {CORRECT, FF_IN, FF_SHF0, FF_SUB0, FF_SHF1, FF_SUB1, FF_SUM, FF_OUT};
+localparam montgomery_shift_params_t params = {CORRECT, FF_IN, FF_SHF, FF_SUB, FF_SUM, FF_OUT};
 localparam M = LOGQ - LOGQH;
 localparam LAT = montgomery_shift_lat(params);
-localparam LAT_1 = (CORRECT) ? LAT - montgomery_shift_correction_lat(params) : 1;
+localparam LAT_1 = LAT - montgomery_shift_correction_lat(params);
 localparam L1_MAX = (1 << LOGL1) - 1;
 localparam L2_MAX = (1 << LOGL2) - 1;
 localparam L3_MAX = (1 << LOGL3) - 1;
@@ -52,7 +50,11 @@ localparam L3_MAX = (1 << LOGL3) - 1;
 
 ///////////////////////////// signals ///////////////////////////////////
 
-reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
+generate
+    if (CORRECT) begin : corr
+        reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
+    end
+endgenerate
 
 wire [LOGQ-1:0] CH;
 reg  [LOGQ-1:0] CH_q [0:4];
@@ -93,9 +95,9 @@ wire [LOGQ-1:0] T0;
 reg  [LOGQ-1:0] T0_q;
 wire [LOGQ-1:0] T0_mx;
 
-wire [2*LOGQ-2:0] T0_Q;
-reg  [2*LOGQ-2:0] T0_Q_q;
-wire [2*LOGQ-2:0] T0_Q_mx;
+wire [LOGC-2:0] T0_Q;
+reg  [LOGC-2:0] T0_Q_q;
+wire [LOGC-2:0] T0_Q_mx;
 
 wire [LOGQ+L1_MAX-1:0] T0_L1;
 reg  [LOGQ+L1_MAX-1:0] T0_L1_q;
@@ -126,7 +128,7 @@ wire [LOGQ:0] T2_mx;
 /////////////////////////// partitioning  ///////////////////////////////
 
 assign CL = C[LOGQ-1:0];
-assign CH = C[2*LOGQ-1:LOGQ];
+assign CH = C[LOGC-1:LOGQ];
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -141,33 +143,33 @@ assign L1_mx[0] = (FF_IN) ? L1_q[0] : L1;
 assign L2_mx[0] = (FF_IN) ? L2_q[0] : L2;
 assign L3_mx[0] = (FF_IN && USE_L3) ? L3_q[0] : L3;
 
-assign CL_L1_mx = (FF_SHF0) ? CL_L1_q : CL_L1;
-assign CL_L2_mx = (FF_SHF0) ? CL_L2_q : CL_L2;
-assign CL_L3_mx = (FF_SHF0 && USE_L3) ? CL_L3_q : CL_L3;
-assign CL_Q_mx  = (FF_SHF0) ? CL_Q_q  : CL_Q;
-assign CH_mx[1] = (FF_SHF0) ? CH_q[1] : CH_mx[0];
-assign CL1_mx[0]= (FF_SHF0) ? CL1_q[0] : CL1;
-assign L1_mx[1] = (FF_SHF0) ? L1_q[1] : L1_mx[0];
-assign L2_mx[1] = (FF_SHF0) ? L2_q[1] : L2_mx[0];
-assign L3_mx[1] = (FF_SHF0 && USE_L3) ? L3_q[1] : L3_mx[0];
+assign CL_L1_mx = (FF_SHF) ? CL_L1_q : CL_L1;
+assign CL_L2_mx = (FF_SHF) ? CL_L2_q : CL_L2;
+assign CL_L3_mx = (FF_SHF && USE_L3) ? CL_L3_q : CL_L3;
+assign CL_Q_mx  = (FF_SHF) ? CL_Q_q  : CL_Q;
+assign CH_mx[1] = (FF_SHF) ? CH_q[1] : CH_mx[0];
+assign CL1_mx[0]= (FF_SHF) ? CL1_q[0] : CL1;
+assign L1_mx[1] = (FF_SHF) ? L1_q[1] : L1_mx[0];
+assign L2_mx[1] = (FF_SHF) ? L2_q[1] : L2_mx[0];
+assign L3_mx[1] = (FF_SHF && USE_L3) ? L3_q[1] : L3_mx[0];
 
-assign T0_mx    = (FF_SUB0) ? T0_q    : T0;
-assign CH_mx[2] = (FF_SUB0) ? CH_q[2] : CH_mx[1];
-assign CL1_mx[1]= (FF_SUB0) ? CL1_q[1]: CL1_mx[0];
-assign L1_mx[2] = (FF_SUB0) ? L1_q[2] : L1_mx[1];
-assign L2_mx[2] = (FF_SUB0) ? L2_q[2] : L2_mx[1];
-assign L3_mx[2] = (FF_SUB0 && USE_L3) ? L3_q[2] : L3_mx[1];
+assign T0_mx    = (FF_SUB) ? T0_q    : T0;
+assign CH_mx[2] = (FF_SUB) ? CH_q[2] : CH_mx[1];
+assign CL1_mx[1]= (FF_SUB) ? CL1_q[1]: CL1_mx[0];
+assign L1_mx[2] = (FF_SUB) ? L1_q[2] : L1_mx[1];
+assign L2_mx[2] = (FF_SUB) ? L2_q[2] : L2_mx[1];
+assign L3_mx[2] = (FF_SUB && USE_L3) ? L3_q[2] : L3_mx[1];
 
-assign T0_L1_mx = (FF_SHF1) ? T0_L1_q : T0_L1;
-assign T0_L2_mx = (FF_SHF1) ? T0_L2_q : T0_L2;
-assign T0_L3_mx = (FF_SHF1 && USE_L3) ? T0_L3_q : T0_L3;
-assign T0_Q_mx  = (FF_SHF1) ? T0_Q_q  : T0_Q;
-assign CH_mx[3] = (FF_SHF1) ? CH_q[3] : CH_mx[2];
-assign CL1_mx[2]= (FF_SHF1) ? CL1_q[2]: CL1_mx[1];
+assign T0_L1_mx = (FF_SHF) ? T0_L1_q : T0_L1;
+assign T0_L2_mx = (FF_SHF) ? T0_L2_q : T0_L2;
+assign T0_L3_mx = (FF_SHF && USE_L3) ? T0_L3_q : T0_L3;
+assign T0_Q_mx  = (FF_SHF) ? T0_Q_q  : T0_Q;
+assign CH_mx[3] = (FF_SHF) ? CH_q[3] : CH_mx[2];
+assign CL1_mx[2]= (FF_SHF) ? CL1_q[2]: CL1_mx[1];
 
-assign T1_mx =    (FF_SUB1) ? T1_q    : T1;
-assign CH_mx[4] = (FF_SUB1) ? CH_q[4] : CH_mx[3];
-assign CL1_mx[3]= (FF_SUB1) ? CL1_q[3]: CL1_mx[2];
+assign T1_mx     = (FF_SUB) ? T1_q    : T1;
+assign CH_mx[4]  = (FF_SUB) ? CH_q[4] : CH_mx[3];
+assign CL1_mx[3] = (FF_SUB) ? CL1_q[3]: CL1_mx[2];
 
 assign T2_mx = (FF_SUM) ? T2_q : T2;
 
@@ -232,8 +234,7 @@ if (CORRECT) begin : correction_block
     correction_u_inst
         (
             .clk(clk           ),
-            .rst(rst           ),
-            .qH (qH_d[LAT_1-1] ),
+            .qH (corr.qH_d[LAT_1-1]),
             .C  (T2_mx         ),
             .T  (T             )
         );
@@ -267,7 +268,7 @@ always @(posedge clk) begin
         end
     end
 
-    if (FF_SHF0) begin
+    if (FF_SHF) begin
         CL_L1_q <= CL_L1;
         CL_L2_q <= CL_L2;
         if (USE_L3) begin
@@ -283,7 +284,7 @@ always @(posedge clk) begin
         end
     end
 
-    if (FF_SUB0) begin
+    if (FF_SUB) begin
         T0_q    <= T0;
         CH_q[2] <= CH_mx[1];
         CL1_q[1]<= CL1_mx[0];
@@ -294,7 +295,7 @@ always @(posedge clk) begin
         end
     end
 
-    if (FF_SHF1) begin
+    if (FF_SHF) begin
         T0_L1_q <= T0_L1;
         T0_L2_q <= T0_L2;
         if (USE_L3) begin
@@ -305,7 +306,7 @@ always @(posedge clk) begin
         CL1_q[2]<= CL1_mx[1];
     end
 
-    if (FF_SUB1) begin
+    if (FF_SUB) begin
         T1_q <= T1;
         CH_q[4] <= CH_mx[3];
         CL1_q[3]<= CL1_mx[2];
@@ -323,7 +324,7 @@ if (CORRECT) begin
 
     for (genvar i = 0; i < LAT_1; i = i + 1) begin
         always @(posedge clk) begin
-            qH_d[i] <= (i == 0) ? qH : qH_d[i - 1];
+            corr.qH_d[i] <= (i == 0) ? qH : corr.qH_d[i - 1];
         end
     end
 

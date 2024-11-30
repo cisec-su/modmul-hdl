@@ -1,5 +1,5 @@
-`ifndef DSP
-`define DSP
+`ifndef DSP_VH
+`define DSP_VH
 
 `define DSP_A 27
 `define DSP_B 18
