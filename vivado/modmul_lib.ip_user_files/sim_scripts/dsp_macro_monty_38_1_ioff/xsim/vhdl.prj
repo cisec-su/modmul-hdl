@@ -1,5 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../../karatsuba_dsp.gen/sources_1/ip/dsp_macro_monty_38_1_ioff/sim/dsp_macro_monty_38_1_ioff.vhd" \
-
-# Do not sort compile order
-nosort

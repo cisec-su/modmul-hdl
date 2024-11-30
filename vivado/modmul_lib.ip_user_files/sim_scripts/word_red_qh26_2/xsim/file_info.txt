@@ -1,1 +1,0 @@
-word_red_qh26_2.vhd,vhdl,xil_defaultlib,../../../../karatsuba_dsp.gen/sources_1/ip/word_red_qh26_2/sim/word_red_qh26_2.vhd,
