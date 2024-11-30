@@ -1,7 +1,7 @@
 `include "dsp.vh"
-`include "intmul_nonstd_34x43.svh"
+`include "intmul_nonstd_BBxAB.svh"
 
-module intmul_nonstd_34x43
+module intmul_nonstd_BBxAB
    #(
         parameter LOGA     = 34,       
         parameter LOGB     = 43,
@@ -10,18 +10,18 @@ module intmul_nonstd_34x43
         parameter FF_OUT   = 1 ,
         parameter USE_CSA  = 0 ,
         parameter FF_CSA   = 0 , 
-        parameter SMLL_DSP = 0 
+        parameter MORE_DSP = 0 
     )
     (
-        input                       clk,
-        input                       rst, 
-        input wire       [LOGA-1:0] A  ,
-        input wire       [LOGB-1:0] B  ,
-        output wire [LOGA+LOGB-1:0] C
+        input                  clk,
+        input                  rst, 
+        input  [LOGA     -1:0] A  ,
+        input  [LOGB     -1:0] B  ,
+        output [LOGA+LOGB-1:0] C
     );
 
-localparam intmul_nonstd_34x43_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, SMLL_DSP};
-localparam LAT = intmul_nonstd_34x43_lat(params);
+localparam intmul_nonstd_BBxAB_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, MORE_DSP};
+localparam LAT = intmul_nonstd_BBxAB_lat(params);
 
 localparam N_A = ((LOGA - 1) / `DSP_A_U) + 1;
 localparam N_B = ((LOGB - 1) / `DSP_B_U) + 1;
@@ -53,12 +53,12 @@ wire [LOGA-1:`DSP_B_U] A_3_mx;
 wire [`DSP_A_U-1:0] B_0_mx;
 wire [LOGB-1:`DSP_A_U] B_1_mx;
 
-(* use_dsp = "yes" *) wire [`DSP_M_U-1:0] P [0:3]; 
+(* MORE_DSP = "yes" *) wire [`DSP_M_U-1:0] P [0:3]; 
 reg  [`DSP_M_U-1:0] P_q [0:3];
 wire [`DSP_M_U-1:0] P_mx [0:3];
 
-(* use_dsp = "yes" *) wire [`DSP_A_U - 1:0] M_dsp; 
-(* use_dsp = "no" *) wire [`DSP_A_U - 1:0] M_lut; 
+(* MORE_DSP = "yes" *) wire [`DSP_A_U - 1:0] M_dsp; 
+(* MORE_DSP = "no" *) wire [`DSP_A_U - 1:0] M_lut; 
 wire [`DSP_A_U - 1:0] M;
 reg [`DSP_A_U - 1:0] M_q;
 wire [`DSP_A_U - 1:0] M_mx; 
@@ -103,7 +103,7 @@ for (genvar i = 0; i < 3; i = i + 1) begin
     assign P_mx[i] = (FF_MUL) ? P_q[i] : P[i];
 end
 
-assign M = (SMLL_DSP) ? M_dsp : M_lut;
+assign M = (MORE_DSP) ? M_dsp : M_lut;
 assign M_mx = (FF_MUL) ? M_q : M;
 
 for (genvar i = 0; i < 2; i = i + 1) begin
@@ -120,7 +120,7 @@ assign P[0] = A_1_mx * B_0_mx;
 assign P[1] = A_0_mx * B_1_mx;
 assign P[2] = A_3_mx * B_0_mx;
 
-if (SMLL_DSP) begin
+if (MORE_DSP) begin
     assign M_dsp = A_2_mx * B_1_mx;
 end else begin
     assign M_lut = A_2_mx * B_1_mx;
@@ -189,7 +189,7 @@ if (FF_MUL) begin
         end
     end
     always @(posedge clk) begin
-        M_q <= (SMLL_DSP) ? M_dsp : M_lut;
+        M_q <= M;
     end
 end
 

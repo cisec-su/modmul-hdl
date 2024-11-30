@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
-module intmul_nonstd_34x43_tb();
+module intmul_nonstd_BBAxBBA_tb();
 
-parameter LOGA = 34;
-parameter LOGB = 43;
+parameter LOGA = 60;
+parameter LOGB = 60;
 
 reg                  clk;
 reg                  rst;
@@ -19,13 +19,13 @@ parameter FF_MUL    = 1;
 parameter FF_OUT    = 1;
 parameter USE_CSA   = 1;
 parameter FF_CSA    = 1;
-parameter SMLL_DSP  = 1;
+parameter MORE_DSP  = 1;
 
 always #HP clk = ~clk;
 
 integer i = 0;
 
-intmul_nonstd_34x43 
+intmul_nonstd_BBAxBBA 
     #(
         .LOGA(LOGA),
         .LOGB(LOGB),
@@ -34,7 +34,7 @@ intmul_nonstd_34x43
         .FF_OUT(FF_OUT),
         .USE_CSA(USE_CSA),
         .FF_CSA(FF_CSA),
-        .SMLL_DSP(SMLL_DSP)
+        .MORE_DSP(MORE_DSP)
     ) mul (
         .clk(clk),
         .rst(rst),
