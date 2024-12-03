@@ -9,56 +9,57 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
 );
 
   localparam L_MAX  = (1 << LOGL)     ; // Maximum shift amount for Ls
-  localparam LOGC1T = (2*LOGQ) - M + 1; // Bit-width for C1 and T (+1 for sign bit)
+  localparam LOGC1T = (2*LOGQ) - W + 1; // Bit-width for C1 and T (+1 for sign bit)
   localparam DELAY  = 4 + (2*FF_SHF)  ; // Latency of the module
-  localparam M      = LOGQ-LOGQH      ;
+  localparam W      = LOGQ-LOGQH      ;
 
   // Pipeline registers for stream processing
-  reg [LOGQ-M-1:0] q_pipeline [ DELAY-2:0];
+  reg [LOGQ-W-1:0] q_pipeline [ DELAY-2:0];
   reg [  LOGL-1:0] L1_pipeline[1+FF_SHF:0];
   reg [  LOGL-1:0] L2_pipeline[1+FF_SHF:0];
   reg [  LOGL-1:0] L3_pipeline[1+FF_SHF:0];
 
-  reg  [(2*LOGQ)-(M)-1:0] CH,CH_q;
-  wire [  (2*LOGQ)-M-1:0] CH_mx  ; // Pipeline mux output
-  reg  [             M:0] CL,CL_q; // Pipeline reg output
-  wire [             M:0] CL_mx  ; // Pipeline mux output
-  wire [       L_MAX+M:0] CLw1m  ;
-  wire [       L_MAX+M:0] CLL1,CLL2,CLL3;
-  reg  [       L_MAX+M:0] CLL1_q,CLL2_q,CLL3_q; // Pipeline reg output
-  wire [       L_MAX+M:0] CLL1_mx,CLL2_mx,CLL3_mx; // Pipeline mux output
+  reg  [(2*LOGQ)-(W)-1:0] CH,CH_q;
+  wire [  (2*LOGQ)-W-1:0] CH_mx  ; // Pipeline mux output
+  reg  [             W:0] CL,CL_q; // Pipeline reg output
+  wire [             W:0] CL_mx  ; // Pipeline mux output
+  wire [       L_MAX+W:0] CLw1m  ;
+  wire [       L_MAX+W:0] CLL1,CLL2,CLL3;
+  reg  [       L_MAX+W:0] CLL1_q,CLL2_q,CLL3_q; // Pipeline reg output
+  wire [       L_MAX+W:0] CLL1_mx,CLL2_mx,CLL3_mx; // Pipeline mux output
 
   reg  signed [  LOGC1T-1:0] C1    ;
-  reg  signed [         M:0] C1L_q ;
-  wire signed [         M:0] C1L   ;
-  wire signed [         M:0] C1L_mx;
-  wire signed [LOGC1T-M-1:0] C1H   ;
-  reg  signed [LOGC1T-M-1:0] C1H_q ;
-  wire signed [LOGC1T-M-1:0] C1H_mx;
+  reg  signed [         W:0] C1L_q ;
+  wire signed [         W:0] C1L   ;
+  wire signed [         W:0] C1L_mx;
+  wire signed [LOGC1T-W-1:0] C1H   ;
+  reg  signed [LOGC1T-W-1:0] C1H_q ;
+  wire signed [LOGC1T-W-1:0] C1H_mx;
 
-  wire signed [L_MAX+M:0] C1w1m,C1L1,C1L2,C1L3; // Added 1 bit for sign
-  reg  signed [L_MAX+M:0] C1L1_q,C1L2_q,C1L3_q; // Added 1 bit for sign
-  wire signed [L_MAX+M:0] C1L1_mx,C1L2_mx,C1L3_mx; // Added 1 bit for sign
+  wire signed [L_MAX+W:0] C1w1m,C1L1,C1L2,C1L3; // Added 1 bit for sign
+  reg  signed [L_MAX+W:0] C1L1_q,C1L2_q,C1L3_q; // Added 1 bit for sign
+  wire signed [L_MAX+W:0] C1L1_mx,C1L2_mx,C1L3_mx; // Added 1 bit for sign
 
-  localparam LOG_T = ((L_MAX + M) > (LOGC1T-M)) ? ((L_MAX + M) + 2) : ((LOGC1T-M) + 2);
+  localparam LOG_T = ((L_MAX + W) > (LOGC1T-W)) ? ((L_MAX + W) + 2) : ((LOGC1T-W) + 2);
 
   reg  signed [LOG_T-1:0] Tint    ;
   wire signed [ LOGQ+1:0] Tint_sub;
 
   // Barrel Shifters
   // C Shift Pipeline Steps
-  assign CLw1m = CL_mx << (LOGQ-1-M);
+  assign CLw1m = CL_mx << (LOGQ-1-W);
   assign CLL1  = CL << L1_pipeline[0];
   assign CLL2  = CL << L2_pipeline[0];
   assign CLL3  = (USE_L3) ? CL << L3_pipeline[0] : 0;
 
-  // C1 Shift Pipeline Steps
-  assign C1w1m = C1L_mx << (LOGQ-1-M);
+// C1 Shift Pipeline Steps
+  assign C1w1m = C1L_mx << (LOGQ-1-W);
   assign C1L1  = C1L << L1_pipeline[1+FF_SHF];
   assign C1L2  = C1L << L2_pipeline[1+FF_SHF];
   assign C1L3  = (USE_L3) ? C1L << L3_pipeline[1+FF_SHF] : 0;
 
-  // Pipeline Multiplexers
+// Pipeline Multiplexers
+
   assign CH_mx   = (FF_SHF) ? CH_q    : CH;
   assign CL_mx   = (FF_SHF) ? CL_q    : CL;
   assign CLL1_mx = (FF_SHF) ? CLL1_q  : CLL1;
@@ -71,10 +72,10 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
   assign C1L2_mx = (FF_SHF) ? C1L2_q  : C1L2;
   assign C1L3_mx = (FF_SHF) ? C1L3_q  : C1L3;
 
-  assign C1H = C1[LOGC1T-1:M];
-  assign C1L = {1'b0,C1[M-1:0]};
+  assign C1H = C1[LOGC1T-1:W];
+  assign C1L = {1'b0,C1[W-1:0]};
 
-  assign Tint_sub = Tint - {q_pipeline[DELAY-2],{(M-1){1'b0}},1'b1};
+  assign Tint_sub = Tint - {q_pipeline[DELAY-2],{(W-1){1'b0}},1'b1};
 
   generate
     if (FF_SHF) begin
@@ -127,19 +128,19 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
     always @(posedge clk )
     begin
       // 1st stage
-      CH <= C[(2*LOGQ)-1:M]; // Get (LOGQ-M)-bit MSBs
-      CL <= C[M    -1:0]; // Get M-bit LSBs
+      CH <= C[(2*LOGQ)-1:W]; // Get (LOGQ-W)-bit MSBs
+      CL <= C[W    -1:0]; // Get W-bit LSBs
       // 2nd stage
       if (USE_L3) begin
-        C1 <= ((CLw1m) + (CLL1_mx) + (CLL3_mx)) - ((CLL2_mx) + {CH_mx}); // First k*C_L - C_H --> 1cc/2cc (FF_SHF)
+        C1 <= ((CLw1m) + (CLL1_mx) + (CLL3_mx)) - ((CLL2_mx) + {CH_mx}); // First k*A_L - A_H --> (1cc/2cc FF_SHF)
       end else begin
-        C1 <= ((CLw1m) + (CLL1_mx)) - ((CLL2_mx) + {CH_mx}); // First k*C_L - C_H
+        C1 <= ((CLw1m) + (CLL1_mx)) - ((CLL2_mx) + {CH_mx}); // First k*A_L - A_H
       end
       // 3rd stage
       if (USE_L3) begin
-        Tint <= ((C1w1m) + (C1L1_mx) + (C1L3_mx)) - ((C1L2_mx) + (C1H_mx)); // Second k*C1_L - C1_H --> 1cc/2cc (FF_SHF)
+        Tint <= ((C1w1m) + (C1L1_mx) + (C1L3_mx)) - ((C1L2_mx) + (C1H_mx)); // Second k*C_L - C_H --> 1cc/2cc (FF_SHF)
       end else begin
-        Tint <= ((C1w1m) + (C1L1_mx)) - ((C1L2_mx) + (C1H_mx)); // Second k*C1_L - C1_H
+        Tint <= ((C1w1m) + (C1L1_mx)) - ((C1L2_mx) + (C1H_mx)); // Second k*C_L - C_H
       end
       // 4th stage
       if ((Tint_sub[LOGQ] == 0)|| (Tint_sub == 0)) // Correction to fully reduce
@@ -149,7 +150,7 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
       else
         begin
           if (Tint < 0) begin
-            T <= Tint + {q_pipeline[DELAY-2],{(M-1){1'b0}},1'b1};
+            T <= Tint + {q_pipeline[DELAY-2],{(W-1){1'b0}},1'b1};
           end else begin
             T <= Tint;
           end
