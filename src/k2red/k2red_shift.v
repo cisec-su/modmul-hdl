@@ -1,4 +1,10 @@
-module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1, FF_SHF = 1) (
+module k2red_shift #(
+  parameter LOGQ   = 32,
+  parameter LOGQH  = 15,
+  parameter LOGL   = 4 ,
+  parameter USE_L3 = 1 ,
+  parameter FF_SHF = 1
+) (
   input                     clk,
   input      [(2*LOGQ)-1:0] C  ,
   input      [   LOGQH-1:0] qH ,
@@ -10,11 +16,11 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
 
   localparam L_MAX  = (1 << LOGL)     ; // Maximum shift amount for Ls
   localparam LOGC1T = (2*LOGQ) - W + 1; // Bit-width for C1 and T (+1 for sign bit)
-  localparam DELAY  = 4 + (2*FF_SHF)  ; // Latency of the module
+  localparam LAT    = 4 + (2*FF_SHF)  ; // Latency of the module
   localparam W      = LOGQ-LOGQH      ;
 
   // Pipeline registers for stream processing
-  reg [LOGQ-W-1:0] q_pipeline [ DELAY-2:0];
+  reg [LOGQ-W-1:0] q_pipeline [   LAT-2:0];
   reg [  LOGL-1:0] L1_pipeline[1+FF_SHF:0];
   reg [  LOGL-1:0] L2_pipeline[1+FF_SHF:0];
   reg [  LOGL-1:0] L3_pipeline[1+FF_SHF:0];
@@ -75,7 +81,7 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
   assign C1H = C1[LOGC1T-1:W];
   assign C1L = {1'b0,C1[W-1:0]};
 
-  assign Tint_sub = Tint - {q_pipeline[DELAY-2],{(W-1){1'b0}},1'b1};
+  assign Tint_sub = Tint - {q_pipeline[LAT-2],{(W-1){1'b0}},1'b1};
 
   generate
     if (FF_SHF) begin
@@ -104,7 +110,7 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
     endgenerate
 
     generate
-      for(genvar dly=0; dly < DELAY-1; dly=dly+1)
+      for(genvar dly=0; dly < LAT-1; dly=dly+1)
         begin
           always @(posedge clk)
           begin
@@ -150,7 +156,7 @@ module k2red_shift #(parameter LOGQ = 32, LOGQH = LOGQ-17, LOGL = 4, USE_L3 = 1,
       else
         begin
           if (Tint < 0) begin
-            T <= Tint + {q_pipeline[DELAY-2],{(W-1){1'b0}},1'b1};
+            T <= Tint + {q_pipeline[LAT-2],{(W-1){1'b0}},1'b1};
           end else begin
             T <= Tint;
           end

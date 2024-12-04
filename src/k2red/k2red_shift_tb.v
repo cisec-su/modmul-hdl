@@ -4,11 +4,11 @@ module k2red_shift_tb();
 
 `ifdef USE_32_BITS
 localparam LOGQ = 32;
-localparam LOGQH = LOGQ-17;
+localparam LOGQH = 15;
 localparam LOGL = 4;
 `else
 localparam LOGQ = 64;
-localparam LOGQH = LOGQ-47;
+localparam LOGQH = 17;
 localparam LOGL = 4;
 `endif
 
