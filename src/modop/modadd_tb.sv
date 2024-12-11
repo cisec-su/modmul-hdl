@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+
 module modadd_tb();
 
 parameter LOGA     = 64;
@@ -9,12 +10,11 @@ parameter FF_IN    = 1 ;
 parameter FF_ADD   = 1 ;
 parameter FF_OUT   = 1 ;
 
-reg                  clk;
-reg                  rst;
-reg   [LOGA  -1:0]   A  ;
-reg   [LOGB  -1:0]   B  ;
-reg   [LOGQ  -1:0]   q  ;
-wire  [LOGQ  -1:0]   C  ;
+reg                   clk;
+reg   [LOGA   -1:0]   A  ;
+reg   [LOGB   -1:0]   B  ;
+reg   [LOGQH  -1:0]   qH ;
+wire  [LOGQ   -1:0]   C  ;
 
 reg [LOGA  :0] R;
 reg [LOGA  :0] Rq;
@@ -36,12 +36,11 @@ modadd
         .FF_IN(FF_IN),
         .FF_ADD(FF_ADD),
         .FF_OUT(FF_OUT)
-    ) add (
+    ) modadd_inst (
         .clk(clk),
-        .rst(rst),
         .A(A),
         .B(B),
-        .q(q),
+        .qH(qH),
         .C(C)
     );
 
@@ -49,26 +48,21 @@ initial begin
     $display("Simulation started.");
 
     clk = 1'b0;
-    rst = 1'b0;
-    #FP;
-    rst = 1'b1;
-    #FP;
-    rst = 1'b0;
     #(HP);
 
     A = 64'h010000000000000A; 
     B = 64'h1000000000000005;
-    q = 64'h111110000000000C; 
+    qH = 47'h400008C00000; 
     
     R = A + B;
-    Rq = (A + B) - {1'b0, q[LOGQ-1:(LOGQ-LOGQH)], {(LOGQ-LOGQH-1){1'b0}}, q[0]};
+    Rq = (A + B) - {1'b0, qH, {(LOGQ-LOGQH-1){1'b0}}, 1'b1};
     C_ = (Rq[LOGA] == 0) ? Rq[LOGQ-1:0] : R[LOGQ-1:0];
 
-    for (i = 0; i < add.LAT; i = i + 1) begin
+    for (i = 0; i < modadd_inst.LAT; i = i + 1) begin
         #(FP);
         A = 0;
         B = 0;    
-        q = 0;
+        qH = 0;
     end
 
     if (C == C_)

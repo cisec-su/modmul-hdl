@@ -2,19 +2,18 @@
 
 module intmul
    #(
-        parameter LOGA                   = 32,
-        parameter LOGB                   = 32,
-        parameter FF_IN                  = 1 ,
-        parameter FF_MUL                 = 1 ,
-        parameter FF_OUT                 = 1 ,
-        parameter USE_CSA                = 0 ,
-        parameter FF_CSA                 = 0 ,
-        parameter MORE_DSP               = 0 ,
-        parameter intmul_mode_t MUL_MODE = USE_STD
+        parameter LOGA     = 32,
+        parameter LOGB     = 32,
+        parameter FF_IN    = 1 ,
+        parameter FF_MUL   = 1 ,
+        parameter FF_OUT   = 1 ,
+        parameter USE_CSA  = 0 ,
+        parameter FF_CSA   = 0 ,
+        parameter MORE_DSP = 0 ,
+        parameter NON_STD  = 1
     )
     (
         input                  clk,
-        input                  rst,
         input  [LOGA     -1:0] A  ,
         input  [LOGB     -1:0] B  ,
         output [LOGA+LOGB-1:0] C
@@ -24,7 +23,7 @@ localparam intmul_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA};
 localparam LAT = intmul_lat(params);
 
 generate
-    if (MUL_MODE == USE_STD) begin
+    if (NON_STD) begin
         mac_std #(
             .LOGA(LOGA),
             .LOGB(LOGB),
