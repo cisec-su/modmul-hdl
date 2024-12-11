@@ -26,11 +26,8 @@ module modmul
     localparam W    = LOGQ - LOGQH;
     localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
     
-    localparam intmul_params_t intmul_params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA};
-    localparam wlm_mixed_params_t wlm_mixed_params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-    localparam wlm_params_t wlm_params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-    localparam modmul_params_t modmul_params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
-    localparam LAT = modmul_lat(intmul_params, wlm_mixed_params, wlm_params, modmul_params);
+    localparam modmul_params_t modmul_params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA};
+    localparam LAT = modmul_lat(modmul_params);
 
     localparam USE_WLM_MIXED = (LOGQH < `DSP_B_U) ? 1 : 0;
 
@@ -41,7 +38,7 @@ module modmul
         .LOGB(LOGQ),
         .FF_IN(FF_IN),
         .FF_MUL(FF_MUL),
-        .FF_OUT(FF_OUT),
+        .FF_OUT(1),
         .USE_CSA(USE_CSA),
         .FF_CSA(FF_CSA),
         .MORE_DSP(MORE_DSP),
@@ -59,7 +56,7 @@ module modmul
                 .LOGQ(LOGQ),
                 .LOGQH(LOGQH),
                 .CORRECT(CORRECT),
-                .FF_IN(FF_IN),
+                .FF_IN(0),
                 .FF_SUM(FF_SUM),
                 .FF_MUL(FF_MUL),
                 .FF_SUB(FF_SUB),
@@ -75,7 +72,7 @@ module modmul
                 .LOGQ(LOGQ),
                 .LOGQH(LOGQH),
                 .CORRECT(CORRECT),
-                .FF_IN(FF_IN),
+                .FF_IN(0),
                 .FF_SUM(FF_SUM),
                 .FF_MUL(FF_MUL),
                 .FF_SUB(FF_SUB),
