@@ -21,7 +21,8 @@ module modadd
 ///////////////////////////// parameters ////////////////////////////////
 
 localparam W = LOGQ - LOGQH;
-localparam modadd_params_t params = {FF_IN, FF_ADD, FF_OUT};
+
+localparam modadd_params_t params = {LOGA, LOGB, LOGQ, LOGQH, FF_IN, FF_ADD, FF_OUT};
 localparam LAT = modadd_lat(params);
 
 /////////////////////////////////////////////////////////////////////////
@@ -48,15 +49,17 @@ wire [LOGA:0] Rq_mx;
 reg  [LOGQ-1:0] S;
 reg  [LOGQ-1:0] S_q;
 
+wire [LOGQ-1:0] q;
+
 /////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////// Pipeline Steps ////////////////////////////
 
-assign A_mx = (FF_IN) ? A_q : A;
-assign B_mx = (FF_IN) ? B_q : B;
+assign A_mx  = (FF_IN) ? A_q  : A;
+assign B_mx  = (FF_IN) ? B_q  : B;
 assign qH_mx = (FF_IN) ? qH_q : qH;
 
-assign R_mx = (FF_ADD) ? R_q : R;
+assign R_mx  = (FF_ADD) ? R_q  : R;
 assign Rq_mx = (FF_ADD) ? Rq_q : Rq;
 
 assign C = (FF_OUT) ? S_q : S;
@@ -65,9 +68,11 @@ assign C = (FF_OUT) ? S_q : S;
 
 ///////////////////////////// Assignments ///////////////////////////////
 
+assign q = (LOGQ > LOGQH) ? {1'b0, qH_mx, {(W - 1){1'b0}}, 1'b1} : qH_mx;
+
 always @(*) begin
     R = A_mx + B_mx;
-    Rq = (A_mx + B_mx) - {1'b0, qH_mx, {(W-1){1'b0}}, 1'b1};
+    Rq = (A_mx + B_mx) - q;
     S = (Rq_mx[LOGA] == 0) ? Rq_mx[LOGQ-1:0] : R_mx[LOGQ-1:0];
 end
 
@@ -77,15 +82,15 @@ end
 
 if (FF_IN) begin
     always @(posedge clk) begin
-        A_q <= A;
-        B_q <= B;
+        A_q  <= A;
+        B_q  <= B;
         qH_q <= qH;
     end
 end
 
 if (FF_ADD) begin
     always @(posedge clk) begin
-        R_q <= R;
+        R_q  <= R;
         Rq_q <= Rq;
     end
 end 
