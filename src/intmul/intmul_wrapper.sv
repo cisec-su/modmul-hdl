@@ -58,7 +58,6 @@ generate
                     .MORE_DSP(MORE_DSP)
                 ) intmul_nonstd_BBxAB_inst (
                     .clk(clk),
-                    .rst(rst),
                     .A  (A  ),
                     .B  (B  ),
                     .C  (C  )
@@ -75,7 +74,6 @@ generate
                     .MORE_DSP(MORE_DSP)
                 ) intmul_nonstd_BBxAB_inst (
                     .clk(clk),
-                    .rst(rst),
                     .A  (B  ),
                     .B  (A  ),
                     .C  (C  )
@@ -93,7 +91,6 @@ generate
                 .MORE_DSP(MORE_DSP)
             ) intmul_nonstd_BBAxBBA_inst (
                 .clk(clk),
-                .rst(rst),
                 .A  (A  ),
                 .B  (B  ),
                 .C  (C  )

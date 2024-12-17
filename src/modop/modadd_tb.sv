@@ -36,7 +36,7 @@ modadd
         .FF_IN (FF_IN ),
         .FF_ADD(FF_ADD),
         .FF_OUT(FF_OUT)
-    ) modsub_inst (
+    ) modadd_inst (
         .clk(clk),
         .A  (A  ),
         .B  (B  ),

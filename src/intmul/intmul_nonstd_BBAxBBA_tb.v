@@ -34,7 +34,7 @@ intmul_nonstd_BBAxBBA
         .USE_CSA(USE_CSA),
         .FF_CSA(FF_CSA),
         .MORE_DSP(MORE_DSP)
-    ) mul (
+    ) intmul_nonstd_BBAxBBA_inst (
         .clk(clk),
         .A(A),
         .B(B),
@@ -51,7 +51,7 @@ initial begin
     B = {LOGB{1'b1}};
     C_ = A * B;
 
-    for (i = 0; i < mul.LAT; i = i + 1) begin
+    for (i = 0; i < intmul_nonstd_BBAxBBA_inst.LAT; i = i + 1) begin
         #(FP);
         A = 0;
         B = 0;    
