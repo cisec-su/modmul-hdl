@@ -1,6 +1,6 @@
-`include "modmul.svh"
+`include "modmul_wlm.svh"
 
-module modmul
+module modmul_wlm
    #(
         parameter LOGQ     = 32,
         parameter LOGQH    = 15,
@@ -26,10 +26,10 @@ module modmul
     localparam W    = LOGQ - LOGQH;
     localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
     
-    localparam modmul_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
-    localparam LAT = modmul_lat(params);
+    localparam modmul_wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
+    localparam LAT = modmul_wlm_lat(params);
 
-    localparam USE_WLM_MIXED = (LOGQH < `DSP_B_U) ? 1 : 0;
+    localparam USE_WLM_MIXED = (LOGQH <= `DSP_B_U) ? 1 : 0;
 
     wire [2*LOGQ-1:0] C;
 
