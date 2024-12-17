@@ -29,19 +29,19 @@ integer i = 0;
 
 modadd
     #(
-        .LOGA(LOGA),
-        .LOGB(LOGB),
-        .LOGQ(LOGQ),
-        .LOGQH(LOGQH),
-        .FF_IN(FF_IN),
+        .LOGA  (LOGA  ),
+        .LOGB  (LOGB  ),
+        .LOGQ  (LOGQ  ),
+        .LOGQH (LOGQH ),
+        .FF_IN (FF_IN ),
         .FF_ADD(FF_ADD),
         .FF_OUT(FF_OUT)
     ) modadd_inst (
         .clk(clk),
-        .A(A),
-        .B(B),
-        .qH(qH),
-        .C(C)
+        .A  (A  ),
+        .B  (B  ),
+        .qH (qH ),
+        .C  (C  )
     );
 
 initial begin

@@ -14,13 +14,12 @@ module intmul_nonstd_BBAxBBA
     )
     (
         input                  clk,
-        input                  rst, 
         input  [LOGA     -1:0] A  ,
         input  [LOGB     -1:0] B  ,
         output [LOGA+LOGB-1:0] C
     );
 
-localparam intmul_nonstd_BBAxBBA_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, MORE_DSP};
+localparam intmul_nonstd_BBAxBBA_params_t params = {LOGA, LOGB, FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, MORE_DSP};
 localparam LAT = intmul_nonstd_BBAxBBA_lat(params);
 
 integer i;

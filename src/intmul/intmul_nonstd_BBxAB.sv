@@ -14,13 +14,12 @@ module intmul_nonstd_BBxAB
     )
     (
         input                  clk,
-        input                  rst, 
         input  [LOGA     -1:0] A  ,
         input  [LOGB     -1:0] B  ,
         output [LOGA+LOGB-1:0] C
     );
 
-localparam intmul_nonstd_BBxAB_params_t params = {FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, MORE_DSP};
+localparam intmul_nonstd_BBxAB_params_t params = {LOGA, LOGB, FF_IN, FF_MUL, FF_OUT, FF_CSA, USE_CSA, MORE_DSP};
 localparam LAT = intmul_nonstd_BBxAB_lat(params);
 
 localparam N_A = ((LOGA - 1) / `DSP_A_U) + 1;
@@ -58,9 +57,9 @@ reg  [`DSP_M_U-1:0] P_q [0:3];
 wire [`DSP_M_U-1:0] P_mx [0:3];
 
 (* MORE_DSP = "yes" *) wire [`DSP_A_U - 1:0] M_dsp; 
-(* MORE_DSP = "no" *) wire [`DSP_A_U - 1:0] M_lut; 
+(* MORE_DSP = "no"  *) wire [`DSP_A_U - 1:0] M_lut; 
 wire [`DSP_A_U - 1:0] M;
-reg [`DSP_A_U - 1:0] M_q;
+reg  [`DSP_A_U - 1:0] M_q;
 wire [`DSP_A_U - 1:0] M_mx; 
 
 reg  [LOGA+LOGB-1:0] S;
