@@ -26,18 +26,18 @@ def prothl_prime_gen(logq, logqh, debug=False, use_l3=True):
 
     primes = {}
 
-    for l1 in range(logq-2, m, -1):
-        for l2 in range(l1, m, -1):
-            for l3 in range(logq-2, m, -1):
-                q = to_q(l1-m, l2-m, l3-m, logq, logqh, use_l3)
+    for l1 in range(logq-2 - m, - 1, -1):
+        for l2 in range(l1, - 1, -1):
+            for l3 in range(logq-2 - m, - 1, -1):
+                q = to_q(l1, l2, l3, logq, logqh, use_l3)
                 if sympy.isprime(q) and q > 2**(logq-1) and q < 2**logq:
                     mu = pow(q, -1, 1 << logq)
                     mu_ = -mu & ((1 << logq) - 1)
                     assert (mu_ * q) & ((1 << logq) - 1) == ((1 << logq) - 1)
-                    if (q not in primes) and check_mu(mu_, l1 - m, l2 - m, l3 - m) and q < (1 << logq) and (q & ((1 << m) - 1) == 1):
+                    if (q not in primes) and check_mu(mu_, l1, l2, l3) and (q & ((1 << m) - 1) == 1):
                         if debug:
                             print(l1, l2, l3, hex(q), hex(mu_))
-                        primes[q] = [l1 - m, l2 - m, l3 - m] if use_l3 else [l1 - m, l2 - m]
+                        primes[q] = [l1, l2, l3] if use_l3 else [l1, l2]
                 if not use_l3:
                     break
 
@@ -48,4 +48,4 @@ def prothl_prime_gen(logq, logqh, debug=False, use_l3=True):
 
 
 if __name__ == "__main__":
-    prothl_prime_gen(64, 16, debug=True, use_l3=True)
+    prothl_prime_gen(32, 15, debug=True, use_l3=False)

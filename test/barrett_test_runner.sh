@@ -1,4 +1,4 @@
-vivado=/home/toluntosun/Xilinx/Vivado/2023.1/bin/vivado
+vivado=$1
 project=$(pwd)/vivado/modmul_lib.xpr
 
 python test/barrett_test_runner.py --test_num 100000 --vivado $vivado --project $project --LOGQ 64 --LOGQH 64 --B 32 --PIPE_Q 0
