@@ -23,67 +23,67 @@ module modmul_wlm
         output [LOGT - 1:0] T
     );
 
-    localparam W    = LOGQ - LOGQH;
-    localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
-    
-    localparam modmul_wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
-    localparam LAT = modmul_wlm_lat(params);
+localparam W    = LOGQ - LOGQH;
+localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 
-    localparam USE_WLM_MIXED = (LOGQH <= `DSP_B_U) ? 1 : 0;
+localparam modmul_wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
+localparam LAT = modmul_wlm_lat(params);
 
-    wire [2*LOGQ-1:0] C;
+localparam USE_WLM_MIXED = (LOGQH <= `DSP_B_U) ? 1 : 0;
 
-    intmul_wrapper #(
-        .LOGA    (LOGQ    ),
-        .LOGB    (LOGQ    ),
-        .FF_IN   (FF_IN   ),
-        .FF_MUL  (FF_MUL  ),
-        .FF_OUT  (1       ),
-        .USE_CSA (USE_CSA ),
-        .FF_CSA  (FF_CSA  ),
-        .MORE_DSP(MORE_DSP),
-        .NON_STD (NON_STD )
-    ) intmul_wrapper_inst (
-        .clk(clk),
-        .A  (A  ),
-        .B  (B  ),
-        .C  (C  )
-    );
+wire [2*LOGQ-1:0] C;
 
-    generate
-        if (USE_WLM_MIXED) begin
-            wlm_mixed #(
-                .LOGQ   (LOGQ   ),
-                .LOGQH  (LOGQH  ),
-                .CORRECT(CORRECT),
-                .FF_IN  (0      ),
-                .FF_SUM (FF_SUM ),
-                .FF_MUL (FF_MUL ),
-                .FF_SUB (FF_SUB ),
-                .FF_OUT (FF_OUT )
-            ) wlm_mixed_inst (
-                .clk(clk),
-                .qH (qH ),
-                .C  (C  ),
-                .T  (T  )
-            );
-        end else begin
-            wlm #(
-                .LOGQ   (LOGQ   ),
-                .LOGQH  (LOGQH  ),
-                .CORRECT(CORRECT),
-                .FF_IN  (0      ),
-                .FF_SUM (FF_SUM ),
-                .FF_MUL (FF_MUL ),
-                .FF_SUB (FF_SUB ),
-                .FF_OUT (FF_OUT )
-            ) wlm_inst (
-                .clk(clk),
-                .qH (qH ),
-                .C  (C  ),
-                .T  (T  )
-            );
-        end
-    endgenerate
+intmul_wrapper #(
+    .LOGA    (LOGQ    ),
+    .LOGB    (LOGQ    ),
+    .FF_IN   (FF_IN   ),
+    .FF_MUL  (FF_MUL  ),
+    .FF_OUT  (1       ),
+    .USE_CSA (USE_CSA ),
+    .FF_CSA  (FF_CSA  ),
+    .MORE_DSP(MORE_DSP),
+    .NON_STD (NON_STD )
+) intmul_wrapper_inst (
+    .clk(clk),
+    .A  (A  ),
+    .B  (B  ),
+    .C  (C  )
+);
+
+generate
+    if (USE_WLM_MIXED) begin
+        wlm_mixed #(
+            .LOGQ   (LOGQ   ),
+            .LOGQH  (LOGQH  ),
+            .CORRECT(CORRECT),
+            .FF_IN  (0      ),
+            .FF_SUM (FF_SUM ),
+            .FF_MUL (FF_MUL ),
+            .FF_SUB (FF_SUB ),
+            .FF_OUT (FF_OUT )
+        ) wlm_mixed_inst (
+            .clk(clk),
+            .qH (qH ),
+            .C  (C  ),
+            .T  (T  )
+        );
+    end else begin
+        wlm #(
+            .LOGQ   (LOGQ   ),
+            .LOGQH  (LOGQH  ),
+            .CORRECT(CORRECT),
+            .FF_IN  (0      ),
+            .FF_SUM (FF_SUM ),
+            .FF_MUL (FF_MUL ),
+            .FF_SUB (FF_SUB ),
+            .FF_OUT (FF_OUT )
+        ) wlm_inst (
+            .clk(clk),
+            .qH (qH ),
+            .C  (C  ),
+            .T  (T  )
+        );
+    end
+endgenerate
 
 endmodule

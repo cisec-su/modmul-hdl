@@ -2,8 +2,8 @@
 
 module modsub_tb();
 
-parameter LOGA     = 64;
-parameter LOGB     = 64;
+parameter LOGQ     = 64;
+parameter LOGQ     = 64;
 parameter LOGQ     = 64;
 parameter LOGQH    = 47; 
 parameter FF_IN    = 1 ;
@@ -11,13 +11,13 @@ parameter FF_SUB   = 1 ;
 parameter FF_OUT   = 1 ;
 
 reg                  clk;
-reg   [LOGA  -1:0]   A  ;
-reg   [LOGB  -1:0]   B  ;
+reg   [LOGQ  -1:0]   A  ;
+reg   [LOGQ  -1:0]   B  ;
 reg   [LOGQH  -1:0]  qH ;
 wire  [LOGQ  -1:0]   C  ;
 
-reg [LOGA  :0] R;
-reg [LOGA  :0] Rq;
+reg [LOGQ  :0] R;
+reg [LOGQ  :0] Rq;
 reg [LOGQ-1:0] C_;
 
 parameter HP = 5;
@@ -29,8 +29,6 @@ integer i = 0;
 
 modsub
     #(
-        .LOGA  (LOGA  ),
-        .LOGB  (LOGB  ),
         .LOGQ  (LOGQ  ),
         .LOGQH (LOGQH ),
         .FF_IN (FF_IN ),
@@ -56,7 +54,7 @@ initial begin
     
     R = A - B; 
     Rq = (A - B) + {1'b0, qH, {(LOGQ-LOGQH-1){1'b0}}, 1'b1};
-    C_ = (R[LOGA] == 0) ? R[LOGQ-1:0] : Rq[LOGQ-1:0];
+    C_ = (R[LOGQ] == 0) ? R[LOGQ-1:0] : Rq[LOGQ-1:0];
 
     for (i = 0; i < modsub_inst.LAT; i = i + 1) begin
         #(FP);
