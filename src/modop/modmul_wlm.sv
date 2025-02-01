@@ -23,12 +23,9 @@ module modmul_wlm
         output [LOGT - 1:0] T
     );
 
-localparam W    = LOGQ - LOGQH;
 localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
-
-localparam modmul_wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
+localparam modmul_wlm_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_MUL, FF_SUM, FF_SUB, FF_OUT, USE_CSA, FF_CSA, MORE_DSP, NON_STD};
 localparam LAT = modmul_wlm_lat(params);
-
 localparam USE_WLM_MIXED = (LOGQH <= `DSP_B_U) ? 1 : 0;
 
 wire [2*LOGQ-1:0] C;
