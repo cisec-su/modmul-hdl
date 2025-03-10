@@ -3,8 +3,6 @@
 module modsub_tb();
 
 parameter LOGQ     = 64;
-parameter LOGQ     = 64;
-parameter LOGQ     = 64;
 parameter LOGQH    = 47; 
 parameter FF_IN    = 1 ;
 parameter FF_SUB   = 1 ;

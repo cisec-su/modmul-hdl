@@ -3,11 +3,9 @@
 module modadd_tb();
 
 parameter LOGQ     = 64;
-parameter LOGQ     = 64;
-parameter LOGQ     = 64;
 parameter LOGQH    = 47; 
-parameter FF_IN    = 1 ;
-parameter FF_ADD   = 1 ;
+parameter FF_IN    = 0 ;
+parameter FF_ADD   = 0 ;
 parameter FF_OUT   = 1 ;
 
 reg                   clk;
