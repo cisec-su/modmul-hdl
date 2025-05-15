@@ -2,7 +2,7 @@
 `define MODSUB
 
 typedef struct packed {
-    int LOGA, LOGB, LOGQ, LOGQH, FF_IN, FF_SUB, FF_OUT;
+    int LOGQ, LOGQH, FF_IN, FF_SUB, FF_OUT;
 } modsub_params_t;
 
 function int modsub_lat(input modsub_params_t params);

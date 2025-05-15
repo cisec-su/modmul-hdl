@@ -25,7 +25,7 @@ module wlm
 localparam LOGC = 2*LOGQ;
 localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam W    = LOGQ - LOGQH;
-localparam wlm_params_t params = {W, LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
+localparam wlm_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam ITER  = wlm_iter(params);
 localparam LAT   = wlm_lat(params);
 localparam LAT_1 = (CORRECT) ? LAT - wlm_correction_lat(params) : 

@@ -11,8 +11,7 @@ module wlm_mixed
         parameter         FF_SUM  = 0       ,
         parameter         FF_MUL  = 1       ,
         parameter         FF_SUB  = 0       ,
-        parameter         FF_OUT  = 1       ,
-        localparam        LOGC    = 2*LOGQ
+        parameter         FF_OUT  = 1
     )
     (
         input                clk,
@@ -24,7 +23,8 @@ module wlm_mixed
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
+localparam LOGC   = 2*LOGQ;
+localparam LOGT   = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam wlm_mixed_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam W0     = wlm_mixed_w0(params);
 localparam W1     = wlm_mixed_w1(params);

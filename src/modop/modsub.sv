@@ -2,8 +2,6 @@
 
 module modsub
     #(
-        parameter LOGA     = 64,
-        parameter LOGB     = 64,
         parameter LOGQ     = 64,
         parameter LOGQH    = 47, 
         parameter FF_IN    = 1 ,
@@ -12,8 +10,8 @@ module modsub
     )
     (
         input                 clk ,
-        input  [LOGA    -1:0] A   ,
-        input  [LOGB    -1:0] B   ,
+        input  [LOGQ    -1:0] A   ,
+        input  [LOGQ    -1:0] B   ,
         input  [LOGQH   -1:0] qH  ,
         output [LOGQ    -1:0] C
     );
@@ -21,30 +19,32 @@ module modsub
 ///////////////////////////// parameters ////////////////////////////////
 
 localparam W = LOGQ - LOGQH;
-
-localparam modsub_params_t params = {LOGA, LOGB, LOGQ, LOGQH, FF_IN, FF_SUB, FF_OUT};
+localparam modsub_params_t params = {LOGQ, LOGQH, FF_IN, FF_SUB, FF_OUT};
 localparam LAT = modsub_lat(params);
 
 /////////////////////////////////////////////////////////////////////////
 
+
+
+
 ///////////////////////// Signals Declaration ///////////////////////////
 
-reg  [LOGA-1:0] A_q;
-wire [LOGA-1:0] A_mx;
+reg  [LOGQ-1:0] A_q;
+wire [LOGQ-1:0] A_mx;
 
-reg  [LOGB-1:0] B_q;
-wire [LOGB-1:0] B_mx;
+reg  [LOGQ-1:0] B_q;
+wire [LOGQ-1:0] B_mx;
 
 reg  [LOGQ-1:0] qH_q;
 wire [LOGQ-1:0] qH_mx;
 
-reg  [LOGA:0] R;
-reg  [LOGA:0] R_q;
-wire [LOGA:0] R_mx;
+reg  [LOGQ:0] R;
+reg  [LOGQ:0] R_q;
+wire [LOGQ:0] R_mx;
 
-reg  [LOGA:0] Rq;
-reg  [LOGA:0] Rq_q;
-wire [LOGA:0] Rq_mx;
+reg  [LOGQ:0] Rq;
+reg  [LOGQ:0] Rq_q;
+wire [LOGQ:0] Rq_mx;
 
 reg  [LOGQ-1:0] S;
 reg  [LOGQ-1:0] S_q;
@@ -52,6 +52,9 @@ reg  [LOGQ-1:0] S_q;
 wire [LOGQ-1:0] q;
 
 /////////////////////////////////////////////////////////////////////////
+
+
+
 
 ///////////////////////////// Pipeline Steps ////////////////////////////
 
@@ -66,17 +69,21 @@ assign C = (FF_OUT) ? S_q : S;
 
 /////////////////////////////////////////////////////////////////////////
 
+
+
+
 ///////////////////////////// Assignments ///////////////////////////////
 
-assign q = (LOGQ > LOGQH) ? {1'b0, qH_mx, {(W - 1){1'b0}}, 1'b1} : qH_mx;
+assign q  = (LOGQ > LOGQH) ? {1'b0, qH_mx, {(W - 1){1'b0}}, 1'b1} : qH_mx;
+assign R  = A_mx - B_mx;
+assign Rq = R + q;
+assign S  = (R_mx[LOGQ] == 0) ? R_mx[LOGQ-1:0] : Rq_mx[LOGQ-1:0];
 
-always @(*) begin
-    R = A_mx - B_mx;
-    Rq = (A_mx - B_mx) + {1'b0, qH_mx, {(W-1){1'b0}}, 1'b1};
-    S = (R_mx[LOGA] == 0) ? R_mx[LOGQ-1:0] : Rq_mx[LOGQ-1:0];
-end
 
 /////////////////////////////////////////////////////////////////////////
+
+
+
 
 /////////////////////////// Sequential Logic ////////////////////////////
 
