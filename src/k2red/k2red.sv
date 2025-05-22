@@ -46,11 +46,10 @@ localparam qH_d_idc = LAT_1 - 1;
 
 reg  [LOGQH-1:0] qH_d  [0:LAT_1    -1];
 reg  [LOGQH-1:0] qH_mx [0:qH_MX_LEN-1];
-generate
-    if (CORRECT) begin : corr
-        wire [LOGQ-1:0] q;
-    end
-endgenerate
+
+
+wire [LOGQ-1:0] corr_q;
+
 
 wire [LOGC-W-1:0] CH;
 wire [     W-1:0] CL;
@@ -174,9 +173,9 @@ mac_std_inst_1
 
 if (CORRECT) begin
     assign qH_mx[2] = (qH_d_idc > 0) ? qH_d[qH_d_idc] : qH;
-    assign corr.q = {qH_mx[2], {(W - 1){1'b0}}, 1'b1};
-    assign T2 = T1 + corr.q;
-    assign T3 = T1 - corr.q;
+    assign corr_q = {qH_mx[2], {(W - 1){1'b0}}, 1'b1};
+    assign T2 = T1 + corr_q;
+    assign T3 = T1 - corr_q;
 
     assign T4 = (T1_mx[LOGT1-1] == 1'b1) ? T2_mx : (T3_mx[LOGQ] == 1'b0) ? T3_mx : T1_mx;
 end

@@ -50,11 +50,8 @@ localparam L3_MAX = (1 << LOGL3) - 1;
 
 ///////////////////////////// signals ///////////////////////////////////
 
-generate
-    if (CORRECT) begin : corr
-        reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
-    end
-endgenerate
+
+reg  [LOGQH-1:0] corr_qH_d [0:LAT_1-1];
 
 wire [LOGQ-1:0] CH;
 reg  [LOGQ-1:0] CH_q [0:4];
@@ -234,7 +231,7 @@ if (CORRECT) begin : correction_block
     correction_u_inst
         (
             .clk(clk           ),
-            .qH (corr.qH_d[LAT_1-1]),
+            .qH (corr_qH_d[LAT_1-1]),
             .C  (T2_mx         ),
             .T  (T             )
         );
@@ -324,7 +321,7 @@ if (CORRECT) begin
 
     for (genvar i = 0; i < LAT_1; i = i + 1) begin
         always @(posedge clk) begin
-            corr.qH_d[i] <= (i == 0) ? qH : corr.qH_d[i - 1];
+            corr_qH_d[i] <= (i == 0) ? qH : corr_qH_d[i - 1];
         end
     end
 
