@@ -46,6 +46,7 @@ localparam FF_OUT_1 = wlm_mixed_wordred_1_ff_out(params);
 
 wire [LOGC-W0:0] C_i  [0:      1];
 reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
+wire [LOGQH-1:0] qH_mx;
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -53,6 +54,8 @@ reg  [LOGQH-1:0] qH_d [0:LAT_1-1];
 
 
 /////////////////////////// reduction iterations ////////////////////////
+
+assign qH_mx = (FF_IN + FF_SUB - 1 >= 0) ? qH_d[FF_IN + FF_SUB -1] : qH;
 
 wordred
     #(
@@ -69,7 +72,7 @@ wordred
 wordred_inst_0
     (
         .clk(clk         ),
-        .qH (qH_d[FF_SUB]),
+        .qH (qH_mx       ),
         .C  (C           ),
         .T  (C_i[0]      )
     );
@@ -80,7 +83,7 @@ wordred
         .LOGQH (LOGQH ),
         .W     (W1    ),
         .Y     (Y1    ),
-        .FF_IN (0     ),
+        .FF_IN (FF_IN ),
         .FF_SUM(FF_SUM),
         .FF_MUL(FF_MUL),
         .FF_SUB(FF_SUB),
