@@ -14,6 +14,12 @@
 - K^2Red.
 - K^2Red with shift-adds.
 
+## To Run Tests
+
+```bash
+./test/<method>_test_runner.sh <vivado_path>
+```
+
 Modular reduction modules correspond to the following academic publication. Please consider using the following bibTeX excerpt:
 ```
 @InProceedings{10.1007/978-3-032-15541-2_7,
