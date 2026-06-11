@@ -16,10 +16,16 @@
 
 Modular reduction modules correspond to the following academic publication. Please consider using the following bibTeX excerpt:
 ```
-@article{tosun2024efficient,
-  title={Efficient Modular Multiplication Hardware for Number Theoretic Transform on FPGA},
-  author={Tosun, Tolun and K{\i}rb{\i}y{\i}k, Selim and Ko{\c{c}}er, Emre and Sava{\c{s}}, Erkay and Alaybeyo{\u{g}}lu, Ersin},
-  journal={Cryptology ePrint Archive},
-  year={2024}
+@InProceedings{10.1007/978-3-032-15541-2_7,
+author="Tosun, Tolun and K{\i}rb{\i}y{\i}k, Selim and Ko{\c{c}}er, Emre and Alaybeyo{\u{g}}lu, Ersin",
+editor="Savas, Erkay and Moradi, Amir and Leander, Gregor",
+title="Optimized FPGA Architecture for Modular Reduction in NTT",
+booktitle="Lightweight Cryptography for Security and Privacy",
+year="2026",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="117--137",
+isbn="978-3-032-15541-2"
 }
+
 ```

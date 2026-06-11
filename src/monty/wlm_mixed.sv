@@ -11,7 +11,8 @@ module wlm_mixed
         parameter         FF_SUM  = 0       ,
         parameter         FF_MUL  = 1       ,
         parameter         FF_SUB  = 0       ,
-        parameter         FF_OUT  = 1
+        parameter         FF_OUT  = 1       ,
+        localparam        LOGC    = 2*LOGQ
     )
     (
         input                clk,
@@ -23,8 +24,7 @@ module wlm_mixed
 
 ///////////////////////////// parameters ////////////////////////////////
 
-localparam LOGC   = 2*LOGQ;
-localparam LOGT   = (CORRECT) ? LOGQ : LOGQ + 1;
+localparam LOGT = (CORRECT) ? LOGQ : LOGQ + 1;
 localparam wlm_mixed_params_t params = {LOGQ, LOGQH, CORRECT, FF_IN, FF_SUB, FF_MUL, FF_SUM, FF_OUT};
 localparam W0     = wlm_mixed_w0(params);
 localparam W1     = wlm_mixed_w1(params);
@@ -55,7 +55,7 @@ wire [LOGQH-1:0] qH_mx;
 
 /////////////////////////// reduction iterations ////////////////////////
 
-assign qH_mx = (FF_IN + FF_SUB - 1 >= 0) ? qH_d[FF_IN + FF_SUB -1] : qH;
+assign qH_mx = (FF_IN + FF_SUB - 1 >= 0) ? qH_d[FF_IN + FF_SUB - 1] : qH;
 
 wordred
     #(
@@ -83,7 +83,7 @@ wordred
         .LOGQH (LOGQH ),
         .W     (W1    ),
         .Y     (Y1    ),
-        .FF_IN (FF_IN ),
+        .FF_IN (0     ),
         .FF_SUM(FF_SUM),
         .FF_MUL(FF_MUL),
         .FF_SUB(FF_SUB),
